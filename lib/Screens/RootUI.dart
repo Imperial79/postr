@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postr/Components/KNavigationBar.dart';
 import 'package:postr/Screens/Home/HomeUI.dart';
 
 class RootUI extends StatefulWidget {
@@ -13,6 +14,7 @@ class _RootUIState extends State<RootUI> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: HomeUI(),
+      bottomNavigationBar: KNavigationBar(),
     );
   }
 }

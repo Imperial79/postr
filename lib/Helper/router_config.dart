@@ -8,7 +8,7 @@ final goRouterProvider = Provider<GoRouter>(
     // final authState = ref.watch(authFuture);
     // final user = ref.watch(userProvider);
 
-    bool isLoading = 1 != 1;
+    bool isLoading = 1 == 1;
 
     return GoRouter(
       initialLocation: '/root', // Set the initial route to root

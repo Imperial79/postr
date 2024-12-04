@@ -14,8 +14,7 @@ class SplashUI extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .8,
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -51,7 +50,15 @@ class SplashUI extends StatelessWidget {
                   ],
                 ),
               ),
-              const Text("Version $kAppVersion")
+              const Text(
+                "Version $kAppVersion",
+                style: TextStyle(height: 10),
+              ),
+              // height20,
+              const Text(
+                "Made with ❤️ in India",
+                style: TextStyle(fontSize: 15, height: 5),
+              ),
             ],
           ),
         ),

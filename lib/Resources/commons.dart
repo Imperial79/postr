@@ -14,11 +14,30 @@ systemColors() {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
       overlays: [SystemUiOverlay.top]);
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.light.copyWith(
+    SystemUiOverlayStyle.dark.copyWith(
       statusBarIconBrightness: Brightness.light,
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
+}
+
+BorderRadius kRadius(double radius) => BorderRadius.circular(radius);
+
+Future<T?> navPush<T extends Object?>(BuildContext context, Widget screen) {
+  return Navigator.push(
+      context, MaterialPageRoute(builder: (context) => screen));
+}
+
+Future<T?> navPushReplacement<T extends Object?, TO extends Object?>(
+    BuildContext context, Widget screen) {
+  return Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => screen));
+}
+
+Future<T?> navPopUntilPush<T extends Object?>(
+    BuildContext context, Widget screen) {
+  Navigator.popUntil(context, (route) => false);
+  return navPush(context, screen);
 }
