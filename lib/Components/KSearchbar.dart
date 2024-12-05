@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:postr/Components/kTextfield.dart';
 import 'package:postr/Resources/colors.dart';
+import 'package:postr/Resources/commons.dart';
 
 class KSearchbar extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
+  final TextInputType keyboardType;
+  final TextCapitalization textCapitalization;
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onSpeechResult;
   final void Function()? onClear;
@@ -16,6 +18,8 @@ class KSearchbar extends StatefulWidget {
     this.onFieldSubmitted,
     this.onClear,
     this.onSpeechResult,
+    this.keyboardType = TextInputType.text,
+    this.textCapitalization = TextCapitalization.none,
   });
 
   @override
@@ -25,35 +29,32 @@ class KSearchbar extends StatefulWidget {
 class _KSearchbarState extends State<KSearchbar> {
   @override
   Widget build(BuildContext context) {
-    return KTextfield(
+    return TextField(
       controller: widget.controller,
-      fontSize: 15,
-      fieldColor: Dark.scaffold,
-      prefix: const Icon(
-        Icons.search,
-        size: 25,
-      ),
-      hintText: widget.hintText,
-      suffix: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (widget.controller.text.isNotEmpty)
-            IconButton(
-              onPressed: () {
-                widget.controller.clear();
-                widget.onClear?.call();
-                setState(() {}); // Trigger re-render only when text is cleared
-              },
-              icon: const Icon(
-                Icons.close,
-                size: 22,
-              ),
-              visualDensity: VisualDensity.compact,
+      cursorColor: Dark.primary,
+      style: const TextStyle(),
+      keyboardType: widget.keyboardType,
+      textCapitalization: widget.textCapitalization,
+      decoration: InputDecoration(
+          filled: true,
+          fillColor: Dark.card,
+          border: OutlineInputBorder(
+            borderRadius: kRadius(10),
+            borderSide: BorderSide.none,
+          ),
+          suffixIcon: const Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: Icon(
+              Icons.search,
+              color: Colors.white,
             ),
-        ],
-      ),
-      onChanged: (_) => setState(() {}), // Reflect any changes in the field
-      onFieldSubmitted: widget.onFieldSubmitted,
-    ).regular;
+          ),
+          suffixIconConstraints:
+              const BoxConstraints(minHeight: 0, minWidth: 0),
+          contentPadding: const EdgeInsets.all(20),
+          hintText: widget.hintText,
+          hintStyle: const TextStyle(color: Dark.fadeText)),
+      onChanged: (_) => setState(() {}),
+    );
   }
 }

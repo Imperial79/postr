@@ -8,4 +8,6 @@ class Dark {
   static const Color fadeText = Color(0xFF9C9C9C);
 }
 
-ColorScheme kColor(context) => Theme.of(context).colorScheme;
+ColorScheme kColor(BuildContext context) => Theme.of(context).colorScheme;
+
+ColorFilter kSvgColor(Color color) => ColorFilter.mode(color, BlendMode.srcIn);

@@ -1,8 +1,10 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:postr/Components/KSearchbar.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/Pill.dart';
 import 'package:postr/Components/kCard.dart';
+import 'package:postr/Components/kCarousel.dart';
 import 'package:postr/Resources/colors.dart';
 import 'package:postr/Resources/commons.dart';
 import 'package:postr/Resources/constants.dart';
@@ -16,12 +18,19 @@ class HomeUI extends StatefulWidget {
 
 class _HomeUIState extends State<HomeUI> {
   int activeStep = 2;
+  final searchKey = TextEditingController();
+  @override
+  void dispose() {
+    searchKey.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(kPadding),
+          padding: const EdgeInsets.all(kPadding).copyWith(bottom: 120),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -77,7 +86,7 @@ class _HomeUIState extends State<HomeUI> {
                     child: KCard(
                       height: 80,
                       radius: 10,
-                      color: kColor(context).secondary,
+                      color: kColor(context).primary,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -238,6 +247,25 @@ class _HomeUIState extends State<HomeUI> {
                     )
                   ],
                 ),
+              ),
+              kHeight(40),
+              Label("Track Your Package").title,
+              height10,
+              KSearchbar(
+                controller: searchKey,
+                textCapitalization: TextCapitalization.characters,
+                hintText: "Enter Shipping Number",
+              ),
+              kHeight(40),
+              Label("Today's Promo").title,
+              height10,
+              const KCarousel(
+                isLooped: true,
+                showIndicator: false,
+                images: [
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUvaVk9-XOPXDK3WF_CUG3mo4WBMFOjT_gsQ&s",
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAwv47Yj5IRxf9juIkVQrAh1cyUQJhiBT3fA&s"
+                ],
               ),
             ],
           ),

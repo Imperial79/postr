@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:postr/Resources/colors.dart';
 import 'package:postr/Resources/commons.dart';
+import 'package:postr/Resources/constants.dart';
+
+final navigationProvider = StateProvider<int>(
+  (ref) => 0,
+);
 
 class KNavigationBar extends StatelessWidget {
   const KNavigationBar({super.key});
@@ -13,7 +20,8 @@ class KNavigationBar extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15)
+                .copyWith(top: 20),
             decoration: const BoxDecoration(
               color: Dark.card,
               borderRadius: BorderRadius.vertical(
@@ -21,13 +29,14 @@ class KNavigationBar extends StatelessWidget {
               ),
             ),
             child: SafeArea(
+              top: false,
               child: Row(
                 children: [
-                  btn(),
-                  btn(),
+                  btn(iconPath: "home", index: 0),
+                  btn(iconPath: "home", index: 1),
                   kWidth(80),
-                  btn(),
-                  btn(),
+                  btn(iconPath: "profile", index: 2),
+                  btn(iconPath: "profile", index: 3),
                 ],
               ),
             ),
@@ -35,15 +44,9 @@ class KNavigationBar extends StatelessWidget {
           Align(
             alignment: Alignment.topCenter,
             child: Container(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(10),
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                // gradient: RadialGradient(
-                //   colors: [
-                //     kColor(context).primaryContainer,
-                //     Dark.primary,
-                //   ],
-                // ),
                 color: Dark.primary,
               ),
               child: const Icon(
@@ -57,24 +60,35 @@ class KNavigationBar extends StatelessWidget {
     );
   }
 
-  Widget btn() {
+  Widget btn({required String iconPath, required int index}) {
     return Expanded(
-      child: IconButton(
-        onPressed: () {},
-        icon: const Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.home,
-              size: 30,
+      child: Consumer(
+        builder: (context, ref, _) {
+          final isActive = ref.watch(navigationProvider) == index;
+          return IconButton(
+            onPressed: () {
+              ref.read(navigationProvider.notifier).state = index;
+            },
+            icon: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(
+                  isActive
+                      ? "$kIconPath/$iconPath-filled.svg"
+                      : "$kIconPath/$iconPath.svg",
+                  colorFilter:
+                      kSvgColor(isActive ? Colors.white : Dark.fadeText),
+                  height: 20,
+                ),
+                kHeight(7),
+                CircleAvatar(
+                  radius: 2,
+                  backgroundColor: isActive ? Colors.white : Dark.card,
+                ),
+              ],
             ),
-            height5,
-            CircleAvatar(
-              radius: 2,
-              backgroundColor: Colors.white,
-            )
-          ],
-        ),
+          );
+        },
       ),
     );
   }
