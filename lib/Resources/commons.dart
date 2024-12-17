@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../Components/Label.dart';
+import 'colors.dart';
+
 const SizedBox width5 = SizedBox(width: 5);
 const SizedBox width10 = SizedBox(width: 10);
 const SizedBox width20 = SizedBox(width: 20);
@@ -40,4 +43,19 @@ Future<T?> navPopUntilPush<T extends Object?>(
     BuildContext context, Widget screen) {
   Navigator.popUntil(context, (route) => false);
   return navPush(context, screen);
+}
+
+KSnackbar(context, {required String message, bool error = false}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: error
+          ? kColor(context).errorContainer
+          : kColor(context).primaryContainer,
+      content: Label(message,
+              color: error
+                  ? kColor(context).onErrorContainer
+                  : kColor(context).onPrimaryContainer)
+          .regular,
+    ),
+  );
 }

@@ -26,6 +26,8 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                 children: [
                   const CircleAvatar(
                     radius: 40,
+                    backgroundImage:
+                        NetworkImage("https://picsum.photos/200/300"),
                   ),
                   width20,
                   Column(
@@ -91,6 +93,7 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                   ),
                 ],
               ),
+              height20,
             ],
           ),
         ),

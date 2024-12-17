@@ -10,6 +10,7 @@ class KSearchbar extends StatefulWidget {
   final void Function(String)? onFieldSubmitted;
   final void Function(String)? onSpeechResult;
   final void Function()? onClear;
+  final bool isSearching;
 
   const KSearchbar({
     super.key,
@@ -20,6 +21,7 @@ class KSearchbar extends StatefulWidget {
     this.onSpeechResult,
     this.keyboardType = TextInputType.text,
     this.textCapitalization = TextCapitalization.none,
+    this.isSearching = false,
   });
 
   @override
@@ -42,12 +44,21 @@ class _KSearchbarState extends State<KSearchbar> {
             borderRadius: kRadius(10),
             borderSide: BorderSide.none,
           ),
-          suffixIcon: const Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
+          suffixIcon: Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: !widget.isSearching
+                ? const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  )
+                : SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3,
+                      color: kColor(context).primaryContainer,
+                    ),
+                  ),
           ),
           suffixIconConstraints:
               const BoxConstraints(minHeight: 0, minWidth: 0),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:postr/Components/Label.dart';
+import 'package:postr/Resources/theme.dart';
 
 import '../Resources/colors.dart';
 import '../Resources/commons.dart';
@@ -53,7 +55,7 @@ class KButton {
         textStyle: TextStyle(
           fontSize: fontSize,
           fontWeight: FontWeight.w600,
-          fontFamily: 'Poppins',
+          fontFamily: kFont,
         ),
       );
 
@@ -183,10 +185,9 @@ class KButton {
                   if (label.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(right: 10.0),
-                      child: Text(
+                      child: Label(
                         label,
-                        textAlign: TextAlign.center,
-                      ),
+                      ).regular,
                     ),
                   icon ?? const SizedBox.shrink(),
                 ],

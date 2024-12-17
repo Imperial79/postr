@@ -1,5 +1,7 @@
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:postr/Components/KSearchbar.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/Pill.dart';
@@ -23,6 +25,44 @@ class _HomeUIState extends State<HomeUI> {
   void dispose() {
     searchKey.dispose();
     super.dispose();
+  }
+
+  Future<void> _scan() async {
+    try {
+      final possibleFormats = BarcodeFormat.values.toList()
+        ..removeWhere((e) => e == BarcodeFormat.unknown);
+      final result = await BarcodeScanner.scan(
+        options: ScanOptions(
+          strings: {
+            'cancel': "Cancel",
+            'flash_on': "Flash On",
+            'flash_off': "Flash Off",
+          },
+          restrictFormat: possibleFormats,
+          useCamera: 0,
+          autoEnableFlash: false,
+          android: const AndroidOptions(
+            aspectTolerance: 0.00,
+            useAutoFocus: true,
+          ),
+        ),
+      );
+
+      KSnackbar(
+        context,
+        message: result.rawContent,
+      );
+    } on PlatformException catch (e) {
+      setState(() {
+        KSnackbar(
+          context,
+          message: e.code == BarcodeScanner.cameraAccessDenied
+              ? 'The user did not grant the camera permission!'
+              : 'Unknown error: $e',
+          error: true,
+        );
+      });
+    }
   }
 
   @override
@@ -96,7 +136,9 @@ class _HomeUIState extends State<HomeUI> {
                             children: [
                               const Icon(Icons.wallet),
                               width10,
-                              Expanded(child: Label("INR 1,000").title),
+                              Flexible(
+                                child: Label("INR 1,000", maxLines: 1).title,
+                              ),
                             ],
                           ),
                         ],
@@ -123,6 +165,7 @@ class _HomeUIState extends State<HomeUI> {
                   ),
                   width10,
                   KCard(
+                    onTap: _scan,
                     height: 80,
                     width: 80,
                     radius: 10,

@@ -9,6 +9,7 @@ class Label {
   final double? fontSize;
   final double? fontWeight;
   final int? maxLines;
+  final FontStyle? fontStyle;
 
   Label(
     this.text, {
@@ -16,6 +17,7 @@ class Label {
     this.fontSize,
     this.fontWeight,
     this.maxLines,
+    this.fontStyle,
   });
 
   Widget get title => Text(
@@ -24,6 +26,7 @@ class Label {
           fontSize: fontSize ?? 20,
           color: color,
           fontVariations: [FontVariation.weight(fontWeight ?? 500)],
+          fontStyle: fontStyle,
         ),
         maxLines: maxLines,
         overflow: maxLines != null ? TextOverflow.ellipsis : null,
@@ -34,6 +37,7 @@ class Label {
           fontSize: fontSize ?? 14,
           color: color ?? Dark.fadeText,
           fontVariations: [FontVariation.weight(fontWeight ?? 400)],
+          fontStyle: fontStyle,
         ),
         maxLines: maxLines,
         overflow: maxLines != null ? TextOverflow.ellipsis : null,
@@ -47,6 +51,7 @@ class Label {
             wordSpacing: 5,
             fontVariations: [FontVariation.weight(fontWeight ?? 600)],
             fontSize: 14,
+            fontStyle: fontStyle,
             color: color ?? Colors.grey.shade600,
           ),
         ),
@@ -58,6 +63,7 @@ class Label {
           fontVariations: [FontVariation.weight(fontWeight ?? 600)],
           color: color,
           fontSize: fontSize,
+          fontStyle: fontStyle,
         ),
       );
   Widget get withDivider => Row(
@@ -68,6 +74,7 @@ class Label {
               letterSpacing: .7,
               fontSize: fontSize,
               color: color,
+              fontStyle: fontStyle,
               fontVariations: [FontVariation.weight(fontWeight ?? 500)],
             ),
           ),
