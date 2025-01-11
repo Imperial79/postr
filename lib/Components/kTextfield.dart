@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:postr/Components/kCard.dart';
 import 'package:postr/Resources/colors.dart';
 
 import '../Resources/commons.dart';
@@ -49,7 +50,7 @@ class KValidation {
 }
 
 class KTextfield {
-  static const double kFontSize = 15;
+  static const double kFontSize = 17;
   static const double kTextHeight = 1.5;
 
   final bool showRequiredStar;
@@ -80,6 +81,7 @@ class KTextfield {
   final void Function(String val)? onChanged;
   final String? Function(String? val)? validator;
   final void Function(String val)? onFieldSubmitted;
+  final Iterable<String>? autofillHints;
 
   KTextfield({
     this.showRequiredStar = true,
@@ -93,7 +95,7 @@ class KTextfield {
     this.prefix,
     this.suffix,
     this.fieldColor = Dark.scaffold,
-    this.cursorColor,
+    this.cursorColor = Dark.primary,
     this.borderColor,
     this.textColor,
     this.hintTextColor,
@@ -110,6 +112,7 @@ class KTextfield {
     this.onChanged,
     this.validator,
     this.onFieldSubmitted,
+    this.autofillHints,
   });
 
   static TextStyle kFieldTextstyle = const TextStyle(
@@ -119,11 +122,11 @@ class KTextfield {
     height: kTextHeight,
   );
 
-  static TextStyle kHintTextstyle = TextStyle(
+  static TextStyle kHintTextstyle = const TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: kFontSize,
     height: kTextHeight,
-    color: Colors.grey.shade700,
+    color: Dark.fadeText,
   );
 
   InputBorder borderStyle(Color? customBorder) => OutlineInputBorder(
@@ -140,27 +143,23 @@ class KTextfield {
             Padding(
               padding: const EdgeInsets.only(bottom: 7.0),
               child: Row(
+                spacing: 10,
                 children: [
-                  labelIcon != null
-                      ? Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: labelIcon,
-                        )
-                      : const SizedBox.shrink(),
+                  if (labelIcon != null) labelIcon!,
                   Label(
                     label!,
-                    fontWeight: 500,
-                    color: Colors.black,
-                    fontSize: 13,
+                    fontWeight: 400,
+                    color: Colors.white,
+                    fontSize: 15,
                   ).subtitle,
                   if (validator != null && showRequiredStar)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 3.0),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 3.0),
                       child: Text(
                         "(Required)",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          color: Colors.red.shade700,
+                          color: StatusText.danger,
                           fontSize: 10,
                           height: 1,
                         ),
@@ -170,13 +169,23 @@ class KTextfield {
               ),
             ),
           Row(
+            spacing: 5,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              if (prefixText != null)
+                KCard(
+                  color: Dark.scaffold,
+                  radius: 10,
+                  borderColor: Dark.border,
+                  borderWidth: 1,
+                  child: Label(prefixText ?? "").regular,
+                ),
               Flexible(
                 child: TextFormField(
                   autofocus: autoFocus,
                   onTap: onTap,
                   focusNode: focusNode,
+                  autofillHints: autofillHints,
                   controller: controller,
                   textCapitalization: textCapitalization,
                   style: kFieldTextstyle.copyWith(
@@ -197,23 +206,12 @@ class KTextfield {
                         const BoxConstraints(minHeight: 0, minWidth: 0),
                     suffixIconConstraints:
                         const BoxConstraints(minHeight: 0, minWidth: 0),
-                    prefixIcon: prefixText != null
-                        ? Container(
+                    prefixIcon: prefix != null
+                        ? Padding(
                             padding: const EdgeInsets.only(left: 12, right: 5),
-                            child: Text(
-                              prefixText!,
-                              style: kFieldTextstyle.copyWith(
-                                  fontSize: fontSize, color: textColor),
-                              textAlign: TextAlign.center,
-                            ),
+                            child: prefix!,
                           )
-                        : prefix != null
-                            ? Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 12, right: 5),
-                                child: prefix!,
-                              )
-                            : const SizedBox(width: 12),
+                        : const SizedBox(width: 12),
                     suffixIcon: suffix != null
                         ? Padding(
                             padding: const EdgeInsets.only(left: 5, right: 12),
@@ -223,7 +221,7 @@ class KTextfield {
                     isDense: true,
                     border: borderStyle(null),
                     errorBorder: borderStyle(Colors.red.shade300),
-                    focusedBorder: borderStyle(Colors.grey.shade500),
+                    focusedBorder: borderStyle(Dark.border),
                     enabledBorder: borderStyle(null),
                     hintText: hintText,
                     hintStyle: kHintTextstyle.copyWith(
@@ -326,7 +324,7 @@ class KTextfield {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: kRadius(10),
-                      borderSide: BorderSide(color: Colors.grey.shade500),
+                      borderSide: const BorderSide(color: Dark.border),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: kRadius(10),
@@ -400,7 +398,7 @@ class KTextfield {
                 backgroundColor: WidgetStatePropertyAll(Dark.card)),
             inputDecorationTheme: InputDecorationTheme(
               errorStyle: const TextStyle(color: Colors.redAccent),
-              activeIndicatorBorder: BorderSide(color: Colors.grey.shade500),
+              activeIndicatorBorder: const BorderSide(color: Dark.border),
               border: OutlineInputBorder(
                 borderRadius: kRadius(10),
                 borderSide: const BorderSide(color: Dark.border),
@@ -411,7 +409,7 @@ class KTextfield {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: kRadius(10),
-                borderSide: BorderSide(color: Colors.grey.shade500),
+                borderSide: const BorderSide(color: Dark.border),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: kRadius(10),
