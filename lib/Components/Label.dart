@@ -10,6 +10,7 @@ class Label {
   final double? fontWeight;
   final int? maxLines;
   final FontStyle? fontStyle;
+  final double? height;
 
   Label(
     this.text, {
@@ -18,27 +19,28 @@ class Label {
     this.fontWeight,
     this.maxLines,
     this.fontStyle,
+    this.height,
   });
 
   Widget get title => Text(
         text,
         style: TextStyle(
-          fontSize: fontSize ?? 20,
-          color: color,
-          fontVariations: [FontVariation.weight(fontWeight ?? 500)],
-          fontStyle: fontStyle,
-        ),
+            fontSize: fontSize ?? 20,
+            color: color,
+            fontVariations: [FontVariation.weight(fontWeight ?? 500)],
+            fontStyle: fontStyle,
+            height: height),
         maxLines: maxLines,
         overflow: maxLines != null ? TextOverflow.ellipsis : null,
       );
   Widget get subtitle => Text(
         text,
         style: TextStyle(
-          fontSize: fontSize ?? 14,
-          color: color ?? Dark.fadeText,
-          fontVariations: [FontVariation.weight(fontWeight ?? 400)],
-          fontStyle: fontStyle,
-        ),
+            fontSize: fontSize ?? 14,
+            color: color ?? Dark.fadeText,
+            fontVariations: [FontVariation.weight(fontWeight ?? 400)],
+            fontStyle: fontStyle,
+            height: height),
         maxLines: maxLines,
         overflow: maxLines != null ? TextOverflow.ellipsis : null,
       );
@@ -52,6 +54,7 @@ class Label {
             fontVariations: [FontVariation.weight(fontWeight ?? 600)],
             fontSize: 14,
             fontStyle: fontStyle,
+            height: height,
             color: color ?? Colors.grey.shade600,
           ),
         ),
@@ -60,11 +63,11 @@ class Label {
   Widget get regular => Text(
         text,
         style: TextStyle(
-          fontVariations: [FontVariation.weight(fontWeight ?? 600)],
-          color: color,
-          fontSize: fontSize,
-          fontStyle: fontStyle,
-        ),
+            fontVariations: [FontVariation.weight(fontWeight ?? 600)],
+            color: color,
+            fontSize: fontSize,
+            fontStyle: fontStyle,
+            height: height),
       );
   Widget get withDivider => Row(
         children: [
@@ -75,6 +78,7 @@ class Label {
               fontSize: fontSize,
               color: color,
               fontStyle: fontStyle,
+              height: height,
               fontVariations: [FontVariation.weight(fontWeight ?? 500)],
             ),
           ),

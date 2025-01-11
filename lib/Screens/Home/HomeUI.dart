@@ -247,8 +247,8 @@ class _HomeUIState extends State<HomeUI> {
                             title: '',
                           ),
                         ),
-                        onStepReached: (index) =>
-                            setState(() => activeStep = index),
+                        // onStepReached: (index) =>
+                        //     setState(() => activeStep = index),
                       ),
                     ),
                     Row(

@@ -2,50 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:postr/Components/kCard.dart';
 import 'package:postr/Resources/colors.dart';
-
 import '../Resources/commons.dart';
 import 'Label.dart';
 import 'kButton.dart';
 
 class KValidation {
-  static String? required(String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Required!';
-    }
-    return null;
-  }
+  static String? required(String? val) =>
+      val == null || val.isEmpty ? 'Required!' : null;
 
   static String? phone(String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Required!';
-    } else if (val.length != 10) {
-      return "Phone must be of length 10!";
-    }
-    return null;
+    if (val == null || val.isEmpty) return 'Required!';
+    return val.length != 10 ? "Phone must be of length 10!" : null;
   }
 
   static String? email(String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Required!';
-    }
-    // Basic email pattern validation
+    if (val == null || val.isEmpty) return 'Required!';
     String pattern = r'^[a-zA-Z0-9._]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
-    RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(val)) {
-      return 'Enter a valid email address';
-    }
-    return null;
+    return !RegExp(pattern).hasMatch(val)
+        ? 'Enter a valid email address'
+        : null;
   }
 
   static String? pan(String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Required!';
-    }
-    // Basic email pattern validation
-    else if (val.length != 10) {
-      return 'Length must be 10!';
-    }
-    return null;
+    if (val == null || val.isEmpty) return 'Required!';
+    return val.length != 10 ? 'Length must be 10!' : null;
   }
 }
 
@@ -115,14 +95,14 @@ class KTextfield {
     this.autofillHints,
   });
 
-  static TextStyle kFieldTextstyle = const TextStyle(
+  static const TextStyle kFieldTextstyle = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: kFontSize,
     letterSpacing: .5,
     height: kTextHeight,
   );
 
-  static TextStyle kHintTextstyle = const TextStyle(
+  static const TextStyle kHintTextstyle = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: kFontSize,
     height: kTextHeight,
@@ -143,7 +123,6 @@ class KTextfield {
             Padding(
               padding: const EdgeInsets.only(bottom: 7.0),
               child: Row(
-                spacing: 10,
                 children: [
                   if (labelIcon != null) labelIcon!,
                   Label(
@@ -170,7 +149,6 @@ class KTextfield {
             ),
           Row(
             spacing: 5,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               if (prefixText != null)
                 KCard(
@@ -178,7 +156,9 @@ class KTextfield {
                   radius: 10,
                   borderColor: Dark.border,
                   borderWidth: 1,
-                  child: Label(prefixText ?? "").regular,
+                  child: Label(prefixText ?? "",
+                          height: kTextHeight, fontSize: fontSize)
+                      .regular,
                 ),
               Flexible(
                 child: TextFormField(
@@ -246,12 +226,11 @@ class KTextfield {
               padding: const EdgeInsets.only(bottom: 10.0),
               child: Row(
                 children: [
-                  labelIcon != null
-                      ? Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: labelIcon,
-                        )
-                      : const SizedBox.shrink(),
+                  if (labelIcon != null)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: labelIcon,
+                    ),
                   Label(
                     label!,
                     fontWeight: 500,
@@ -298,9 +277,7 @@ class KTextfield {
                   controller: controller,
                   textCapitalization: textCapitalization,
                   style: kFieldTextstyle.copyWith(
-                    fontSize: fontSize,
-                    color: textColor,
-                  ),
+                      fontSize: fontSize, color: textColor),
                   textAlign: TextAlign.center,
                   readOnly: readOnly ?? false,
                   obscureText: obscureText ?? false,
@@ -359,12 +336,11 @@ class KTextfield {
               padding: const EdgeInsets.only(bottom: 10.0),
               child: Row(
                 children: [
-                  labelIcon != null
-                      ? Padding(
-                          padding: const EdgeInsets.only(right: 7.0),
-                          child: labelIcon,
-                        )
-                      : const SizedBox.shrink(),
+                  if (labelIcon != null)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 7.0),
+                      child: labelIcon,
+                    ),
                   Label(
                     label!,
                     fontWeight: 500,
@@ -418,9 +394,7 @@ class KTextfield {
               filled: true,
               fillColor: fieldColor,
               hintStyle: kHintTextstyle.copyWith(
-                fontSize: fontSize,
-                color: hintTextColor,
-              ),
+                  fontSize: fontSize, color: hintTextColor),
             ),
             selectedTrailingIcon: const Icon(Icons.keyboard_arrow_up_rounded),
             trailingIcon: const Icon(Icons.keyboard_arrow_down_rounded),

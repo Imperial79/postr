@@ -11,6 +11,8 @@ ThemeData darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
   ).copyWith(brightness: Brightness.dark, surface: Dark.scaffold),
   textTheme: Typography().white.apply(fontFamily: kFont),
   iconTheme: const IconThemeData(color: Colors.white),
+  textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(foregroundColor: Dark.primary)),
   appBarTheme: const AppBarTheme(
     backgroundColor: Dark.scaffold,
     foregroundColor: Colors.white,
