@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "526890697325",
+    "project_id": "postr-68c13",
+    "storage_bucket": "postr-68c13.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526890697325:android:a7d86c882bb7d094fab564",
+        "android_client_info": {
+          "package_name": "com.appkraft.postr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcj_8vmfkZWGYGNvZMa2AoCe1Q5ZrIoj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,13 +3,18 @@ import 'package:postr/Resources/colors.dart';
 
 const String kFont = "Kumbh";
 
-ThemeData darkTheme = ThemeData(
-  useMaterial3: true,
-  brightness: Brightness.dark,
+ThemeData darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
   scaffoldBackgroundColor: Dark.scaffold,
-  colorScheme: ColorScheme.fromSeed(seedColor: Dark.primary)
-      .copyWith(brightness: Brightness.dark),
+  splashFactory: InkSplash.splashFactory,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Dark.primary,
+  ).copyWith(brightness: Brightness.dark, surface: Dark.scaffold),
   textTheme: Typography().white.apply(fontFamily: kFont),
-  fontFamily: kFont,
   iconTheme: const IconThemeData(color: Colors.white),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Dark.scaffold,
+    foregroundColor: Colors.white,
+    elevation: 0,
+    iconTheme: IconThemeData(color: Colors.white),
+  ),
 );

@@ -1,27 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:postr/Screens/Auth/LoginUI.dart';
+import 'package:postr/Screens/Courier/New_Courier_UI.dart';
 import 'package:postr/Screens/RootUI.dart';
+import '../Repository/Auth/auth_repo.dart';
 import '../Screens/SplashUI.dart';
 
 final goRouterProvider = Provider<GoRouter>(
   (ref) {
-    // final authState = ref.watch(authFuture);
-    // final user = ref.watch(userProvider);
-
-    bool isLoading = 1 == 1;
+    final authState = ref.watch(authFuture);
+    final user = ref.watch(userProvider);
 
     return GoRouter(
-      initialLocation: '/login', // Set the initial route to root
+      initialLocation: '/',
       redirect: (context, state) {
-        // Show splash screen while auth is loading
-        if (!isLoading) {
+        if (authState.isLoading) {
           return '/splash';
         }
-        // Redirect logic based on authentication state
-        // if (user == null && state.fullPath != '/login') return '/login';
-        // if (user != null && state.fullPath == '/login') return '/home';
 
+        if (user == null && state.fullPath != '/login') return '/login';
+        if (user != null && state.fullPath == '/login') return '/';
         return null;
       },
       routes: [
@@ -29,17 +27,17 @@ final goRouterProvider = Provider<GoRouter>(
           path: '/splash',
           builder: (context, state) => const SplashUI(),
         ),
-        // GoRoute(
-        //   path: '/login',
-        //   builder: (context, state) => const LoginUI(),
-        // ),
         GoRoute(
           path: '/login',
           builder: (context, state) => const LoginUI(),
         ),
         GoRoute(
-          path: '/root',
+          path: '/',
           builder: (context, state) => const RootUI(),
+        ),
+        GoRoute(
+          path: '/new-courier',
+          builder: (context, state) => const NewCourierUI(),
         ),
 
         // GoRoute(

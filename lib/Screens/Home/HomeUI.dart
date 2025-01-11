@@ -33,11 +33,6 @@ class _HomeUIState extends State<HomeUI> {
         ..removeWhere((e) => e == BarcodeFormat.unknown);
       final result = await BarcodeScanner.scan(
         options: ScanOptions(
-          strings: {
-            'cancel': "Cancel",
-            'flash_on': "Flash On",
-            'flash_off': "Flash Off",
-          },
           restrictFormat: possibleFormats,
           useCamera: 0,
           autoEnableFlash: false,
@@ -47,21 +42,20 @@ class _HomeUIState extends State<HomeUI> {
           ),
         ),
       );
-
-      KSnackbar(
-        context,
-        message: result.rawContent,
-      );
-    } on PlatformException catch (e) {
-      setState(() {
+      if (result.rawContent.isNotEmpty) {
         KSnackbar(
           context,
-          message: e.code == BarcodeScanner.cameraAccessDenied
-              ? 'The user did not grant the camera permission!'
-              : 'Unknown error: $e',
-          error: true,
+          message: result.rawContent,
         );
-      });
+      }
+    } on PlatformException catch (e) {
+      KSnackbar(
+        context,
+        message: e.code == BarcodeScanner.cameraAccessDenied
+            ? 'The user did not grant the camera permission!'
+            : 'Unknown error: $e',
+        error: true,
+      );
     }
   }
 
@@ -207,8 +201,7 @@ class _HomeUIState extends State<HomeUI> {
                         width10,
                         Pill(
                           label: "on the way",
-                          backgroundColor:
-                              Colors.amber.shade900.withOpacity(.1),
+                          backgroundColor: kOpacity(Colors.amber.shade900, .1),
                           textColor: Colors.amber.shade800,
                         ).text
                       ],

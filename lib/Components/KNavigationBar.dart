@@ -1,6 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:postr/Components/kCard.dart';
 import 'package:postr/Resources/colors.dart';
 import 'package:postr/Resources/commons.dart';
 import 'package:postr/Resources/constants.dart';
@@ -9,55 +14,72 @@ final navigationProvider = StateProvider<int>(
   (ref) => 0,
 );
 
-class KNavigationBar extends StatelessWidget {
+class KNavigationBar extends StatefulWidget {
   const KNavigationBar({super.key});
 
   @override
+  State<KNavigationBar> createState() => _KNavigationBarState();
+}
+
+class _KNavigationBarState extends State<KNavigationBar> {
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 130,
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15)
-                .copyWith(top: 20),
-            decoration: const BoxDecoration(
-              color: Dark.card,
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(20),
+    return KeyboardVisibilityBuilder(builder: (context, isVisible) {
+      return SizedBox(
+        height: !isVisible ? 130 : 0,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 10,
+                  sigmaY: 10,
+                ),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 15)
+                          .copyWith(top: 20),
+                  decoration: BoxDecoration(
+                    color: Dark.card.withAlpha((.8 * 255).round()),
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                  ),
+                  child: SafeArea(
+                    top: false,
+                    child: Row(
+                      children: [
+                        btn(iconPath: "home", index: 0),
+                        btn(iconPath: "home", index: 1),
+                        kWidth(80),
+                        btn(iconPath: "profile", index: 2),
+                        btn(iconPath: "profile", index: 3),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
-            child: SafeArea(
-              top: false,
-              child: Row(
-                children: [
-                  btn(iconPath: "home", index: 0),
-                  btn(iconPath: "home", index: 1),
-                  kWidth(80),
-                  btn(iconPath: "profile", index: 2),
-                  btn(iconPath: "profile", index: 3),
-                ],
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
+            Align(
+              alignment: Alignment.topCenter,
+              child: KCard(
+                onTap: () {
+                  context.push("/new-courier");
+                },
+                padding: const EdgeInsets.all(10),
                 color: Dark.primary,
-              ),
-              child: const Icon(
-                Icons.add,
-                size: 50,
+                radius: 100,
+                child: const Icon(
+                  Icons.add,
+                  size: 50,
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 
   Widget btn({required String iconPath, required int index}) {
@@ -76,14 +98,10 @@ class KNavigationBar extends StatelessWidget {
                   isActive
                       ? "$kIconPath/$iconPath-filled.svg"
                       : "$kIconPath/$iconPath.svg",
-                  colorFilter:
-                      kSvgColor(isActive ? Colors.white : Dark.fadeText),
-                  height: 20,
-                ),
-                kHeight(7),
-                CircleAvatar(
-                  radius: 2,
-                  backgroundColor: isActive ? Colors.white : Dark.card,
+                  colorFilter: ColorFilter.mode(
+                    isActive ? Dark.primary : Dark.fadeText,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ],
             ),

@@ -1,88 +1,123 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:postr/Components/KScaffold.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/kButton.dart';
+import 'package:postr/Models/User_Model.dart';
+import 'package:postr/Repository/Auth/auth_repo.dart';
 import 'package:postr/Resources/constants.dart';
 
 import '../../Resources/colors.dart';
 import '../../Resources/commons.dart';
 
-class LoginUI extends StatefulWidget {
+class LoginUI extends ConsumerStatefulWidget {
   const LoginUI({super.key});
 
   @override
-  State<LoginUI> createState() => _LoginUIState();
+  ConsumerState<LoginUI> createState() => _LoginUIState();
 }
 
-class _LoginUIState extends State<LoginUI> {
+class _LoginUIState extends ConsumerState<LoginUI> {
+  ValueNotifier<bool> isLoading = ValueNotifier(false);
+
+  _signInWithGoogle() async {
+    try {
+      isLoading.value = true;
+      final res = await ref.read(authRepo).signInWithGoogle();
+
+      if (!res.error) {
+        ref.read(userProvider.notifier).state = UserModel.fromMap(res.data);
+        context.go("/");
+      } else {
+        KSnackbar(context, message: res.message, error: res.error);
+      }
+    } catch (e) {
+      KSnackbar(context, message: "$e", error: true);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return KScaffold(
+      isLoading: isLoading,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(kPadding),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
+              Column(
+                spacing: 10,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Transform.rotate(
-                          angle: .2,
-                          child: const Icon(
-                            Icons.adb_rounded,
-                            color: Dark.primary,
-                            size: 50,
-                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Transform.rotate(
+                              angle: .2,
+                              child: const Icon(
+                                Icons.adb_rounded,
+                                color: Dark.primary,
+                                size: 50,
+                              ),
+                            ),
+                            width10,
+                            Label(
+                              "Postr",
+                              fontSize: 50,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: 800,
+                            ).title,
+                          ],
                         ),
-                        width10,
+                        height20,
                         Label(
-                          "Postr",
-                          fontSize: 50,
+                          "Fastest and most trusted package delivery",
+                          fontSize: 22,
                           fontStyle: FontStyle.italic,
-                          fontWeight: 800,
-                        ).title,
+                          color: Colors.white,
+                        ).subtitle,
                       ],
                     ),
-                    height20,
-                    Label(
-                      "Fastest and most trusted package delivery",
-                      fontSize: 22,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.white,
-                    ).subtitle,
-                  ],
-                ),
-              ),
-              Row(
-                spacing: 10,
-                children: [
-                  const Icon(
-                    Icons.security,
-                    size: 16,
                   ),
-                  Expanded(
-                      child:
-                          Label("Secure sign in with google", fontWeight: 400)
-                              .regular)
+                  Row(
+                    spacing: 10,
+                    children: [
+                      Icon(
+                        Icons.security,
+                        size: 16,
+                        color: kColor(context).primaryContainer,
+                      ),
+                      Expanded(
+                        child: Label(
+                          "Secure log in",
+                          fontWeight: 400,
+                          color: kColor(context).primaryContainer,
+                        ).regular,
+                      )
+                    ],
+                  ),
+                  KButton(
+                    onPressed: _signInWithGoogle,
+                    label: "Sign in with Google",
+                    backgroundColor: Dark.card,
+                    icon: Image.asset(
+                      "$kImagePath/google-logo.png",
+                      height: 20,
+                    ),
+                    fontSize: 20,
+                    padding: const EdgeInsets.all(20),
+                  ).withIcon,
                 ],
               ),
-              height10,
-              KButton(
-                      onPressed: () {},
-                      label: "Sign in with Google",
-                      backgroundColor: Dark.card,
-                      icon: Image.asset(
-                        "$kImagePath/google-logo.png",
-                        height: 20,
-                      ),
-                      fontSize: 20,
-                      padding: const EdgeInsets.all(20))
-                  .withIcon,
             ],
           ),
         ),
