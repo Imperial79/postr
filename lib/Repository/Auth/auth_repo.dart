@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:postr/Helper/api_config.dart';
 import 'package:postr/Models/User_Model.dart';
-import 'package:postr/Models/response_model.dart';
+import 'package:postr/Models/Response_Model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 final userProvider = StateProvider<UserModel?>(

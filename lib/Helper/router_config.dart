@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:postr/Screens/Address/Addresses_UI.dart';
 import 'package:postr/Screens/Auth/LoginUI.dart';
 import 'package:postr/Screens/Courier/New_Courier_UI.dart';
 import 'package:postr/Screens/RootUI.dart';
@@ -38,6 +39,10 @@ final goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/new-courier',
           builder: (context, state) => const NewCourierUI(),
+        ),
+        GoRoute(
+          path: '/addresses',
+          builder: (context, state) => const Addresses_UI(),
         ),
 
         // GoRoute(

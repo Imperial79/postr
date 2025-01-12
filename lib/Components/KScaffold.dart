@@ -15,6 +15,7 @@ class KScaffold extends StatelessWidget {
   FloatingActionButtonLocation? floatingActionButtonLocation;
   FloatingActionButtonAnimator? floatingActionButtonAnimator;
   Widget? floatingActionButton;
+  Widget? bottomNavigationBar;
   ValueListenable<bool>? isLoading;
   KScaffold({
     super.key,
@@ -24,6 +25,7 @@ class KScaffold extends StatelessWidget {
     this.floatingActionButtonAnimator,
     this.floatingActionButtonLocation,
     this.floatingActionButton,
+    this.bottomNavigationBar,
   });
 
   @override
@@ -45,6 +47,7 @@ class KScaffold extends StatelessWidget {
                   floatingActionButtonAnimator: floatingActionButtonAnimator,
                   floatingActionButtonLocation: floatingActionButtonLocation,
                   floatingActionButton: floatingActionButton,
+                  bottomNavigationBar: bottomNavigationBar,
                 ),
                 _fullLoading(isLoading: loading),
               ],

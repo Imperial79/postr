@@ -316,7 +316,7 @@ class KTextfield {
                 ),
               ),
               const SizedBox(width: 10),
-              KButton(onPressed: onTap, label: 'Send OTP').regular,
+              KButton(onPressed: onTap, label: 'Send OTP'),
             ],
           ),
         ],
