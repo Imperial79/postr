@@ -50,22 +50,24 @@ class KButton extends StatelessWidget {
           iconColor: foregroundColor,
           padding: padding ?? const EdgeInsets.all(15),
           shape: RoundedRectangleBorder(
-            borderRadius: kRadius(100),
+            borderRadius: kRadius(15),
           ),
           visualDensity: visualDensity,
           elevation: 0,
           shadowColor: Colors.transparent,
           alignment: Alignment.center,
+          disabledBackgroundColor: Dark.card,
           textStyle: TextStyle(
             fontSize: fontSize,
-            fontWeight: FontWeight.w600,
+            letterSpacing: .7,
+            fontVariations: const [FontVariation.weight(500)],
             fontFamily: kFont,
           ),
         );
       case KButtonStyle.pill:
         return TextButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: kRadius(100),
+            borderRadius: kRadius(15),
           ),
           backgroundColor: backgroundColor ?? Dark.primary,
           foregroundColor: foregroundColor ?? Colors.white,
@@ -80,15 +82,17 @@ class KButton extends StatelessWidget {
           padding: padding ??
               const EdgeInsets.symmetric(horizontal: 20, vertical: 17),
           shape: RoundedRectangleBorder(
-            borderRadius: kRadius(100),
+            borderRadius: kRadius(15),
           ),
           visualDensity: visualDensity,
           elevation: 0,
           shadowColor: Colors.transparent,
           alignment: Alignment.center,
+          disabledBackgroundColor: Dark.card,
           textStyle: TextStyle(
             fontSize: fontSize,
-            fontWeight: FontWeight.w600,
+            letterSpacing: .7,
+            fontVariations: const [FontVariation.weight(500)],
             fontFamily: kFont,
           ),
         );
@@ -99,15 +103,17 @@ class KButton extends StatelessWidget {
           iconColor: foregroundColor,
           padding: padding ?? const EdgeInsets.all(15),
           shape: RoundedRectangleBorder(
-            borderRadius: kRadius(100),
+            borderRadius: kRadius(15),
           ),
           visualDensity: visualDensity,
           elevation: 0,
           shadowColor: Colors.transparent,
+          disabledBackgroundColor: Dark.card,
           alignment: Alignment.center,
           textStyle: TextStyle(
             fontSize: fontSize,
-            fontWeight: FontWeight.w600,
+            letterSpacing: .7,
+            fontVariations: const [FontVariation.weight(500)],
             fontFamily: kFont,
           ),
         );
@@ -118,15 +124,17 @@ class KButton extends StatelessWidget {
           iconColor: foregroundColor,
           padding: padding ?? const EdgeInsets.all(15),
           shape: RoundedRectangleBorder(
-            borderRadius: kRadius(100),
+            borderRadius: kRadius(15),
           ),
           visualDensity: visualDensity,
           elevation: 0,
           shadowColor: Colors.transparent,
           alignment: Alignment.center,
+          disabledBackgroundColor: Dark.card,
           textStyle: TextStyle(
             fontSize: fontSize,
-            fontWeight: FontWeight.w600,
+            letterSpacing: .7,
+            fontVariations: const [FontVariation.weight(500)],
             fontFamily: kFont,
           ),
           minimumSize: const Size.fromHeight(50), // Full width
@@ -176,13 +184,13 @@ class KButton extends StatelessWidget {
       case KButtonStyle.regular:
       case KButtonStyle.expanded:
         return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               label,
               textAlign: TextAlign.center,
             ),
-            if (icon != null) icon!,
+            if (icon != null) ...[const Spacer(), icon!],
           ],
         );
     }
@@ -196,7 +204,7 @@ class KButton extends StatelessWidget {
             height: 15,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              color: Colors.black,
+              color: Dark.primary,
               backgroundColor: Colors.transparent,
             ),
           ),
@@ -206,7 +214,7 @@ class KButton extends StatelessWidget {
             style: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.w500,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ],

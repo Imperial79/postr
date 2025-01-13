@@ -22,7 +22,6 @@ class CourierForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KCard(
-      padding: const EdgeInsets.all(15),
       width: double.maxFinite,
       child: Form(
         key: formKey,

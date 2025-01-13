@@ -33,7 +33,8 @@ class KTextfield {
   static const double kFontSize = 17;
   static const double kTextHeight = 1.5;
 
-  final bool showRequiredStar;
+  /// Show Required text aside Label.
+  final bool showRequired;
   final bool autoFocus;
   final void Function()? onTap;
   final bool? readOnly;
@@ -64,7 +65,7 @@ class KTextfield {
   final Iterable<String>? autofillHints;
 
   KTextfield({
-    this.showRequiredStar = true,
+    this.showRequired = true,
     this.autoFocus = false,
     this.onTap,
     this.readOnly,
@@ -131,7 +132,7 @@ class KTextfield {
                     color: Colors.white,
                     fontSize: 15,
                   ).subtitle,
-                  if (validator != null && showRequiredStar)
+                  if (validator != null && showRequired)
                     const Padding(
                       padding: EdgeInsets.only(left: 3.0),
                       child: Text(
@@ -188,7 +189,7 @@ class KTextfield {
                         const BoxConstraints(minHeight: 0, minWidth: 0),
                     prefixIcon: prefix != null
                         ? Padding(
-                            padding: const EdgeInsets.only(left: 12, right: 5),
+                            padding: const EdgeInsets.only(left: 12, right: 10),
                             child: prefix!,
                           )
                         : const SizedBox(width: 12),
@@ -347,7 +348,7 @@ class KTextfield {
                     color: Colors.black,
                     fontSize: 13,
                   ).subtitle,
-                  if (validator != null && showRequiredStar)
+                  if (validator != null && showRequired)
                     Padding(
                       padding: const EdgeInsets.only(left: 3.0),
                       child: Text(

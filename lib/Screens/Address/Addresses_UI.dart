@@ -9,6 +9,7 @@ import 'package:postr/Resources/commons.dart';
 import 'package:postr/Resources/constants.dart';
 
 import '../../Components/Label.dart';
+import '../../Components/kWidgets.dart';
 
 class Addresses_UI extends StatefulWidget {
   const Addresses_UI({super.key});
@@ -29,18 +30,7 @@ class _Addresses_UIState extends State<Addresses_UI> {
             spacing: 10,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 70),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Label("Select an address", fontSize: 25, fontWeight: 800)
-                          .title,
-                      Label("or Add one", fontSize: 20, fontWeight: 200).title,
-                    ],
-                  ),
-                ),
-              ),
+              KHeading(title: "Select an address", subtitle: "or Add one"),
               Label("Recently added").regular,
               _addressCard(),
             ],

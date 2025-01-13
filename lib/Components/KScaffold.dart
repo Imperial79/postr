@@ -16,7 +16,7 @@ class KScaffold extends StatelessWidget {
   FloatingActionButtonAnimator? floatingActionButtonAnimator;
   Widget? floatingActionButton;
   Widget? bottomNavigationBar;
-  ValueListenable<bool>? isLoading;
+  ValueListenable<dynamic>? isLoading;
   KScaffold({
     super.key,
     this.appBar,

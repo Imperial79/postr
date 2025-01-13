@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:postr/Components/KNavigationBar.dart';
 import 'package:postr/Resources/colors.dart';
+import 'package:postr/Screens/Calculate/CalculateUI.dart';
 import 'package:postr/Screens/Home/HomeUI.dart';
 import 'package:postr/Screens/Profile/profileUI.dart';
 
@@ -16,7 +17,7 @@ class RootUI extends ConsumerStatefulWidget {
 class _RootUIState extends ConsumerState<RootUI> {
   final List<Widget> _screens = [
     const HomeUI(),
-    const HomeUI(),
+    const CalculateUI(),
     const ProfileUI(),
     const ProfileUI(),
   ];

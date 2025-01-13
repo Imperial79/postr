@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:postr/Screens/Address/Addresses_UI.dart';
 import 'package:postr/Screens/Auth/LoginUI.dart';
+import 'package:postr/Screens/Calculate/CalculateUI.dart';
+import 'package:postr/Screens/Calculate/CalculatedResultUI.dart';
 import 'package:postr/Screens/Courier/New_Courier_UI.dart';
 import 'package:postr/Screens/RootUI.dart';
 import '../Repository/Auth/auth_repo.dart';
@@ -43,6 +45,23 @@ final goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/addresses',
           builder: (context, state) => const Addresses_UI(),
+        ),
+        GoRoute(
+          path: '/calculate',
+          builder: (context, state) => const CalculateUI(),
+          routes: [
+            GoRoute(
+              path: 'calculated-result',
+              builder: (context, state) {
+                final extra = state.extra;
+                final amount =
+                    (extra is Map<String, dynamic>) ? extra["amount"] : null;
+                return CalculatedResultUI(
+                  amount: amount,
+                );
+              },
+            ),
+          ],
         ),
 
         // GoRoute(

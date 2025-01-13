@@ -17,7 +17,7 @@ class KCard extends StatelessWidget {
   const KCard({
     super.key,
     this.onTap,
-    this.radius = 15,
+    this.radius = 20,
     this.child,
     this.padding,
     this.margin,
@@ -36,7 +36,7 @@ class KCard extends StatelessWidget {
         width: width,
         height: height,
         margin: margin,
-        padding: padding ?? const EdgeInsets.all(12),
+        padding: padding ?? const EdgeInsets.all(15),
         decoration: BoxDecoration(
             borderRadius: kRadius(radius),
             color: color,

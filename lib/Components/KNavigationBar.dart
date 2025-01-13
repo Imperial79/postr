@@ -51,7 +51,7 @@ class _KNavigationBarState extends State<KNavigationBar> {
                     child: Row(
                       children: [
                         btn(iconPath: "home", index: 0),
-                        btn(iconPath: "home", index: 1),
+                        btn(iconPath: "calculator", index: 1),
                         kWidth(80),
                         btn(iconPath: "profile", index: 2),
                         btn(iconPath: "profile", index: 3),

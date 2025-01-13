@@ -11,6 +11,7 @@ class Label {
   final int? maxLines;
   final FontStyle? fontStyle;
   final double? height;
+  final TextAlign? textAlign;
 
   Label(
     this.text, {
@@ -20,6 +21,7 @@ class Label {
     this.maxLines,
     this.fontStyle,
     this.height,
+    this.textAlign,
   });
 
   Widget get title => Text(
@@ -30,17 +32,20 @@ class Label {
             fontVariations: [FontVariation.weight(fontWeight ?? 500)],
             fontStyle: fontStyle,
             height: height),
+        textAlign: textAlign,
         maxLines: maxLines,
         overflow: maxLines != null ? TextOverflow.ellipsis : null,
       );
   Widget get subtitle => Text(
         text,
         style: TextStyle(
-            fontSize: fontSize ?? 14,
-            color: color ?? Dark.fadeText,
-            fontVariations: [FontVariation.weight(fontWeight ?? 400)],
-            fontStyle: fontStyle,
-            height: height),
+          fontSize: fontSize ?? 14,
+          color: color ?? Dark.fadeText,
+          fontVariations: [FontVariation.weight(fontWeight ?? 400)],
+          fontStyle: fontStyle,
+          height: height,
+        ),
+        textAlign: textAlign,
         maxLines: maxLines,
         overflow: maxLines != null ? TextOverflow.ellipsis : null,
       );
@@ -57,6 +62,7 @@ class Label {
             height: height,
             color: color ?? Colors.grey.shade600,
           ),
+          textAlign: textAlign,
         ),
       );
 
@@ -68,6 +74,7 @@ class Label {
             fontSize: fontSize,
             fontStyle: fontStyle,
             height: height),
+        textAlign: textAlign,
       );
   Widget get withDivider => Row(
         children: [
@@ -81,6 +88,7 @@ class Label {
               height: height,
               fontVariations: [FontVariation.weight(fontWeight ?? 500)],
             ),
+            textAlign: textAlign,
           ),
           width5,
           const Expanded(child: Divider())

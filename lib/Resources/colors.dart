@@ -11,7 +11,7 @@ class Dark {
 class StatusText {
   static const Color danger =
       Color(0xFFFF0000); // Added a color for danger status
-  static const Color success = Color(0xFF28a745);
+  static const Color success = Color.fromARGB(255, 101, 255, 137);
   static const Color warning = Color(0xFFFFC107);
   static const Color info = Color(0xFF17a2b8);
   static const Color light = Color(0xFFf8f9fa);
