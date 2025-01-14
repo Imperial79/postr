@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:postr/Helper/api_config.dart';
@@ -15,19 +17,34 @@ final authRepo = Provider(
 
 final authFuture = FutureProvider(
   (ref) async {
-    final fcmToken = await FirebaseMessaging.instance.getToken();
+    try {
+      final fcmToken = await FirebaseMessaging.instance.getToken();
 
-    final res =
-        await apiCallBack(path: "/user/auth", body: {"fcmToken": fcmToken});
+      final res =
+          await apiCallBack(path: "/user/auth", body: {"fcmToken": fcmToken});
 
-    if (!res.error) {
-      ref.read(userProvider.notifier).state = UserModel.fromMap(res.data);
+      if (!res.error) {
+        ref.read(userProvider.notifier).state = UserModel.fromMap(res.data);
+      }
+    } catch (e) {
+      log("$e");
     }
   },
 );
 
 class AuthRepo {
-  static Future<ResponseModel> sendTokenToBackend(String idToken) async {
+  static GoogleSignIn get googleSignIn => GoogleSignIn(
+        serverClientId:
+            "526890697325-rtmpch385f38js8aq1ip8c66t8iibfuh.apps.googleusercontent.com",
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/contacts.readonly',
+          'https://www.googleapis.com/auth/userinfo.profile',
+          'openid',
+        ],
+      );
+  static Future<ResponseModel> sendTokenToBackend(
+      WidgetRef ref, String idToken) async {
     try {
       final fcmToken = await FirebaseMessaging.instance.getToken();
 
@@ -36,13 +53,17 @@ class AuthRepo {
         body: {"token": idToken, "fcmToken": fcmToken},
       );
 
+      if (!res.error) {
+        ref.read(userProvider.notifier).state = UserModel.fromMap(res.data);
+      }
+
       return res;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<ResponseModel> signInWithGoogle() async {
+  Future<ResponseModel> signInWithGoogle(WidgetRef ref) async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn(
         serverClientId:
@@ -61,12 +82,18 @@ class AuthRepo {
       if (gAccount != null) {
         final GoogleSignInAuthentication gAuth = await gAccount.authentication;
 
-        // log("Acccess Token : ${googleSignInAuthentication.accessToken}");
-        // log("idToken : ${googleSignInAuthentication.idToken}");
-
-        return await sendTokenToBackend(gAuth.idToken ?? "");
+        return await sendTokenToBackend(ref, gAuth.idToken ?? "");
       }
       return ResponseModel(error: true, message: "User is null!");
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseModel> logout(WidgetRef ref) async {
+    try {
+      final res = await apiCallBack(path: "/user/logout");
+      return res;
     } catch (error) {
       rethrow;
     }

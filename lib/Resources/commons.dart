@@ -15,6 +15,7 @@ SizedBox kWidth(double width) => SizedBox(width: width);
 
 Widget get div => const Divider(
       color: DColor.border,
+      thickness: .5,
     );
 
 systemColors() {

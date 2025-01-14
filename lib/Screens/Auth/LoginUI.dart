@@ -24,7 +24,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
   _signInWithGoogle() async {
     try {
       isLoading.value = true;
-      final res = await ref.read(authRepo).signInWithGoogle();
+      final res = await ref.read(authRepo).signInWithGoogle(ref);
 
       if (!res.error) {
         ref.read(userProvider.notifier).state = UserModel.fromMap(res.data);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:postr/Components/KScaffold.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/kCard.dart';
 import 'package:postr/Repository/Auth/auth_repo.dart';
@@ -17,10 +18,29 @@ class ProfileUI extends ConsumerStatefulWidget {
 }
 
 class _ProfileUIState extends ConsumerState<ProfileUI> {
+  ValueNotifier isLoading = ValueNotifier(false);
+  logout() async {
+    try {
+      isLoading.value = true;
+      final res = await ref.read(authRepo).logout(ref);
+
+      if (!res.error) {
+        await AuthRepo.googleSignIn.signOut();
+        ref.read(userProvider.notifier).state = null;
+        context.go("/login");
+      }
+    } catch (e) {
+      KSnackbar(context, message: "$e", error: true);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(userProvider)!;
-    return Scaffold(
+    return KScaffold(
+      isLoading: isLoading,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(kPadding).copyWith(bottom: 120),
@@ -30,10 +50,9 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 40,
-                    backgroundImage:
-                        NetworkImage("https://picsum.photos/200/300"),
+                    backgroundImage: NetworkImage(user.image),
                   ),
                   width20,
                   Column(
@@ -41,13 +60,13 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Label(
-                        "Avishek Verma",
+                        user.name,
                         fontSize: 25,
                         fontWeight: 500,
                       ).regular,
-                      if (user.phone.isNotEmpty)
+                      if (user.phone!.isNotEmpty)
                         Label(
-                          "ID: 26137861723",
+                          "+91 ${user.phone}",
                           fontSize: 17,
                           fontWeight: 400,
                         ).subtitle
@@ -63,7 +82,7 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                               Label("Add Phone", fontSize: 12).regular
                             ],
                           ),
-                        )
+                        ),
                     ],
                   ),
                 ],
@@ -82,11 +101,12 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                           const Icon(Icons.qr_code_scanner_outlined),
                           width20,
                           Flexible(
-                              child: Label(
-                            "New Track",
-                            fontSize: 17,
-                            fontWeight: 500,
-                          ).regular),
+                            child: Label(
+                              "New Track",
+                              fontSize: 17,
+                              fontWeight: 500,
+                            ).regular,
+                          ),
                         ],
                       ),
                     ),
@@ -102,11 +122,12 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                           const Icon(Icons.support_agent),
                           width20,
                           Flexible(
-                              child: Label(
-                            "Contact Us",
-                            fontSize: 17,
-                            fontWeight: 500,
-                          ).regular),
+                            child: Label(
+                              "Contact Us",
+                              fontSize: 17,
+                              fontWeight: 500,
+                            ).regular,
+                          ),
                         ],
                       ),
                     ),
@@ -135,6 +156,12 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                       label: "Help",
                       icon: Icons.help,
                     ),
+                    div,
+                    buildSettingTile(
+                      onTap: logout,
+                      label: "Log Out",
+                      icon: Icons.logout,
+                    ),
                   ],
                 ),
               ),
@@ -157,7 +184,7 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
         spacing: 20,
         children: [
           Icon(icon),
-          Label(label).regular,
+          Label(label, fontSize: 17, fontWeight: 400).regular,
           const Spacer(),
           const Icon(
             Icons.arrow_forward_ios,

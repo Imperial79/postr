@@ -2,6 +2,7 @@ import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:postr/Components/KSearchbar.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/Pill.dart';
@@ -11,14 +12,16 @@ import 'package:postr/Resources/colors.dart';
 import 'package:postr/Resources/commons.dart';
 import 'package:postr/Resources/constants.dart';
 
-class HomeUI extends StatefulWidget {
+import '../../Repository/Auth/auth_repo.dart';
+
+class HomeUI extends ConsumerStatefulWidget {
   const HomeUI({super.key});
 
   @override
-  State<HomeUI> createState() => _HomeUIState();
+  ConsumerState<HomeUI> createState() => _HomeUIState();
 }
 
-class _HomeUIState extends State<HomeUI> {
+class _HomeUIState extends ConsumerState<HomeUI> {
   int activeStep = 2;
   final searchKey = TextEditingController();
   @override
@@ -61,6 +64,7 @@ class _HomeUIState extends State<HomeUI> {
 
   @override
   Widget build(BuildContext context) {
+    final user = ref.watch(userProvider)!;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -99,7 +103,7 @@ class _HomeUIState extends State<HomeUI> {
                 ],
               ),
               height20,
-              Label("Welcome back, Avishek").subtitle,
+              Label("Welcome back, ${user.name.split(" ").first}").subtitle,
               Row(
                 children: [
                   Flexible(

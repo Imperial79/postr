@@ -4,13 +4,11 @@ class UserModel {
   int id = 0;
   String name = "";
   String image = "";
-  String phone = "";
+  String? phone = "";
   String email = "";
   String? googleId = "";
   String? appleId = "";
   String? fcmToken = "";
-  String? tokenId = "";
-  String? tokenExpiry = "";
   String status = "";
   String date = "";
   UserModel({
@@ -22,8 +20,6 @@ class UserModel {
     this.googleId,
     this.appleId,
     this.fcmToken,
-    this.tokenId,
-    this.tokenExpiry,
     required this.status,
     required this.date,
   });
@@ -37,8 +33,6 @@ class UserModel {
     String? googleId,
     String? appleId,
     String? fcmToken,
-    String? tokenId,
-    String? tokenExpiry,
     String? status,
     String? date,
   }) {
@@ -51,8 +45,6 @@ class UserModel {
       googleId: googleId ?? this.googleId,
       appleId: appleId ?? this.appleId,
       fcmToken: fcmToken ?? this.fcmToken,
-      tokenId: tokenId ?? this.tokenId,
-      tokenExpiry: tokenExpiry ?? this.tokenExpiry,
       status: status ?? this.status,
       date: date ?? this.date,
     );
@@ -68,8 +60,6 @@ class UserModel {
       'googleId': googleId,
       'appleId': appleId,
       'fcmToken': fcmToken,
-      'tokenId': tokenId,
-      'tokenExpiry': tokenExpiry,
       'status': status,
       'date': date,
     };
@@ -82,11 +72,9 @@ class UserModel {
       image: map['image'] ?? '',
       phone: map['phone'] ?? '',
       email: map['email'] ?? '',
-      googleId: map['googleId'],
-      appleId: map['appleId'],
-      fcmToken: map['fcmToken'],
-      tokenId: map['tokenId'],
-      tokenExpiry: map['tokenExpiry'],
+      googleId: map['googleId'] ?? '',
+      appleId: map['appleId'] ?? '',
+      fcmToken: map['fcmToken'] ?? '',
       status: map['status'] ?? '',
       date: map['date'] ?? '',
     );
@@ -99,7 +87,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, image: $image, phone: $phone, email: $email, googleId: $googleId, appleId: $appleId, fcmToken: $fcmToken, tokenId: $tokenId, tokenExpiry: $tokenExpiry, status: $status, date: $date)';
+    return 'UserModel(id: $id, name: $name, image: $image, phone: $phone, email: $email, googleId: $googleId, appleId: $appleId, fcmToken: $fcmToken, status: $status, date: $date)';
   }
 
   @override
@@ -115,8 +103,6 @@ class UserModel {
         other.googleId == googleId &&
         other.appleId == appleId &&
         other.fcmToken == fcmToken &&
-        other.tokenId == tokenId &&
-        other.tokenExpiry == tokenExpiry &&
         other.status == status &&
         other.date == date;
   }
@@ -131,8 +117,6 @@ class UserModel {
         googleId.hashCode ^
         appleId.hashCode ^
         fcmToken.hashCode ^
-        tokenId.hashCode ^
-        tokenExpiry.hashCode ^
         status.hashCode ^
         date.hashCode;
   }
