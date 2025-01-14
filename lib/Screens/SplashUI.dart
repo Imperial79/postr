@@ -26,7 +26,7 @@ class SplashUI extends StatelessWidget {
                           angle: .2,
                           child: const Icon(
                             Icons.adb_rounded,
-                            color: Dark.primary,
+                            color: DColor.primary,
                             size: 50,
                           ),
                         ),

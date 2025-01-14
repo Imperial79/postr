@@ -32,7 +32,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Postr',
-      darkTheme: darkTheme,
+      darkTheme: darkTheme(context),
       themeMode: ThemeMode.dark,
       routerConfig: routerConfig,
     );

@@ -41,7 +41,7 @@ class _KNavigationBarState extends State<KNavigationBar> {
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 15)
                           .copyWith(top: 20),
                   decoration: BoxDecoration(
-                    color: Dark.card.withAlpha((.8 * 255).round()),
+                    color: DColor.card.withAlpha((.8 * 255).round()),
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(20),
                     ),
@@ -68,7 +68,7 @@ class _KNavigationBarState extends State<KNavigationBar> {
                   context.push("/new-courier");
                 },
                 padding: const EdgeInsets.all(10),
-                color: Dark.primary,
+                color: DColor.primary,
                 radius: 100,
                 child: const Icon(
                   Icons.add,
@@ -99,7 +99,7 @@ class _KNavigationBarState extends State<KNavigationBar> {
                       ? "$kIconPath/$iconPath-filled.svg"
                       : "$kIconPath/$iconPath.svg",
                   colorFilter: ColorFilter.mode(
-                    isActive ? Dark.primary : Dark.fadeText,
+                    isActive ? DColor.primary : DColor.fadeText,
                     BlendMode.srcIn,
                   ),
                 ),

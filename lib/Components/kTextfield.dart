@@ -75,8 +75,8 @@ class KTextfield {
     this.prefixText,
     this.prefix,
     this.suffix,
-    this.fieldColor = Dark.scaffold,
-    this.cursorColor = Dark.primary,
+    this.fieldColor = DColor.scaffold,
+    this.cursorColor = DColor.primary,
     this.borderColor,
     this.textColor,
     this.hintTextColor,
@@ -107,13 +107,13 @@ class KTextfield {
     fontWeight: FontWeight.w400,
     fontSize: kFontSize,
     height: kTextHeight,
-    color: Dark.fadeText,
+    color: DColor.fadeText,
   );
 
   InputBorder borderStyle(Color? customBorder) => OutlineInputBorder(
         borderRadius: kRadius(10),
         borderSide:
-            BorderSide(color: borderColor ?? customBorder ?? Dark.border),
+            BorderSide(color: borderColor ?? customBorder ?? DColor.border),
       );
 
   Widget get regular => Column(
@@ -153,9 +153,9 @@ class KTextfield {
             children: [
               if (prefixText != null)
                 KCard(
-                  color: Dark.scaffold,
+                  color: DColor.scaffold,
                   radius: 10,
-                  borderColor: Dark.border,
+                  borderColor: DColor.border,
                   borderWidth: 1,
                   child: Label(prefixText ?? "",
                           height: kTextHeight, fontSize: fontSize)
@@ -202,7 +202,7 @@ class KTextfield {
                     isDense: true,
                     border: borderStyle(null),
                     errorBorder: borderStyle(Colors.red.shade300),
-                    focusedBorder: borderStyle(Dark.border),
+                    focusedBorder: borderStyle(DColor.border),
                     enabledBorder: borderStyle(null),
                     hintText: hintText,
                     hintStyle: kHintTextstyle.copyWith(
@@ -250,7 +250,7 @@ class KTextfield {
                   margin: const EdgeInsets.only(right: 10),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Dark.primary,
+                    color: DColor.primary,
                     borderRadius: kRadius(10),
                   ),
                   child: Text(
@@ -268,7 +268,7 @@ class KTextfield {
                   padding: const EdgeInsets.all(12),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Dark.primary,
+                    color: DColor.primary,
                     borderRadius: kRadius(10),
                   ),
                   child: prefix!,
@@ -289,12 +289,12 @@ class KTextfield {
                   inputFormatters: inputFormatters,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Dark.card,
+                    fillColor: DColor.card,
                     counterText: '',
                     isDense: true,
                     border: OutlineInputBorder(
                       borderRadius: kRadius(10),
-                      borderSide: const BorderSide(color: Dark.border),
+                      borderSide: const BorderSide(color: DColor.border),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderRadius: kRadius(10),
@@ -302,11 +302,11 @@ class KTextfield {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: kRadius(10),
-                      borderSide: const BorderSide(color: Dark.border),
+                      borderSide: const BorderSide(color: DColor.border),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: kRadius(10),
-                      borderSide: const BorderSide(color: Dark.border),
+                      borderSide: const BorderSide(color: DColor.border),
                     ),
                     hintText: hintText,
                     hintStyle: kHintTextstyle.copyWith(
@@ -372,13 +372,13 @@ class KTextfield {
             onSelected: onSelected,
             expandedInsets: EdgeInsets.zero,
             menuStyle: const MenuStyle(
-                backgroundColor: WidgetStatePropertyAll(Dark.card)),
+                backgroundColor: WidgetStatePropertyAll(DColor.card)),
             inputDecorationTheme: InputDecorationTheme(
               errorStyle: const TextStyle(color: Colors.redAccent),
-              activeIndicatorBorder: const BorderSide(color: Dark.border),
+              activeIndicatorBorder: const BorderSide(color: DColor.border),
               border: OutlineInputBorder(
                 borderRadius: kRadius(10),
-                borderSide: const BorderSide(color: Dark.border),
+                borderSide: const BorderSide(color: DColor.border),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: kRadius(10),
@@ -386,11 +386,11 @@ class KTextfield {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: kRadius(10),
-                borderSide: const BorderSide(color: Dark.border),
+                borderSide: const BorderSide(color: DColor.border),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: kRadius(10),
-                borderSide: const BorderSide(color: Dark.border),
+                borderSide: const BorderSide(color: DColor.border),
               ),
               filled: true,
               fillColor: fieldColor,

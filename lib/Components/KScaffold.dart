@@ -78,7 +78,7 @@ class KScaffold extends StatelessWidget {
                         width: 25,
                         child: CircularProgressIndicator(
                           strokeWidth: 3,
-                          color: Dark.primary,
+                          color: DColor.primary,
                         ),
                       ),
                       Label("Please Wait", fontSize: 17, fontWeight: 400).title,
@@ -101,7 +101,7 @@ AppBar KAppBar(
   List<Widget>? actions,
 }) {
   return AppBar(
-    backgroundColor: Dark.scaffold,
+    backgroundColor: DColor.scaffold,
     automaticallyImplyLeading: false,
     titleSpacing: showBack ? 0 : kPadding,
     leadingWidth: 70,

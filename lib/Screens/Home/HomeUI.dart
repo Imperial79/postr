@@ -74,7 +74,7 @@ class _HomeUIState extends State<HomeUI> {
                     angle: .2,
                     child: const Icon(
                       Icons.adb_rounded,
-                      color: Dark.primary,
+                      color: DColor.primary,
                       size: 30,
                     ),
                   ),
@@ -108,7 +108,7 @@ class _HomeUIState extends State<HomeUI> {
                   width10,
                   const Icon(
                     Icons.keyboard_arrow_down,
-                    color: Dark.primary,
+                    color: DColor.primary,
                     size: 30,
                   ),
                 ],
@@ -192,7 +192,7 @@ class _HomeUIState extends State<HomeUI> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Label("Shipping ID",
-                                      color: Dark.fadeText, fontSize: 15)
+                                      color: DColor.fadeText, fontSize: 15)
                                   .subtitle,
                               Label("273627362783", fontSize: 17).regular,
                             ],
@@ -217,8 +217,8 @@ class _HomeUIState extends State<HomeUI> {
                           lineWidth: 0,
                           lineSpace: 0,
                           lineLength: 70,
-                          defaultLineColor: Dark.border,
-                          finishedLineColor: Dark.primary,
+                          defaultLineColor: DColor.border,
+                          finishedLineColor: DColor.primary,
                         ),
                         activeStepTextColor: Colors.black87,
                         finishedStepTextColor: Colors.black87,
@@ -232,16 +232,16 @@ class _HomeUIState extends State<HomeUI> {
                           (index) => EasyStep(
                             customStep: CircleAvatar(
                               radius: 8,
-                              backgroundColor: Dark.border,
+                              backgroundColor: DColor.border,
                               child: KCard(
                                 radius: 100,
                                 height: 20,
                                 width: 20,
                                 borderColor:
-                                    activeStep >= index ? Dark.border : null,
+                                    activeStep >= index ? DColor.border : null,
                                 color: activeStep >= index
-                                    ? Dark.primary
-                                    : Dark.border,
+                                    ? DColor.primary
+                                    : DColor.border,
                               ),
                             ),
                             title: '',

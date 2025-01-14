@@ -33,13 +33,13 @@ class _KSearchbarState extends State<KSearchbar> {
   Widget build(BuildContext context) {
     return TextField(
       controller: widget.controller,
-      cursorColor: Dark.primary,
+      cursorColor: DColor.primary,
       style: const TextStyle(),
       keyboardType: widget.keyboardType,
       textCapitalization: widget.textCapitalization,
       decoration: InputDecoration(
           filled: true,
-          fillColor: Dark.card,
+          fillColor: DColor.card,
           border: OutlineInputBorder(
             borderRadius: kRadius(10),
             borderSide: BorderSide.none,
@@ -64,7 +64,7 @@ class _KSearchbarState extends State<KSearchbar> {
               const BoxConstraints(minHeight: 0, minWidth: 0),
           contentPadding: const EdgeInsets.all(20),
           hintText: widget.hintText,
-          hintStyle: const TextStyle(color: Dark.fadeText)),
+          hintStyle: const TextStyle(color: DColor.fadeText)),
       onChanged: (_) => setState(() {}),
     );
   }

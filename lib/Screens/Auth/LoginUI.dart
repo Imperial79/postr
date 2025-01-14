@@ -65,7 +65,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                               angle: .2,
                               child: const Icon(
                                 Icons.adb_rounded,
-                                color: Dark.primary,
+                                color: DColor.primary,
                                 size: 50,
                               ),
                             ),
@@ -108,7 +108,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                   KButton(
                     onPressed: _signInWithGoogle,
                     label: "Sign in with Google",
-                    backgroundColor: Dark.card,
+                    backgroundColor: DColor.card,
                     icon: Image.asset(
                       "$kImagePath/google-logo.png",
                       height: 20,

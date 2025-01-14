@@ -40,7 +40,7 @@ class Label {
         text,
         style: TextStyle(
           fontSize: fontSize ?? 14,
-          color: color ?? Dark.fadeText,
+          color: color ?? DColor.fadeText,
           fontVariations: [FontVariation.weight(fontWeight ?? 400)],
           fontStyle: fontStyle,
           height: height,

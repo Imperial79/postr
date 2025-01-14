@@ -13,6 +13,10 @@ const SizedBox height20 = SizedBox(height: 20);
 SizedBox kHeight(double height) => SizedBox(height: height);
 SizedBox kWidth(double width) => SizedBox(width: width);
 
+Widget get div => const Divider(
+      color: DColor.border,
+    );
+
 systemColors() {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
       overlays: [SystemUiOverlay.top]);
@@ -56,6 +60,8 @@ KSnackbar(context, {required String message, bool error = false}) {
                   ? kColor(context).onErrorContainer
                   : kColor(context).onPrimaryContainer)
           .regular,
+      behavior: SnackBarBehavior.floating,
+      dismissDirection: DismissDirection.horizontal,
     ),
   );
 }

@@ -43,7 +43,7 @@ class KCarousel extends StatefulWidget {
                     boxShadow: showShadow
                         ? [
                             const BoxShadow(
-                              color: Dark.border,
+                              color: DColor.border,
                               blurRadius: 20,
                               spreadRadius: 5,
                             ),
@@ -62,7 +62,7 @@ class KCarousel extends StatefulWidget {
                   boxShadow: showShadow
                       ? [
                           const BoxShadow(
-                            color: Dark.border,
+                            color: DColor.border,
                             blurRadius: 20,
                             spreadRadius: 5,
                           ),
