@@ -4,8 +4,11 @@ import 'package:postr/Screens/Address/Addresses_UI.dart';
 import 'package:postr/Screens/Auth/LoginUI.dart';
 import 'package:postr/Screens/Calculate/CalculateUI.dart';
 import 'package:postr/Screens/Calculate/CalculatedResultUI.dart';
+import 'package:postr/Screens/Courier/Checkout_UI.dart';
+import 'package:postr/Screens/Courier/Confirmation_UI.dart';
 import 'package:postr/Screens/Courier/Courier_UI.dart';
 import 'package:postr/Screens/Courier/Package_UI.dart';
+import 'package:postr/Screens/Courier/Schedule_UI.dart';
 import 'package:postr/Screens/RootUI.dart';
 import '../Repository/Auth/auth_repo.dart';
 import '../Screens/SplashUI.dart';
@@ -44,11 +47,50 @@ final goRouterProvider = Provider<GoRouter>(
               path: 'package',
               builder: (context, state) {
                 final extra = state.extra;
-                final masterdata =
-                    (extra is Map<String, dynamic>) ? extra["amount"] : null;
+                final masterdata = (extra is Map<String, dynamic>)
+                    ? extra["masterdata"]
+                    : null;
 
                 return Package_UI(
                   masterdata: masterdata,
+                );
+              },
+            ),
+            GoRoute(
+              path: 'schedule',
+              builder: (context, state) {
+                final extra = state.extra;
+                final masterdata = (extra is Map<String, dynamic>)
+                    ? extra["masterdata"]
+                    : null;
+
+                return Schedule_UI(
+                  masterdata: masterdata,
+                );
+              },
+            ),
+            GoRoute(
+              path: 'checkout',
+              builder: (context, state) {
+                final extra = state.extra;
+                final masterdata = (extra is Map<String, dynamic>)
+                    ? extra["masterdata"]
+                    : null;
+
+                return Checkout_UI(
+                  masterdata: masterdata,
+                );
+              },
+            ),
+            GoRoute(
+              path: 'confirmation',
+              builder: (context, state) {
+                final extra = state.extra;
+                final awbNumber =
+                    (extra is Map<String, dynamic>) ? extra["awbNumber"] : null;
+
+                return Confirmation_UI(
+                  awbNumber: awbNumber,
                 );
               },
             ),

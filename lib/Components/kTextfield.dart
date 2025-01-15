@@ -150,6 +150,7 @@ class KTextfield {
               ),
             ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 5,
             children: [
               if (prefixText != null)

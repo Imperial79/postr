@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/kCard.dart';
 import 'package:postr/Components/kWidgets.dart';
@@ -37,7 +38,10 @@ class _Package_UIState extends State<Package_UI> {
   @override
   Widget build(BuildContext context) {
     return KScaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Label("1/3", color: kColor(context).primaryContainer).regular,
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(kPadding),
@@ -74,22 +78,32 @@ class _Package_UIState extends State<Package_UI> {
           padding: const EdgeInsets.all(20.0),
           child: KButton(
             onPressed: () {
-              if (formKey.currentState!.validate() &&
+              final data = widget.masterdata.copyWith(
+                weight: parseToDouble(weight.text),
+                length: parseToDouble(length.text),
+                width: parseToDouble(width.text),
+                height: parseToDouble(height.text),
+                packageValue: parseToDouble(packageValue.text),
+                contentType: contentType.text,
+                isFragile: isFragile,
+              );
+
+              if (packageType == "Non-Document" &&
+                  formKey.currentState!.validate() &&
                   contentType.text.isNotEmpty) {
-                // navPush(
-                //   context,
-                //   Courier_Partner_UI(
-                //     masterdata: widget.masterdata.copyWith(
-                //       weight: parseToDouble(_weight.text.trim()),
-                //       length: int.parse(_length.text),
-                //       width: int.parse(_width.text),
-                //       height: int.parse(_height.text),
-                //       packageValue: int.parse(_packageValue.text),
-                //       packageContent: content.text,
-                //       packageType: packageType,
-                //     ),
-                //   ),
-                // );
+                context.push(
+                  "/courier/schedule",
+                  extra: {
+                    "masterdata": data,
+                  },
+                );
+              } else if (formKey.currentState!.validate()) {
+                context.push(
+                  "/courier/schedule",
+                  extra: {
+                    "masterdata": data,
+                  },
+                );
               } else {
                 KSnackbar(context,
                     message: "All fields are required!", error: true);

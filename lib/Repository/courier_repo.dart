@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Helper/api_config.dart';
+import '../Models/Courier_Model.dart';
 import '../Models/Response_Model.dart';
 
 final courierRepository = Provider(
@@ -31,6 +32,16 @@ class CourierRepo {
         "toPincode": toPincode,
         "weightInKg": weightInKg,
       });
+      return res;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseModel> placeOrder({required CourierModel data}) async {
+    try {
+      final res =
+          await apiCallBack(path: "/courier/place-order", body: data.toMap());
       return res;
     } catch (e) {
       rethrow;

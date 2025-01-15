@@ -95,6 +95,7 @@ class _CourierFormState extends ConsumerState<CourierForm> {
               label: "Name",
               hintText: "Eg. John Doe",
               autofillHints: [AutofillHints.name],
+              validator: (val) => KValidation.required(val),
             ).regular,
             KTextfield(
               controller: widget.phone,
@@ -104,6 +105,7 @@ class _CourierFormState extends ConsumerState<CourierForm> {
               autofillHints: [AutofillHints.telephoneNumber],
               hintText: "Eg. 909××××199",
               prefixText: "+91",
+              validator: (val) => KValidation.phone(val),
             ).regular,
             KTextfield(
               controller: widget.pincode,
@@ -113,6 +115,7 @@ class _CourierFormState extends ConsumerState<CourierForm> {
               suffix: isLoading ? _smallLoading() : null,
               autofillHints: [AutofillHints.postalCode],
               keyboardType: TextInputType.number,
+              validator: (val) => KValidation.required(val),
             ).regular,
             if (cityDetails.isNotEmpty)
               Row(
@@ -134,6 +137,7 @@ class _CourierFormState extends ConsumerState<CourierForm> {
               minLines: 2,
               maxLines: 2,
               autofillHints: [AutofillHints.fullStreetAddress],
+              validator: (val) => KValidation.required(val),
             ).regular,
           ],
         ),

@@ -6,6 +6,7 @@ import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/kButton.dart';
 import 'package:postr/Components/kCard.dart';
 import 'package:postr/Models/Address_Model.dart';
+import 'package:postr/Models/Courier_Model.dart';
 import 'package:postr/Resources/colors.dart';
 import 'package:postr/Resources/commons.dart';
 import 'package:postr/Resources/constants.dart';
@@ -109,10 +110,10 @@ class _Courier_UIState extends ConsumerState<Courier_UI> {
                         final address = AddressModel.fromMap(result);
 
                         setState(() {
-                          fromName.text = address.name;
-                          fromPhone.text = address.phone;
-                          fromPincode.text = address.pincode;
-                          fromAddress.text = address.address;
+                          toName.text = address.name;
+                          toPhone.text = address.phone;
+                          toPincode.text = address.pincode;
+                          toAddress.text = address.address;
                         });
                       }
                     },
@@ -145,7 +146,21 @@ class _Courier_UIState extends ConsumerState<Courier_UI> {
                   .subtitle,
               KButton(
                 onPressed: () {
-                  context.push("/courier/package");
+                  if (fromFormKey.currentState!.validate() &&
+                      toFormKey.currentState!.validate()) {
+                    final masterdata = CourierModel(
+                      fromName: fromName.text,
+                      fromPhone: fromPhone.text,
+                      fromPincode: fromPincode.text,
+                      fromAddress: fromAddress.text,
+                      toName: toName.text,
+                      toPhone: toPhone.text,
+                      toPincode: toPincode.text,
+                      toAddress: toAddress.text,
+                    );
+                    context.push("/courier/package",
+                        extra: {"masterdata": masterdata});
+                  }
                 },
                 label: "Proceed",
                 backgroundColor: kColor(context).primary,

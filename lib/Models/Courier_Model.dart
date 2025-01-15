@@ -20,7 +20,7 @@ class CourierModel {
   double? packageValue = 0;
   String? contentType = "";
   bool? isFragile = false;
-  String scheduleDate = "";
+  String? scheduleDate = "";
 
   String? txnId = "";
   String? refundId = "";
@@ -56,7 +56,7 @@ class CourierModel {
     this.packageValue,
     this.contentType,
     this.isFragile,
-    required this.scheduleDate,
+    this.scheduleDate,
     this.txnId,
     this.refundId,
     this.refundStatus,
@@ -199,7 +199,7 @@ class CourierModel {
       packageValue: map['packageValue']?.toDouble(),
       contentType: map['contentType'],
       isFragile: map['isFragile'],
-      scheduleDate: map['scheduleDate'] ?? '',
+      scheduleDate: map['scheduleDate'],
       txnId: map['txnId'],
       refundId: map['refundId'],
       refundStatus: map['refundStatus'],
