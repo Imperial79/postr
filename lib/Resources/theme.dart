@@ -3,12 +3,20 @@ import 'package:postr/Resources/colors.dart';
 
 const String kFont = "Kumbh";
 
+ColorScheme kScheme = ColorScheme.fromSeed(
+  seedColor: DColor.primary,
+).copyWith(brightness: Brightness.dark, surface: DColor.scaffold);
+
 ThemeData darkTheme(context) => ThemeData.dark(useMaterial3: true).copyWith(
       scaffoldBackgroundColor: DColor.scaffold,
       splashFactory: InkSplash.splashFactory,
       colorScheme: ColorScheme.fromSeed(
         seedColor: DColor.primary,
-      ).copyWith(brightness: Brightness.dark, surface: DColor.scaffold),
+      ).copyWith(
+        brightness: Brightness.dark,
+        onSurface: Colors.white,
+        surface: DColor.card,
+      ),
       textTheme: Typography().white.apply(fontFamily: kFont),
       iconTheme: const IconThemeData(color: Colors.white),
       textButtonTheme: TextButtonThemeData(
@@ -24,6 +32,11 @@ ThemeData darkTheme(context) => ThemeData.dark(useMaterial3: true).copyWith(
         labelStyle: const TextStyle(
           color: Colors.white,
         ),
+      ),
+      textSelectionTheme: TextSelectionThemeData(
+        selectionHandleColor: DColor.primary,
+        cursorColor: DColor.primary,
+        selectionColor: kScheme.tertiary,
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: DColor.primary,

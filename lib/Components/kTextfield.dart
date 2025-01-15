@@ -110,6 +110,12 @@ class KTextfield {
     color: DColor.fadeText,
   );
 
+  Widget get kLabel => Label(
+        label!,
+        fontWeight: 400,
+        fontSize: 15,
+      ).regular;
+
   InputBorder borderStyle(Color? customBorder) => OutlineInputBorder(
         borderRadius: kRadius(10),
         borderSide:
@@ -126,12 +132,7 @@ class KTextfield {
               child: Row(
                 children: [
                   if (labelIcon != null) labelIcon!,
-                  Label(
-                    label!,
-                    fontWeight: 400,
-                    color: Colors.white,
-                    fontSize: 15,
-                  ).subtitle,
+                  kLabel,
                   if (validator != null && showRequired)
                     const Padding(
                       padding: EdgeInsets.only(left: 3.0),
@@ -153,6 +154,7 @@ class KTextfield {
             children: [
               if (prefixText != null)
                 KCard(
+                  padding: const EdgeInsets.all(12),
                   color: DColor.scaffold,
                   radius: 10,
                   borderColor: DColor.border,
@@ -201,9 +203,10 @@ class KTextfield {
                         : const SizedBox(width: 12),
                     isDense: true,
                     border: borderStyle(null),
-                    errorBorder: borderStyle(Colors.red.shade300),
+                    errorBorder: borderStyle(StatusText.danger),
                     focusedBorder: borderStyle(DColor.border),
                     enabledBorder: borderStyle(null),
+                    errorStyle: const TextStyle(color: StatusText.danger),
                     hintText: hintText,
                     hintStyle: kHintTextstyle.copyWith(
                         fontSize: fontSize, color: hintTextColor),
@@ -224,7 +227,7 @@ class KTextfield {
         children: [
           if (label != null)
             Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
+              padding: const EdgeInsets.only(bottom: 7.0),
               child: Row(
                 children: [
                   if (labelIcon != null)
@@ -232,12 +235,7 @@ class KTextfield {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: labelIcon,
                     ),
-                  Label(
-                    label!,
-                    fontWeight: 500,
-                    color: Colors.black,
-                    fontSize: 13,
-                  ).subtitle,
+                  kLabel
                 ],
               ),
             ),
@@ -292,22 +290,10 @@ class KTextfield {
                     fillColor: DColor.card,
                     counterText: '',
                     isDense: true,
-                    border: OutlineInputBorder(
-                      borderRadius: kRadius(10),
-                      borderSide: const BorderSide(color: DColor.border),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: kRadius(10),
-                      borderSide: BorderSide(color: Colors.red.shade300),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: kRadius(10),
-                      borderSide: const BorderSide(color: DColor.border),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: kRadius(10),
-                      borderSide: const BorderSide(color: DColor.border),
-                    ),
+                    border: borderStyle(null),
+                    errorBorder: borderStyle(StatusText.danger),
+                    focusedBorder: borderStyle(DColor.border),
+                    enabledBorder: borderStyle(null),
                     hintText: hintText,
                     hintStyle: kHintTextstyle.copyWith(
                         fontSize: fontSize, color: hintTextColor),
@@ -328,81 +314,65 @@ class KTextfield {
     void Function(dynamic)? onSelected,
     Widget? leadingIcon,
     String? errorText,
-  }) =>
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (label != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: Row(
-                children: [
-                  if (labelIcon != null)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 7.0),
-                      child: labelIcon,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (label != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 7.0),
+            child: Row(
+              children: [
+                if (labelIcon != null)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 7.0),
+                    child: labelIcon,
+                  ),
+                kLabel,
+                if (validator != null && showRequired)
+                  const Padding(
+                    padding: EdgeInsets.only(left: 3.0),
+                    child: Text(
+                      "(Required)",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: StatusText.danger,
+                          fontSize: 10,
+                          height: 1),
                     ),
-                  Label(
-                    label!,
-                    fontWeight: 500,
-                    color: Colors.black,
-                    fontSize: 13,
-                  ).subtitle,
-                  if (validator != null && showRequired)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 3.0),
-                      child: Text(
-                        "(Required)",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.red.shade700,
-                            fontSize: 10,
-                            height: 1),
-                      ),
-                    ),
-                ],
-              ),
+                  ),
+              ],
             ),
-          DropdownMenu(
-            controller: controller,
-            hintText: hintText,
-            errorText: errorText,
-            textStyle:
-                kFieldTextstyle.copyWith(fontSize: fontSize, color: textColor),
-            onSelected: onSelected,
-            expandedInsets: EdgeInsets.zero,
-            menuStyle: const MenuStyle(
-                backgroundColor: WidgetStatePropertyAll(DColor.card)),
-            inputDecorationTheme: InputDecorationTheme(
-              errorStyle: const TextStyle(color: Colors.redAccent),
-              activeIndicatorBorder: const BorderSide(color: DColor.border),
-              border: OutlineInputBorder(
-                borderRadius: kRadius(10),
-                borderSide: const BorderSide(color: DColor.border),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: kRadius(10),
-                borderSide: BorderSide(color: Colors.red.shade300),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: kRadius(10),
-                borderSide: const BorderSide(color: DColor.border),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: kRadius(10),
-                borderSide: const BorderSide(color: DColor.border),
-              ),
-              filled: true,
-              fillColor: fieldColor,
-              hintStyle: kHintTextstyle.copyWith(
-                  fontSize: fontSize, color: hintTextColor),
-            ),
-            selectedTrailingIcon: const Icon(Icons.keyboard_arrow_up_rounded),
-            trailingIcon: const Icon(Icons.keyboard_arrow_down_rounded),
-            leadingIcon: leadingIcon,
-            dropdownMenuEntries: dropdownMenuEntries,
-            menuHeight: 300,
           ),
-        ],
-      );
+        DropdownMenu(
+          controller: controller,
+          hintText: hintText,
+          errorText: errorText,
+          textStyle:
+              kFieldTextstyle.copyWith(fontSize: fontSize, color: textColor),
+          onSelected: onSelected,
+          expandedInsets: EdgeInsets.zero,
+          menuStyle: const MenuStyle(
+              backgroundColor: WidgetStatePropertyAll(DColor.card)),
+          inputDecorationTheme: InputDecorationTheme(
+            errorStyle: const TextStyle(color: StatusText.danger),
+            activeIndicatorBorder: const BorderSide(color: DColor.border),
+            border: borderStyle(null),
+            errorBorder: borderStyle(StatusText.danger),
+            focusedBorder: borderStyle(DColor.border),
+            enabledBorder: borderStyle(null),
+            filled: true,
+            fillColor: fieldColor,
+            hintStyle: kHintTextstyle.copyWith(
+                fontSize: fontSize, color: hintTextColor),
+          ),
+          selectedTrailingIcon: const Icon(Icons.keyboard_arrow_up_rounded),
+          trailingIcon: const Icon(Icons.keyboard_arrow_down_rounded),
+          leadingIcon: leadingIcon,
+          dropdownMenuEntries: dropdownMenuEntries,
+          menuHeight: 300,
+        ),
+      ],
+    );
+  }
 }

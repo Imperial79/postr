@@ -65,7 +65,7 @@ class _KNavigationBarState extends State<KNavigationBar> {
               alignment: Alignment.topCenter,
               child: KCard(
                 onTap: () {
-                  context.push("/new-courier");
+                  context.push("/courier");
                 },
                 padding: const EdgeInsets.all(10),
                 color: DColor.primary,

@@ -4,7 +4,8 @@ import 'package:postr/Screens/Address/Addresses_UI.dart';
 import 'package:postr/Screens/Auth/LoginUI.dart';
 import 'package:postr/Screens/Calculate/CalculateUI.dart';
 import 'package:postr/Screens/Calculate/CalculatedResultUI.dart';
-import 'package:postr/Screens/Courier/New_Courier_UI.dart';
+import 'package:postr/Screens/Courier/Courier_UI.dart';
+import 'package:postr/Screens/Courier/Package_UI.dart';
 import 'package:postr/Screens/RootUI.dart';
 import '../Repository/Auth/auth_repo.dart';
 import '../Screens/SplashUI.dart';
@@ -17,10 +18,7 @@ final goRouterProvider = Provider<GoRouter>(
     return GoRouter(
       initialLocation: '/',
       redirect: (context, state) {
-        if (authState.isLoading) {
-          return '/splash';
-        }
-
+        if (authState.isLoading) return '/splash';
         if (user == null && state.fullPath != '/login') return '/login';
         if (user != null && state.fullPath == '/login') return '/';
         return null;
@@ -39,8 +37,22 @@ final goRouterProvider = Provider<GoRouter>(
           builder: (context, state) => const RootUI(),
         ),
         GoRoute(
-          path: '/new-courier',
-          builder: (context, state) => const NewCourierUI(),
+          path: '/courier',
+          builder: (context, state) => const Courier_UI(),
+          routes: [
+            GoRoute(
+              path: 'package',
+              builder: (context, state) {
+                final extra = state.extra;
+                final masterdata =
+                    (extra is Map<String, dynamic>) ? extra["amount"] : null;
+
+                return Package_UI(
+                  masterdata: masterdata,
+                );
+              },
+            ),
+          ],
         ),
         GoRoute(
           path: '/addresses',
@@ -63,30 +75,6 @@ final goRouterProvider = Provider<GoRouter>(
             ),
           ],
         ),
-
-        // GoRoute(
-        //   path: '/book/:type/:bookId',
-        //   builder: (context, state) {
-        //     final type = state.pathParameters["type"];
-        //     final bookId = state.pathParameters["bookId"]!;
-        //     switch (type) {
-        //       case "regular":
-        //         return Regular_Book_UI(bookId: bookId, bookType: type!);
-
-        //       default:
-        //         return const Scaffold(
-        //           body: Center(
-        //             child: Text("No Page Found!"),
-        //           ),
-        //         );
-        //     }
-        //   },
-        // ),
-        // GoRoute(
-        //   path: '/about/:id',
-        //   builder: (context, state) =>
-        //       MigrateUI(id: state.pathParameters["id"] ?? "No Params"),
-        // ),
       ],
     );
   },

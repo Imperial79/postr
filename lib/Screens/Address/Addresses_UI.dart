@@ -13,6 +13,7 @@ import 'package:postr/Repository/address_repo.dart';
 import 'package:postr/Resources/colors.dart';
 import 'package:postr/Resources/commons.dart';
 import 'package:postr/Resources/constants.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../Components/Label.dart';
 import '../../Components/kWidgets.dart';
 
@@ -76,16 +77,35 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 KHeading(title: "Select an address", subtitle: "or Add one"),
-                Label("Recently added").regular,
                 addressList.when(
-                  data: (data) => Column(
-                    spacing: 15,
-                    children: data.map((e) => _addressCard(e)).toList(),
-                  ),
+                  data: (data) => data.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 15,
+                          children: [
+                            Label("Recently added").regular,
+                            ...data.map((e) => _addressCard(address: e)),
+                          ],
+                        )
+                      : Center(
+                          child: Column(
+                            children: [
+                              const Icon(
+                                Icons.inbox,
+                                size: 80,
+                                color: DColor.fadeText,
+                              ),
+                              Label("No Data", color: DColor.fadeText).title,
+                            ],
+                          ),
+                        ),
                   error: (error, stackTrace) => Center(
                     child: Label("$error").regular,
                   ),
-                  loading: () => const LinearProgressIndicator(),
+                  loading: () => Skeletonizer(
+                    enabled: true,
+                    child: _addressCard(),
+                  ),
                 ),
               ],
             ),
@@ -194,6 +214,7 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
                       Label("Address Type", fontWeight: 400).regular,
                       height5,
                       Row(
+                        spacing: 10,
                         children: [
                           buildTypeSelector(setState, "Home"),
                           buildTypeSelector(setState, "Work"),
@@ -242,10 +263,10 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
     );
   }
 
-  Widget _addressCard(AddressModel address) {
+  Widget _addressCard({AddressModel? address}) {
     return KCard(
       onTap: () {
-        context.pop(address.toMap());
+        if (address != null) context.pop(address.toMap());
       },
       child: Column(
         spacing: 10,
@@ -255,7 +276,7 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
             spacing: 10,
             children: [
               const Icon(Icons.home_outlined),
-              Label(address.type).title,
+              Label(address?.type ?? "type").title,
             ],
           ),
           Row(
@@ -269,10 +290,13 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Label(address.name, fontWeight: 500).regular,
-                    Label("+91 ${address.phone}", fontWeight: 300).regular,
-                    Label(address.address, fontWeight: 300).regular,
-                    Label(address.pincode, fontWeight: 300).regular,
+                    Label(address?.name ?? "Name", fontWeight: 500).regular,
+                    Label("+91 ${address?.phone ?? "Phone"}", fontWeight: 300)
+                        .regular,
+                    Label(address?.address ?? "Address", fontWeight: 300)
+                        .regular,
+                    Label(address?.pincode ?? "Pincode", fontWeight: 300)
+                        .regular,
                   ],
                 ),
               ),

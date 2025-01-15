@@ -9,12 +9,10 @@ final courierRepository = Provider(
 class CourierRepo {
   Future<ResponseModel> getCityFromPin({
     required String pincode,
-    required String type,
   }) async {
     try {
       final res = await apiCallBack(path: "/courier/pincode-details", body: {
         "pincode": pincode,
-        "type": type,
       });
       return res;
     } catch (e) {

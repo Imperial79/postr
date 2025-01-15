@@ -36,9 +36,8 @@ class _CalculateUIState extends ConsumerState<CalculateUI> {
       setState(() {
         fetchingFor = type;
       });
-      final res = await ref
-          .read(courierRepository)
-          .getCityFromPin(pincode: pincode, type: type);
+      final res =
+          await ref.read(courierRepository).getCityFromPin(pincode: pincode);
 
       if (!res.error) {
         String cityRes =
