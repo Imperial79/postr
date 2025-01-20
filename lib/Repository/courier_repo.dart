@@ -47,4 +47,14 @@ class CourierRepo {
       rethrow;
     }
   }
+
+  Future<ResponseModel> confirmOrder({required int orderId}) async {
+    try {
+      final res = await apiCallBack(
+          path: "/courier/confirm-order", body: {"orderId": orderId});
+      return res;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

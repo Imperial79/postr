@@ -15,9 +15,11 @@ class KButton extends StatelessWidget {
   final bool isLoading;
   final VisualDensity? visualDensity;
   final KButtonStyle style;
+  final double weight;
 
   const KButton({
     super.key,
+    this.weight = 600,
     required this.onPressed,
     this.label = "",
     this.backgroundColor,
@@ -40,30 +42,41 @@ class KButton extends StatelessWidget {
     );
   }
 
-  ButtonStyle _buttonStyle(context) {
+  ButtonStyle _buttonStyle(BuildContext context) {
+    final commonStyle = ElevatedButton.styleFrom(
+      backgroundColor: backgroundColor ?? kColor(context).primary,
+      foregroundColor: foregroundColor ?? kColor(context).onPrimary,
+      iconColor: foregroundColor,
+      padding: padding ?? const EdgeInsets.all(20),
+      shape: RoundedRectangleBorder(
+        borderRadius: kRadius(15),
+      ),
+      visualDensity: visualDensity,
+      elevation: 0,
+      shadowColor: Colors.transparent,
+      disabledBackgroundColor: DColor.card,
+      alignment: Alignment.center,
+      textStyle: TextStyle(
+        fontSize: fontSize,
+        fontVariations: [FontVariation.weight(weight)],
+        fontFamily: kFont,
+      ),
+    );
+
     switch (style) {
       case KButtonStyle.outlined:
-        return ElevatedButton.styleFrom(
-          side: BorderSide(
-              color: foregroundColor ?? kColor(context).primaryContainer),
-          backgroundColor: backgroundColor ?? kColor(context).surface,
-          foregroundColor: foregroundColor ?? kColor(context).primaryContainer,
-          iconColor: foregroundColor,
-          padding: padding ?? const EdgeInsets.all(15),
-          shape: RoundedRectangleBorder(
-            borderRadius: kRadius(15),
-          ),
-          visualDensity: visualDensity,
-          elevation: 0,
-          shadowColor: Colors.transparent,
-          alignment: Alignment.center,
-          disabledBackgroundColor: DColor.card,
-          textStyle: TextStyle(
+        return commonStyle.copyWith(
+          side: WidgetStateProperty.all(BorderSide(
+              color: foregroundColor ?? kColor(context).primaryContainer)),
+          backgroundColor: WidgetStateProperty.all(
+              backgroundColor ?? kColor(context).surface),
+          foregroundColor: WidgetStateProperty.all(
+              foregroundColor ?? kColor(context).primaryContainer),
+          textStyle: WidgetStateProperty.all(TextStyle(
             fontSize: fontSize,
-            letterSpacing: .7,
-            fontVariations: const [FontVariation.weight(500)],
+            fontVariations: const [FontVariation.weight(700)],
             fontFamily: kFont,
-          ),
+          )),
         );
       case KButtonStyle.pill:
         return TextButton.styleFrom(
@@ -76,69 +89,22 @@ class KButton extends StatelessWidget {
           padding: padding ?? const EdgeInsets.symmetric(horizontal: 15),
         );
       case KButtonStyle.thickPill:
-        return ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? kColor(context).primary,
-          foregroundColor: foregroundColor ?? kColor(context).onPrimary,
-          iconColor: foregroundColor,
-          padding: padding ??
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 17),
-          shape: RoundedRectangleBorder(
-            borderRadius: kRadius(15),
-          ),
-          visualDensity: visualDensity,
-          elevation: 0,
-          shadowColor: Colors.transparent,
-          alignment: Alignment.center,
-          disabledBackgroundColor: DColor.card,
-          textStyle: TextStyle(
-            fontSize: fontSize,
-            letterSpacing: .7,
-            fontVariations: const [FontVariation.weight(500)],
-            fontFamily: kFont,
+        return commonStyle.copyWith(
+          padding: WidgetStateProperty.all(padding ??
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 17)),
+          textStyle: WidgetStateProperty.all(
+            TextStyle(
+              fontSize: fontSize,
+              fontVariations: const [FontVariation.weight(500)],
+              fontFamily: kFont,
+            ),
           ),
         );
       case KButtonStyle.regular:
-        return ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? kColor(context).primary,
-          foregroundColor: foregroundColor ?? kColor(context).onPrimary,
-          iconColor: foregroundColor,
-          padding: padding ?? const EdgeInsets.all(15),
-          shape: RoundedRectangleBorder(
-            borderRadius: kRadius(15),
-          ),
-          visualDensity: visualDensity,
-          elevation: 0,
-          shadowColor: Colors.transparent,
-          disabledBackgroundColor: DColor.card,
-          alignment: Alignment.center,
-          textStyle: TextStyle(
-            fontSize: fontSize,
-            letterSpacing: .7,
-            fontVariations: const [FontVariation.weight(500)],
-            fontFamily: kFont,
-          ),
-        );
+        return commonStyle;
       case KButtonStyle.expanded:
-        return ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? kColor(context).primary,
-          foregroundColor: foregroundColor ?? kColor(context).onPrimary,
-          iconColor: foregroundColor,
-          padding: padding ?? const EdgeInsets.all(15),
-          shape: RoundedRectangleBorder(
-            borderRadius: kRadius(15),
-          ),
-          visualDensity: visualDensity,
-          elevation: 0,
-          shadowColor: Colors.transparent,
-          alignment: Alignment.center,
-          disabledBackgroundColor: DColor.card,
-          textStyle: TextStyle(
-            fontSize: fontSize,
-            letterSpacing: .7,
-            fontVariations: const [FontVariation.weight(500)],
-            fontFamily: kFont,
-          ),
-          minimumSize: const Size.fromHeight(50), // Full width
+        return commonStyle.copyWith(
+          minimumSize: WidgetStateProperty.all(const Size.fromHeight(50)),
         );
     }
   }
@@ -159,23 +125,17 @@ class KButton extends StatelessWidget {
             ),
             if (icon != null) ...[
               const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: icon,
-              ),
+              icon!,
             ]
           ],
         );
       case KButtonStyle.pill:
       case KButtonStyle.thickPill:
         return Row(
+          spacing: 10,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (icon != null)
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: icon,
-              ),
+            if (icon != null) icon!,
             Text(
               label,
               style: TextStyle(fontSize: fontSize),

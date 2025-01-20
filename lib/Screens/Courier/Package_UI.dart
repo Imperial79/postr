@@ -9,7 +9,6 @@ import 'package:postr/Models/Courier_Model.dart';
 import 'package:postr/Resources/colors.dart';
 import 'package:postr/Resources/commons.dart';
 import 'package:postr/Resources/constants.dart';
-
 import '../../Components/KScaffold.dart';
 import '../../Components/kButton.dart';
 import '../../Components/kTextfield.dart';
@@ -30,7 +29,7 @@ class _Package_UIState extends State<Package_UI> {
   final width = TextEditingController(text: "20");
   final height = TextEditingController(text: "12");
   final packageValue = TextEditingController(text: "1000");
-  final contentType = TextEditingController();
+  final packageContent = TextEditingController(text: "Others");
   String packageType = "Document";
   String selectedUnit = "GM";
   bool isFragile = false;
@@ -79,18 +78,21 @@ class _Package_UIState extends State<Package_UI> {
           child: KButton(
             onPressed: () {
               final data = widget.masterdata.copyWith(
-                weight: parseToDouble(weight.text),
+                weightInKg: selectedUnit == "KG"
+                    ? parseToDouble(weight.text)
+                    : parseToDouble(weight.text) / 1000,
                 length: parseToDouble(length.text),
                 width: parseToDouble(width.text),
                 height: parseToDouble(height.text),
+                packageType: packageType,
                 packageValue: parseToDouble(packageValue.text),
-                contentType: contentType.text,
+                packageContent: packageContent.text,
                 isFragile: isFragile,
               );
 
               if (packageType == "Non-Document" &&
                   formKey.currentState!.validate() &&
-                  contentType.text.isNotEmpty) {
+                  packageContent.text.isNotEmpty) {
                 context.push(
                   "/courier/schedule",
                   extra: {
@@ -228,11 +230,11 @@ class _Package_UIState extends State<Package_UI> {
         validator: (val) => KValidation.required(val),
       ).regular,
       KTextfield(
-        controller: contentType,
+        controller: packageContent,
         label: "Content Type",
         hintText: "Select Content Type",
       ).dropdown(
-        errorText: contentType.text.isEmpty ? "Required!" : null,
+        errorText: packageContent.text.isEmpty ? "Required!" : null,
         dropdownMenuEntries: List.generate(
           kPackageContentMap.length,
           (index) => DropdownMenuEntry(

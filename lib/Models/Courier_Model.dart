@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:postr/Resources/constants.dart';
+
 class CourierModel {
   int? id = 0;
   String? fromName = "";
@@ -13,12 +15,12 @@ class CourierModel {
   String? toAddress = "";
 
   String? packageType = "";
-  double? weight = 0;
+  double? weightInKg = 0;
   double? length = 0;
   double? width = 0;
   double? height = 0;
   double? packageValue = 0;
-  String? contentType = "";
+  String? packageContent = "";
   bool? isFragile = false;
   String? scheduleDate = "";
 
@@ -49,12 +51,12 @@ class CourierModel {
     this.toPincode,
     this.toAddress,
     this.packageType,
-    this.weight,
+    this.weightInKg,
     this.length,
     this.width,
     this.height,
     this.packageValue,
-    this.contentType,
+    this.packageContent,
     this.isFragile,
     this.scheduleDate,
     this.txnId,
@@ -84,12 +86,12 @@ class CourierModel {
     String? toPincode,
     String? toAddress,
     String? packageType,
-    double? weight,
+    double? weightInKg,
     double? length,
     double? width,
     double? height,
     double? packageValue,
-    String? contentType,
+    String? packageContent,
     bool? isFragile,
     String? scheduleDate,
     String? txnId,
@@ -118,12 +120,12 @@ class CourierModel {
       toPincode: toPincode ?? this.toPincode,
       toAddress: toAddress ?? this.toAddress,
       packageType: packageType ?? this.packageType,
-      weight: weight ?? this.weight,
+      weightInKg: weightInKg ?? this.weightInKg,
       length: length ?? this.length,
       width: width ?? this.width,
       height: height ?? this.height,
       packageValue: packageValue ?? this.packageValue,
-      contentType: contentType ?? this.contentType,
+      packageContent: packageContent ?? this.packageContent,
       isFragile: isFragile ?? this.isFragile,
       scheduleDate: scheduleDate ?? this.scheduleDate,
       txnId: txnId ?? this.txnId,
@@ -155,12 +157,12 @@ class CourierModel {
       'toPincode': toPincode,
       'toAddress': toAddress,
       'packageType': packageType,
-      'weight': weight,
+      'weightInKg': weightInKg,
       'length': length,
       'width': width,
       'height': height,
       'packageValue': packageValue,
-      'contentType': contentType,
+      'packageContent': packageContent,
       'isFragile': isFragile,
       'scheduleDate': scheduleDate,
       'txnId': txnId,
@@ -192,22 +194,22 @@ class CourierModel {
       toPincode: map['toPincode'],
       toAddress: map['toAddress'],
       packageType: map['packageType'],
-      weight: map['weight']?.toDouble(),
-      length: map['length']?.toDouble(),
-      width: map['width']?.toDouble(),
-      height: map['height']?.toDouble(),
-      packageValue: map['packageValue']?.toDouble(),
-      contentType: map['contentType'],
+      weightInKg: parseToDouble(map['weightInKg']),
+      length: parseToDouble(map['length']),
+      width: parseToDouble(map['width']),
+      height: parseToDouble(map['height']),
+      packageValue: parseToDouble(map['packageValue']),
+      packageContent: map['packageContent'],
       isFragile: map['isFragile'],
       scheduleDate: map['scheduleDate'],
       txnId: map['txnId'],
       refundId: map['refundId'],
       refundStatus: map['refundStatus'],
       status: map['status'],
-      netPayable: map['netPayable']?.toDouble(),
+      netPayable: parseToDouble(map['netPayable']),
       date: map['date'],
       feedback: map['feedback'],
-      rating: map['rating']?.toDouble(),
+      rating: parseToDouble(map['rating']),
       riderId: map['riderId'],
       riderName: map['riderName'],
       riderPhone: map['riderPhone'],
@@ -224,7 +226,7 @@ class CourierModel {
 
   @override
   String toString() {
-    return 'CourierModel(id: $id, fromName: $fromName, fromPhone: $fromPhone, fromPincode: $fromPincode, fromAddress: $fromAddress, toName: $toName, toPhone: $toPhone, toPincode: $toPincode, toAddress: $toAddress, packageType: $packageType, weight: $weight, length: $length, width: $width, height: $height, packageValue: $packageValue, contentType: $contentType, isFragile: $isFragile, scheduleDate: $scheduleDate, txnId: $txnId, refundId: $refundId, refundStatus: $refundStatus, status: $status, netPayable: $netPayable, date: $date, feedback: $feedback, rating: $rating, riderId: $riderId, riderName: $riderName, riderPhone: $riderPhone, riderImage: $riderImage, riderRating: $riderRating, awbNumber: $awbNumber)';
+    return 'CourierModel(id: $id, fromName: $fromName, fromPhone: $fromPhone, fromPincode: $fromPincode, fromAddress: $fromAddress, toName: $toName, toPhone: $toPhone, toPincode: $toPincode, toAddress: $toAddress, packageType: $packageType, weightInKg: $weightInKg, length: $length, width: $width, height: $height, packageValue: $packageValue, packageContent: $packageContent, isFragile: $isFragile, scheduleDate: $scheduleDate, txnId: $txnId, refundId: $refundId, refundStatus: $refundStatus, status: $status, netPayable: $netPayable, date: $date, feedback: $feedback, rating: $rating, riderId: $riderId, riderName: $riderName, riderPhone: $riderPhone, riderImage: $riderImage, riderRating: $riderRating, awbNumber: $awbNumber)';
   }
 
   @override
@@ -242,12 +244,12 @@ class CourierModel {
         other.toPincode == toPincode &&
         other.toAddress == toAddress &&
         other.packageType == packageType &&
-        other.weight == weight &&
+        other.weightInKg == weightInKg &&
         other.length == length &&
         other.width == width &&
         other.height == height &&
         other.packageValue == packageValue &&
-        other.contentType == contentType &&
+        other.packageContent == packageContent &&
         other.isFragile == isFragile &&
         other.scheduleDate == scheduleDate &&
         other.txnId == txnId &&
@@ -278,12 +280,12 @@ class CourierModel {
         toPincode.hashCode ^
         toAddress.hashCode ^
         packageType.hashCode ^
-        weight.hashCode ^
+        weightInKg.hashCode ^
         length.hashCode ^
         width.hashCode ^
         height.hashCode ^
         packageValue.hashCode ^
-        contentType.hashCode ^
+        packageContent.hashCode ^
         isFragile.hashCode ^
         scheduleDate.hashCode ^
         txnId.hashCode ^

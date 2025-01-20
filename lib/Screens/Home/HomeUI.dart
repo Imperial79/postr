@@ -3,6 +3,7 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:postr/Components/KSearchbar.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/Pill.dart';
@@ -145,6 +146,7 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                   ),
                   width10,
                   KCard(
+                    onTap: () => context.push("/calculate"),
                     height: 80,
                     width: 80,
                     radius: 10,
@@ -152,11 +154,11 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                       child: Column(
                         children: [
                           const Icon(
-                            Icons.location_on_outlined,
-                            size: 40,
+                            Icons.calculate_outlined,
+                            size: 25,
                           ),
                           height10,
-                          Label("Rate").regular,
+                          Label("Rate", height: 1).regular,
                         ],
                       ),
                     ),
@@ -172,10 +174,10 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                         children: [
                           const Icon(
                             Icons.qr_code_scanner_sharp,
-                            size: 40,
+                            size: 20,
                           ),
                           height10,
-                          Label("Scan").regular,
+                          Label("Scan", height: 1).regular,
                         ],
                       ),
                     ),

@@ -66,3 +66,19 @@ KSnackbar(context, {required String message, bool error = false}) {
     ),
   );
 }
+
+KErrorAlert(context, {required dynamic message}) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: DColor.card,
+      title: Label("An Error Occurred!", color: StatusText.danger).title,
+      icon: const Icon(
+        Icons.dangerous,
+        color: StatusText.danger,
+        size: 50,
+      ),
+      content: Label("$message").regular,
+    ),
+  );
+}

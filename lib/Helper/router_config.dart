@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:postr/Screens/Address/Addresses_UI.dart';
@@ -86,11 +87,12 @@ final goRouterProvider = Provider<GoRouter>(
               path: 'confirmation',
               builder: (context, state) {
                 final extra = state.extra;
-                final awbNumber =
-                    (extra is Map<String, dynamic>) ? extra["awbNumber"] : null;
+                final masterdata = (extra is Map<String, dynamic>)
+                    ? extra["masterdata"]
+                    : null;
 
                 return Confirmation_UI(
-                  awbNumber: awbNumber,
+                  masterdata: masterdata,
                 );
               },
             ),
@@ -116,6 +118,15 @@ final goRouterProvider = Provider<GoRouter>(
               },
             ),
           ],
+        ),
+        GoRoute(
+          path: '/track-order/:orderId',
+          builder: (context, state) {
+            final orderId = (state is Map<String, dynamic>)
+                ? state.pathParameters["orderId"]
+                : null;
+            return const SizedBox();
+          },
         ),
       ],
     );

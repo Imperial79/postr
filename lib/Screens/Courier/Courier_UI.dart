@@ -132,47 +132,52 @@ class _Courier_UIState extends ConsumerState<Courier_UI> {
           ),
         ),
       ),
-      bottomNavigationBar: KCard(
-        radius: 25,
-        padding: const EdgeInsets.all(20),
-        child: SafeArea(
-          child: Column(
-            spacing: 10,
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Label("Proceed with the details?",
-                      color: kColor(context).primaryContainer)
-                  .subtitle,
-              KButton(
-                onPressed: () {
-                  if (fromFormKey.currentState!.validate() &&
-                      toFormKey.currentState!.validate()) {
-                    final masterdata = CourierModel(
-                      fromName: fromName.text,
-                      fromPhone: fromPhone.text,
-                      fromPincode: fromPincode.text,
-                      fromAddress: fromAddress.text,
-                      toName: toName.text,
-                      toPhone: toPhone.text,
-                      toPincode: toPincode.text,
-                      toAddress: toAddress.text,
-                    );
-                    context.push("/courier/package",
-                        extra: {"masterdata": masterdata});
-                  }
-                },
-                label: "Proceed",
-                backgroundColor: kColor(context).primary,
-                icon: const Icon(
-                  Icons.arrow_right_alt_rounded,
-                  size: 25,
+      bottomNavigationBar: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 250),
+        child: MediaQuery.of(context).viewInsets.bottom == 0
+            ? KCard(
+                radius: 25,
+                padding: const EdgeInsets.all(20),
+                child: SafeArea(
+                  child: Column(
+                    spacing: 10,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Label("Proceed with the details?",
+                              color: kColor(context).primaryContainer)
+                          .subtitle,
+                      KButton(
+                        onPressed: () {
+                          if (fromFormKey.currentState!.validate() &&
+                              toFormKey.currentState!.validate()) {
+                            final masterdata = CourierModel(
+                              fromName: fromName.text,
+                              fromPhone: fromPhone.text,
+                              fromPincode: fromPincode.text,
+                              fromAddress: fromAddress.text,
+                              toName: toName.text,
+                              toPhone: toPhone.text,
+                              toPincode: toPincode.text,
+                              toAddress: toAddress.text,
+                            );
+                            context.push("/courier/package",
+                                extra: {"masterdata": masterdata});
+                          }
+                        },
+                        label: "Proceed",
+                        backgroundColor: kColor(context).primary,
+                        icon: const Icon(
+                          Icons.arrow_right_alt_rounded,
+                          size: 25,
+                        ),
+                        style: KButtonStyle.expanded,
+                      ),
+                    ],
+                  ),
                 ),
-                style: KButtonStyle.expanded,
-              ),
-            ],
-          ),
-        ),
+              )
+            : const SizedBox(),
       ),
     );
   }

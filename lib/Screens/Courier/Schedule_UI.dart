@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:postr/Components/KScaffold.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/kButton.dart';
 import 'package:postr/Components/kWidgets.dart';
 import 'package:postr/Models/Courier_Model.dart';
+import 'package:postr/Repository/courier_repo.dart';
+import 'package:postr/Resources/commons.dart';
 import 'package:postr/Resources/constants.dart';
 
 import '../../Components/Day_Picker.dart';
@@ -21,9 +26,38 @@ class Schedule_UI extends ConsumerStatefulWidget {
 
 class _Checkout_UIState extends ConsumerState<Schedule_UI> {
   String selectedDate = "${DateTime.now()}";
+  final isLoading = ValueNotifier(false);
+
+  placeOrder() async {
+    try {
+      isLoading.value = true;
+
+      final finalData = widget.masterdata.copyWith(scheduleDate: selectedDate);
+      final res = await ref.read(courierRepository).placeOrder(
+            data: finalData,
+          );
+      log(res.toString());
+      if (!res.error) {
+        context.push("/courier/checkout", extra: {
+          "masterdata": finalData.copyWith(
+            id: res.data["id"],
+            netPayable: parseToDouble(res.data["netPayable"]),
+          ),
+        });
+      } else {
+        KErrorAlert(context, message: res.message);
+      }
+    } catch (e) {
+      KErrorAlert(context, message: "Error while placing order - $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return KScaffold(
+      isLoading: isLoading,
       appBar: AppBar(
         title: Label("2/3", color: kColor(context).primaryContainer).regular,
         centerTitle: true,
@@ -54,6 +88,24 @@ class _Checkout_UIState extends ConsumerState<Schedule_UI> {
                   });
                 },
               ),
+              div,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: kPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Label("Selected Date").regular,
+                    height5,
+                    Label(
+                            DateFormat("dd MMMM, yyyy").format(
+                              DateTime.parse(selectedDate),
+                            ),
+                            fontSize: 25,
+                            color: kColor(context).tertiaryContainer)
+                        .title,
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -64,11 +116,18 @@ class _Checkout_UIState extends ConsumerState<Schedule_UI> {
           padding: const EdgeInsets.all(kPadding),
           child: KButton(
             onPressed: () {
-              context.push("/courier/checkout", extra: {
-                "masterdata":
-                    widget.masterdata.copyWith(scheduleDate: selectedDate),
-              });
+              placeOrder();
+              // context.push(
+              //   "/courier/checkout",
+              //   extra: {
+              //     "masterdata":
+              //         widget.masterdata.copyWith(scheduleDate: selectedDate),
+              //   },
+              // );
             },
+            icon: const Icon(
+              Icons.arrow_right_alt_rounded,
+            ),
             style: KButtonStyle.expanded,
             label: "Proceed to checkout",
           ),

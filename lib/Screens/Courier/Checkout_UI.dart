@@ -22,24 +22,34 @@ class Checkout_UI extends ConsumerStatefulWidget {
 }
 
 class _Checkout_UIState extends ConsumerState<Checkout_UI> {
-  placeOrder() async {
-    try {
-      final res =
-          await ref.read(courierRepository).placeOrder(data: widget.masterdata);
-      if (!res.error) {
-        context.go("/courier/cofirmation",
-            extra: {"awbNumber": res.data["awbNumber"]});
-      }
+  final isLoading = ValueNotifier(false);
 
-      KSnackbar(context, message: res.message, error: res.error);
+  confirmPickup() async {
+    try {
+      isLoading.value = true;
+
+      final res = await ref
+          .read(courierRepository)
+          .confirmOrder(orderId: widget.masterdata.id!);
+
+      if (!res.error) {
+        context.go("/courier/confirmation", extra: {
+          "masterdata": widget.masterdata.copyWith(txnId: "${res.data}")
+        });
+      } else {
+        KErrorAlert(context, message: res.message);
+      }
     } catch (e) {
-      KSnackbar(context, message: "$e", error: true);
-    } finally {}
+      KErrorAlert(context, message: e);
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return KScaffold(
+      isLoading: isLoading,
       appBar: AppBar(
         title: Label("3/3", color: kColor(context).primaryContainer).regular,
         centerTitle: true,
@@ -55,11 +65,12 @@ class _Checkout_UIState extends ConsumerState<Checkout_UI> {
               height10,
               _addressCard(
                 address: AddressModel(
-                    name: widget.masterdata.fromName!,
-                    phone: widget.masterdata.fromPhone!,
-                    address: widget.masterdata.fromAddress!,
-                    pincode: widget.masterdata.fromPincode!,
-                    type: ""),
+                  name: widget.masterdata.fromName!,
+                  phone: widget.masterdata.fromPhone!,
+                  address: widget.masterdata.fromAddress!,
+                  pincode: widget.masterdata.fromPincode!,
+                  type: "",
+                ),
               ),
               height20,
               Label("Drop Details").title,
@@ -84,7 +95,8 @@ class _Checkout_UIState extends ConsumerState<Checkout_UI> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Label("Total Payable").title,
-                        Label(kCurrencyFormat(1000)).title,
+                        Label(kCurrencyFormat(widget.masterdata.netPayable))
+                            .title,
                       ],
                     )
                   ],
@@ -99,9 +111,13 @@ class _Checkout_UIState extends ConsumerState<Checkout_UI> {
         child: Padding(
           padding: const EdgeInsets.all(kPadding),
           child: KButton(
-            onPressed: placeOrder,
+            onPressed: confirmPickup,
             style: KButtonStyle.expanded,
-            label: "Proceed to checkout",
+            label: "Confirm Pickup",
+            fontSize: 17,
+            weight: 700,
+            backgroundColor: DColor.primary,
+            foregroundColor: Colors.black,
           ),
         ),
       ),
@@ -115,10 +131,11 @@ class _Checkout_UIState extends ConsumerState<Checkout_UI> {
         spacing: 1,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Label(address?.name ?? "Name", fontWeight: 500).regular,
+          Label(address?.name ?? "Name", fontWeight: 500).title,
           Label("+91 ${address?.phone ?? "Phone"}", fontWeight: 300).regular,
-          Label(address?.address ?? "Address", fontWeight: 300).regular,
-          Label(address?.pincode ?? "Pincode", fontWeight: 300).regular,
+          height5,
+          Label(address?.address ?? "Address", fontWeight: 300).subtitle,
+          Label(address?.pincode ?? "Pincode", fontWeight: 300).subtitle,
         ],
       ),
     );

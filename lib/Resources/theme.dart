@@ -20,6 +20,7 @@ ThemeData darkTheme(context) => ThemeData.dark(useMaterial3: true).copyWith(
         onSurface: Colors.white,
         surface: DColor.card,
       ),
+      dialogBackgroundColor: DColor.card,
       textTheme: Typography().white.apply(fontFamily: kFont),
       iconTheme: const IconThemeData(color: Colors.white),
       textButtonTheme: TextButtonThemeData(

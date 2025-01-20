@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:postr/Animations/FadeUp.dart';
 import 'package:postr/Components/Label.dart';
+import 'package:postr/Models/Courier_Model.dart';
 import 'package:postr/Resources/commons.dart';
 import '../../Components/KScaffold.dart';
 import '../../Components/kButton.dart';
@@ -9,8 +10,8 @@ import '../../Resources/colors.dart';
 import '../../Resources/constants.dart';
 
 class Confirmation_UI extends StatefulWidget {
-  final String awbNumber;
-  const Confirmation_UI({super.key, required this.awbNumber});
+  final CourierModel masterdata;
+  const Confirmation_UI({super.key, required this.masterdata});
 
   @override
   State<Confirmation_UI> createState() => _Confirmation_UIState();
@@ -57,26 +58,25 @@ class _Confirmation_UIState extends State<Confirmation_UI> {
                   size: 100,
                 ),
                 kHeight(50),
-                Label("Total estimated amount",
-                        fontSize: 30,
-                        fontWeight: 200,
-                        textAlign: TextAlign.center)
-                    .title,
                 Label(
-                  "Tracking ID",
+                  "Order No.",
                   fontSize: 20,
                   fontWeight: 500,
                   textAlign: TextAlign.center,
                 ).regular,
                 Label(
-                  widget.awbNumber,
+                  "#${widget.masterdata.txnId}",
                   fontSize: 30,
                   fontWeight: 700,
                   color: DColor.primary,
                   textAlign: TextAlign.center,
                 ).title,
                 height20,
-                Label("This amount is estimated and can vary if location or weight is changed.",
+                Label("You will be notiifed once a rider is available to pickup your package.",
+                        fontSize: 18, textAlign: TextAlign.center)
+                    .subtitle,
+                height20,
+                Label("THANK YOU FOR CHOOSING US",
                         fontSize: 18, textAlign: TextAlign.center)
                     .subtitle,
                 kHeight(50),
@@ -84,8 +84,9 @@ class _Confirmation_UIState extends State<Confirmation_UI> {
                   onPressed: () {
                     context.pop();
                   },
-                  backgroundColor: kColor(context).primary,
+                  backgroundColor: kColor(context).tertiary,
                   label: "Back to Home",
+                  fontSize: 20,
                   style: KButtonStyle.expanded,
                 ),
               ],
