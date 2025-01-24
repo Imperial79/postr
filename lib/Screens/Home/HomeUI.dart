@@ -80,14 +80,14 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                     child: const Icon(
                       Icons.adb_rounded,
                       color: DColor.primary,
-                      size: 30,
+                      size: 20,
                     ),
                   ),
-                  width10,
+                  width5,
                   const Text(
                     "Postr",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 20,
                       fontStyle: FontStyle.italic,
                       color: Colors.white,
                       fontVariations: [FontVariation.weight(500)],
@@ -108,38 +108,77 @@ class _HomeUIState extends ConsumerState<HomeUI> {
               Row(
                 children: [
                   Flexible(
-                    child: Label("Netaji Colony, Durgapur").title,
+                    child: Label("Netaji Colony, Durgapur", fontSize: 18).title,
                   ),
                   width10,
                   const Icon(
                     Icons.keyboard_arrow_down,
                     color: DColor.primary,
-                    size: 30,
+                    size: 20,
                   ),
                 ],
               ),
               height20,
               Row(
                 children: [
+                  // Expanded(
+                  //   child: KCard(
+                  //     height: 80,
+                  //     radius: 10,
+                  //     color: kColor(context).primary,
+                  //     child: Column(
+                  //       spacing: 5,
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Label("My Balance").regular,
+                  //         Row(
+                  //           children: [
+                  //             const Icon(Icons.account_balance_wallet),
+                  //             width10,
+                  //             Flexible(
+                  //               child: Label("INR 1,000",
+                  //                       maxLines: 1, fontSize: 17)
+                  //                   .title,
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   Expanded(
                     child: KCard(
                       height: 80,
                       radius: 10,
-                      color: kColor(context).primary,
+                      color: kOpacity(kColor(context).primary, .5),
                       child: Column(
+                        spacing: 5,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Label("My Balance").regular,
                           Row(
+                            spacing: 5,
                             children: [
-                              const Icon(Icons.wallet),
-                              width10,
+                              const Icon(
+                                Icons.schedule,
+                                size: 15,
+                                color: DColor.fadeText,
+                              ),
                               Flexible(
-                                child: Label("INR 1,000", maxLines: 1).title,
+                                child: Label(
+                                  "Pending",
+                                  color: DColor.fadeText,
+                                ).regular,
                               ),
                             ],
                           ),
+                          Label(
+                            "No Payments",
+                            maxLines: 1,
+                            fontSize: 17,
+                            color: DColor.fadeText,
+                          ).title,
                         ],
                       ),
                     ),

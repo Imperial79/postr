@@ -7,6 +7,7 @@ import 'package:postr/Components/kButton.dart';
 import 'package:postr/Models/User_Model.dart';
 import 'package:postr/Repository/Auth/auth_repo.dart';
 import 'package:postr/Resources/constants.dart';
+import 'package:postr/Resources/theme.dart';
 
 import '../../Resources/colors.dart';
 import '../../Resources/commons.dart';
@@ -66,13 +67,13 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                               child: const Icon(
                                 Icons.adb_rounded,
                                 color: DColor.primary,
-                                size: 50,
+                                size: 40,
                               ),
                             ),
                             width10,
                             Label(
                               "Postr",
-                              fontSize: 50,
+                              fontSize: 40,
                               fontStyle: FontStyle.italic,
                               fontWeight: 800,
                             ).title,
@@ -81,7 +82,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                         height20,
                         Label(
                           "Fastest and most trusted package delivery",
-                          fontSize: 22,
+                          fontSize: 20,
                           fontStyle: FontStyle.italic,
                           color: Colors.white,
                         ).subtitle,
@@ -98,7 +99,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                       ),
                       Expanded(
                         child: Label(
-                          "Secure log in",
+                          "Your data is secured",
                           fontWeight: 400,
                           color: kColor(context).primaryContainer,
                         ).regular,
@@ -107,15 +108,17 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                   ),
                   KButton(
                     onPressed: _signInWithGoogle,
-                    label: "Sign in with Google",
+                    label: "Google",
                     backgroundColor: DColor.card,
+                    foregroundColor: Colors.white,
                     icon: Image.asset(
                       "$kImagePath/google-logo.png",
                       height: 20,
                     ),
                     fontSize: 20,
                     padding: const EdgeInsets.all(20),
-                    style: KButtonStyle.expanded,
+                    style: KButtonStyle.outlined,
+                    borderColor: DColor.border,
                   ),
                 ],
               ),

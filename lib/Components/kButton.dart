@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postr/Components/Label.dart';
 import 'package:postr/Resources/theme.dart';
 import '../Resources/colors.dart';
 import '../Resources/commons.dart';
@@ -8,6 +9,7 @@ class KButton extends StatelessWidget {
   final String label;
   final Color? backgroundColor;
   final Color? foregroundColor;
+  final Color? borderColor;
   final double fontSize;
   final Widget? icon;
   final EdgeInsetsGeometry? padding;
@@ -31,6 +33,7 @@ class KButton extends StatelessWidget {
     this.isLoading = false,
     this.visualDensity,
     this.style = KButtonStyle.regular,
+    this.borderColor,
   });
 
   @override
@@ -47,7 +50,7 @@ class KButton extends StatelessWidget {
       backgroundColor: backgroundColor ?? kColor(context).primary,
       foregroundColor: foregroundColor ?? kColor(context).onPrimary,
       iconColor: foregroundColor,
-      padding: padding ?? const EdgeInsets.all(20),
+      padding: padding ?? const EdgeInsets.all(15),
       shape: RoundedRectangleBorder(
         borderRadius: kRadius(15),
       ),
@@ -66,17 +69,23 @@ class KButton extends StatelessWidget {
     switch (style) {
       case KButtonStyle.outlined:
         return commonStyle.copyWith(
-          side: WidgetStateProperty.all(BorderSide(
-              color: foregroundColor ?? kColor(context).primaryContainer)),
+          side: WidgetStateProperty.all(
+            BorderSide(
+                color: borderColor ??
+                    foregroundColor ??
+                    kColor(context).primaryContainer),
+          ),
           backgroundColor: WidgetStateProperty.all(
               backgroundColor ?? kColor(context).surface),
           foregroundColor: WidgetStateProperty.all(
               foregroundColor ?? kColor(context).primaryContainer),
-          textStyle: WidgetStateProperty.all(TextStyle(
-            fontSize: fontSize,
-            fontVariations: const [FontVariation.weight(700)],
-            fontFamily: kFont,
-          )),
+          textStyle: WidgetStateProperty.all(
+            TextStyle(
+              fontSize: fontSize,
+              fontVariations: const [FontVariation.weight(700)],
+              fontFamily: kFont,
+            ),
+          ),
         );
       case KButtonStyle.pill:
         return TextButton.styleFrom(
@@ -119,10 +128,7 @@ class KButton extends StatelessWidget {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              label,
-              style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.w500),
-            ),
+            Label(label, fontWeight: 500).regular,
             if (icon != null) ...[
               const Spacer(),
               icon!,
