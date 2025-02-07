@@ -35,7 +35,7 @@ class _CalculatedResultUIState extends State<CalculatedResultUI> {
                       angle: .2,
                       child: const Icon(
                         Icons.adb_rounded,
-                        color: DColor.primary,
+                        color: Kolor.primary,
                         size: 50,
                       ),
                     ),
@@ -75,7 +75,7 @@ class _CalculatedResultUIState extends State<CalculatedResultUI> {
                           "₹ ${value.toStringAsFixed(2)}",
                           fontSize: 30,
                           fontWeight: 700,
-                          color: DColor.primary,
+                          color: Kolor.primary,
                           textAlign: TextAlign.center,
                         ).title,
                         Label("INR", fontSize: 20, fontWeight: 200).regular,

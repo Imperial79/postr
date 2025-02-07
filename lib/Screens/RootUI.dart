@@ -33,7 +33,7 @@ class _RootUIState extends ConsumerState<RootUI> {
               return FadeThroughTransition(
                 animation: animation,
                 secondaryAnimation: secondaryAnimation,
-                fillColor: DColor.scaffold,
+                fillColor: Kolor.scaffold,
                 child: child,
               );
             },

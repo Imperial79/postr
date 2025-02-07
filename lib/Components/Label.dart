@@ -40,7 +40,7 @@ class Label {
         text,
         style: TextStyle(
           fontSize: fontSize ?? 14,
-          color: color ?? DColor.fadeText,
+          color: color ?? Kolor.fadeText,
           fontVariations: [FontVariation.weight(fontWeight ?? 400)],
           fontStyle: fontStyle,
           height: height,
@@ -69,11 +69,14 @@ class Label {
   Widget get regular => Text(
         text,
         style: TextStyle(
-            fontVariations: [FontVariation.weight(fontWeight ?? 600)],
-            color: color,
-            fontSize: fontSize,
-            fontStyle: fontStyle,
-            height: height),
+          fontVariations: [FontVariation.weight(fontWeight ?? 600)],
+          color: color,
+          fontSize: fontSize,
+          fontStyle: fontStyle,
+          height: height,
+        ),
+        maxLines: maxLines,
+        overflow: (maxLines != null) ? TextOverflow.ellipsis : null,
         textAlign: textAlign,
       );
   Widget get withDivider => Row(

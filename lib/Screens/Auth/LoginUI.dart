@@ -7,7 +7,6 @@ import 'package:postr/Components/kButton.dart';
 import 'package:postr/Models/User_Model.dart';
 import 'package:postr/Repository/Auth/auth_repo.dart';
 import 'package:postr/Resources/constants.dart';
-import 'package:postr/Resources/theme.dart';
 
 import '../../Resources/colors.dart';
 import '../../Resources/commons.dart';
@@ -66,7 +65,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                               angle: .2,
                               child: const Icon(
                                 Icons.adb_rounded,
-                                color: DColor.primary,
+                                color: Kolor.primary,
                                 size: 40,
                               ),
                             ),
@@ -109,7 +108,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                   KButton(
                     onPressed: _signInWithGoogle,
                     label: "Google",
-                    backgroundColor: DColor.card,
+                    backgroundColor: Kolor.card,
                     foregroundColor: Colors.white,
                     icon: Image.asset(
                       "$kImagePath/google-logo.png",
@@ -118,7 +117,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                     fontSize: 20,
                     padding: const EdgeInsets.all(20),
                     style: KButtonStyle.outlined,
-                    borderColor: DColor.border,
+                    borderColor: Kolor.border,
                   ),
                 ],
               ),

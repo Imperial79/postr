@@ -79,7 +79,7 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                     angle: .2,
                     child: const Icon(
                       Icons.adb_rounded,
-                      color: DColor.primary,
+                      color: Kolor.primary,
                       size: 20,
                     ),
                   ),
@@ -113,7 +113,7 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                   width10,
                   const Icon(
                     Icons.keyboard_arrow_down,
-                    color: DColor.primary,
+                    color: Kolor.primary,
                     size: 20,
                   ),
                 ],
@@ -163,12 +163,12 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                               const Icon(
                                 Icons.schedule,
                                 size: 15,
-                                color: DColor.fadeText,
+                                color: Kolor.fadeText,
                               ),
                               Flexible(
                                 child: Label(
                                   "Pending",
-                                  color: DColor.fadeText,
+                                  color: Kolor.fadeText,
                                 ).regular,
                               ),
                             ],
@@ -177,7 +177,7 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                             "No Payments",
                             maxLines: 1,
                             fontSize: 17,
-                            color: DColor.fadeText,
+                            color: Kolor.fadeText,
                           ).title,
                         ],
                       ),
@@ -237,7 +237,7 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Label("Shipping ID",
-                                      color: DColor.fadeText, fontSize: 15)
+                                      color: Kolor.fadeText, fontSize: 15)
                                   .subtitle,
                               Label("273627362783", fontSize: 17).regular,
                             ],
@@ -262,8 +262,8 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                           lineWidth: 0,
                           lineSpace: 0,
                           lineLength: 70,
-                          defaultLineColor: DColor.border,
-                          finishedLineColor: DColor.primary,
+                          defaultLineColor: Kolor.border,
+                          finishedLineColor: Kolor.primary,
                         ),
                         activeStepTextColor: Colors.black87,
                         finishedStepTextColor: Colors.black87,
@@ -277,16 +277,16 @@ class _HomeUIState extends ConsumerState<HomeUI> {
                           (index) => EasyStep(
                             customStep: CircleAvatar(
                               radius: 8,
-                              backgroundColor: DColor.border,
+                              backgroundColor: Kolor.border,
                               child: KCard(
                                 radius: 100,
                                 height: 20,
                                 width: 20,
                                 borderColor:
-                                    activeStep >= index ? DColor.border : null,
+                                    activeStep >= index ? Kolor.border : null,
                                 color: activeStep >= index
-                                    ? DColor.primary
-                                    : DColor.border,
+                                    ? Kolor.primary
+                                    : Kolor.border,
                               ),
                             ),
                             title: '',

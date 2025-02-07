@@ -274,7 +274,7 @@ class _CalculateUIState extends ConsumerState<CalculateUI> {
       width: 15,
       child: CircularProgressIndicator(
         strokeWidth: 2,
-        color: DColor.primary,
+        color: Kolor.primary,
       ),
     );
   }

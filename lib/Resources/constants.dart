@@ -26,3 +26,17 @@ double parseToDouble(dynamic value) {
   }
   return 0.0; // Default fallback if the value is of an unexpected type
 }
+
+String kConvertToGram(dynamic weightInKg) {
+  final weight = parseToDouble("$weightInKg");
+  if (weight > 1) return "$weight Kg";
+  return "${(weight * 1000)} Gm";
+}
+
+String kDateFormat(String date, {bool showTime = false, String? format}) {
+  String formatter = "dd MMM, yyyy";
+  if (showTime) {
+    formatter += " - hh:mm a";
+  }
+  return DateFormat(format ?? formatter).format(DateTime.parse(date));
+}

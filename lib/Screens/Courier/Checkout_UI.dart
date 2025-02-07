@@ -33,9 +33,8 @@ class _Checkout_UIState extends ConsumerState<Checkout_UI> {
           .confirmOrder(orderId: widget.masterdata.id!);
 
       if (!res.error) {
-        context.go("/courier/confirmation", extra: {
-          "masterdata": widget.masterdata.copyWith(txnId: "${res.data}")
-        });
+        context.go("/courier/confirmation",
+            extra: {"masterdata": widget.masterdata.copyWith(txnId: res.data)});
       } else {
         KErrorAlert(context, message: res.message);
       }
@@ -116,7 +115,7 @@ class _Checkout_UIState extends ConsumerState<Checkout_UI> {
             label: "Confirm Pickup",
             fontSize: 17,
             weight: 700,
-            backgroundColor: DColor.primary,
+            backgroundColor: Kolor.primary,
             foregroundColor: Colors.black,
           ),
         ),

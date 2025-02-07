@@ -57,7 +57,7 @@ class KButton extends StatelessWidget {
       visualDensity: visualDensity,
       elevation: 0,
       shadowColor: Colors.transparent,
-      disabledBackgroundColor: DColor.card,
+      disabledBackgroundColor: Kolor.card,
       alignment: Alignment.center,
       textStyle: TextStyle(
         fontSize: fontSize,
@@ -171,7 +171,7 @@ class KButton extends StatelessWidget {
             height: 15,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              color: DColor.primary,
+              color: Kolor.primary,
               backgroundColor: Colors.transparent,
             ),
           ),

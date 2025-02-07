@@ -93,9 +93,9 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
                               const Icon(
                                 Icons.inbox,
                                 size: 80,
-                                color: DColor.fadeText,
+                                color: Kolor.fadeText,
                               ),
-                              Label("No Data", color: DColor.fadeText).title,
+                              Label("No Data", color: Kolor.fadeText).title,
                             ],
                           ),
                         ),
@@ -129,7 +129,7 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
                   label: "Add an address",
                   icon: const Icon(Icons.add),
                   style: KButtonStyle.outlined,
-                  backgroundColor: DColor.scaffold,
+                  backgroundColor: Kolor.scaffold,
                   foregroundColor: kColor(context).primaryContainer,
                 );
               },
@@ -147,7 +147,7 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
           valueListenable: isLoading,
           builder: (context, loading, _) {
             return Dialog(
-              backgroundColor: DColor.card,
+              backgroundColor: Kolor.card,
               insetPadding: const EdgeInsets.all(20),
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(kPadding),
@@ -245,7 +245,7 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
   Widget buildTypeSelector(StateSetter setState, String label) {
     final bool selected = type == label;
     return ChoiceChip(
-      label: Label(label, color: !selected ? DColor.fadeText : Colors.white)
+      label: Label(label, color: !selected ? Kolor.fadeText : Colors.white)
           .regular,
       selectedColor: kColor(context).secondary,
       selected: selected,
@@ -253,7 +253,7 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
       shape: RoundedRectangleBorder(
         borderRadius: kRadius(10),
         side: BorderSide(
-            color: !selected ? DColor.border : kColor(context).secondary),
+            color: !selected ? Kolor.border : kColor(context).secondary),
       ),
       onSelected: (value) {
         setState(() {

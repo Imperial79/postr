@@ -36,7 +36,7 @@ class _Confirmation_UIState extends State<Confirmation_UI> {
                       angle: .2,
                       child: const Icon(
                         Icons.adb_rounded,
-                        color: DColor.primary,
+                        color: Kolor.primary,
                         size: 50,
                       ),
                     ),
@@ -68,7 +68,7 @@ class _Confirmation_UIState extends State<Confirmation_UI> {
                   "#${widget.masterdata.txnId}",
                   fontSize: 30,
                   fontWeight: 700,
-                  color: DColor.primary,
+                  color: Kolor.primary,
                   textAlign: TextAlign.center,
                 ).title,
                 height20,

@@ -36,7 +36,7 @@ class _Checkout_UIState extends ConsumerState<Schedule_UI> {
       final res = await ref.read(courierRepository).placeOrder(
             data: finalData,
           );
-      log(res.toString());
+
       if (!res.error) {
         context.push("/courier/checkout", extra: {
           "masterdata": finalData.copyWith(
@@ -80,7 +80,7 @@ class _Checkout_UIState extends ConsumerState<Schedule_UI> {
                 showDatePicker: false,
                 days: 10,
                 activeColor: kColor(context).tertiary,
-                inactiveCardColor: DColor.card,
+                inactiveCardColor: Kolor.card,
                 foregroundColor: Colors.black,
                 onSelected: (date) {
                   setState(() {
@@ -117,13 +117,6 @@ class _Checkout_UIState extends ConsumerState<Schedule_UI> {
           child: KButton(
             onPressed: () {
               placeOrder();
-              // context.push(
-              //   "/courier/checkout",
-              //   extra: {
-              //     "masterdata":
-              //         widget.masterdata.copyWith(scheduleDate: selectedDate),
-              //   },
-              // );
             },
             icon: const Icon(
               Icons.arrow_right_alt_rounded,

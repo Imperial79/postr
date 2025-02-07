@@ -24,7 +24,7 @@ class CourierModel {
   bool? isFragile = false;
   String? scheduleDate = "";
 
-  String? txnId = "";
+  int? txnId = 0;
   String? refundId = "";
   String? refundStatus = "";
   String? status = "";
@@ -34,11 +34,11 @@ class CourierModel {
   String? feedback = "";
   double? rating = 0;
 
-  String? riderId = "";
+  int? riderId = 0;
   String? riderName = "";
   String? riderPhone = "";
   String? riderImage = "";
-  String? riderRating = "";
+  double? riderRating = 0;
   String? awbNumber = "";
   CourierModel({
     this.id,
@@ -94,7 +94,7 @@ class CourierModel {
     String? packageContent,
     bool? isFragile,
     String? scheduleDate,
-    String? txnId,
+    int? txnId,
     String? refundId,
     String? refundStatus,
     String? status,
@@ -102,11 +102,11 @@ class CourierModel {
     String? date,
     String? feedback,
     double? rating,
-    String? riderId,
+    int? riderId,
     String? riderName,
     String? riderPhone,
     String? riderImage,
-    String? riderRating,
+    double? riderRating,
     String? awbNumber,
   }) {
     return CourierModel(
@@ -200,9 +200,9 @@ class CourierModel {
       height: parseToDouble(map['height']),
       packageValue: parseToDouble(map['packageValue']),
       packageContent: map['packageContent'],
-      isFragile: map['isFragile'],
+      isFragile: map['isFragile'] == "Y",
       scheduleDate: map['scheduleDate'],
-      txnId: map['txnId'],
+      txnId: map['txnId']?.toInt(),
       refundId: map['refundId'],
       refundStatus: map['refundStatus'],
       status: map['status'],
@@ -210,11 +210,11 @@ class CourierModel {
       date: map['date'],
       feedback: map['feedback'],
       rating: parseToDouble(map['rating']),
-      riderId: map['riderId'],
+      riderId: map['riderId']?.toInt(),
       riderName: map['riderName'],
       riderPhone: map['riderPhone'],
       riderImage: map['riderImage'],
-      riderRating: map['riderRating'],
+      riderRating: parseToDouble(map['riderRating']),
       awbNumber: map['awbNumber'],
     );
   }

@@ -5,6 +5,7 @@ import 'package:postr/Components/KScaffold.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/kButton.dart';
 import 'package:postr/Components/kCard.dart';
+import 'package:postr/Components/kWidgets.dart';
 import 'package:postr/Models/Address_Model.dart';
 import 'package:postr/Models/Courier_Model.dart';
 import 'package:postr/Resources/colors.dart';
@@ -57,19 +58,7 @@ class _Courier_UIState extends ConsumerState<Courier_UI> {
             spacing: 10,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 70),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Label("New Courier?", fontSize: 25, fontWeight: 800)
-                          .title,
-                      Label("Enter details", fontSize: 20, fontWeight: 200)
-                          .title,
-                    ],
-                  ),
-                ),
-              ),
+              KHeading(title: "New Courier?", subtitle: "Enter details"),
               Row(
                 children: [
                   Label("Pickup Details").title,

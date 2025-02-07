@@ -40,8 +40,10 @@ class CourierRepo {
 
   Future<ResponseModel> placeOrder({required CourierModel data}) async {
     try {
+      Map<String, dynamic> finalData = data.toMap();
+      finalData["isFragile"] = data.isFragile! ? "Y" : "N";
       final res =
-          await apiCallBack(path: "/courier/place-order", body: data.toMap());
+          await apiCallBack(path: "/courier/place-order", body: finalData);
       return res;
     } catch (e) {
       rethrow;

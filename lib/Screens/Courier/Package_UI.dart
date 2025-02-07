@@ -290,9 +290,9 @@ class _Package_UIState extends State<Package_UI> {
           });
         },
         padding: const EdgeInsets.all(15),
-        color: selected ? kOpacity(kColor(context).tertiary, .5) : DColor.card,
+        color: selected ? kOpacity(kColor(context).tertiary, .5) : Kolor.card,
         borderWidth: 1,
-        borderColor: selected ? kColor(context).tertiaryContainer : DColor.card,
+        borderColor: selected ? kColor(context).tertiaryContainer : Kolor.card,
         child: Row(
           children: [
             Icon(icon),

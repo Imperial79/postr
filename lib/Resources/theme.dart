@@ -4,29 +4,29 @@ import 'package:postr/Resources/colors.dart';
 const String kFont = "Kumbh";
 
 ColorScheme get kScheme => ColorScheme.fromSeed(
-      seedColor: DColor.primary,
+      seedColor: Kolor.primary,
       brightness: Brightness.dark,
-      surface: DColor.scaffold,
+      surface: Kolor.scaffold,
       onSurface: Colors.white,
     );
 
 ThemeData darkTheme(context) => ThemeData.dark(useMaterial3: true).copyWith(
-      scaffoldBackgroundColor: DColor.scaffold,
+      scaffoldBackgroundColor: Kolor.scaffold,
       splashFactory: InkSplash.splashFactory,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: DColor.primary,
+        seedColor: Kolor.primary,
       ).copyWith(
         brightness: Brightness.dark,
         onSurface: Colors.white,
-        surface: DColor.card,
+        surface: Kolor.card,
       ),
-      dialogBackgroundColor: DColor.card,
+      dialogBackgroundColor: Kolor.card,
       textTheme: Typography().white.apply(fontFamily: kFont),
       iconTheme: const IconThemeData(color: Colors.white),
       textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: DColor.primary)),
+          style: TextButton.styleFrom(foregroundColor: Kolor.primary)),
       appBarTheme: const AppBarTheme(
-        backgroundColor: DColor.scaffold,
+        backgroundColor: Kolor.scaffold,
         foregroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
@@ -38,14 +38,14 @@ ThemeData darkTheme(context) => ThemeData.dark(useMaterial3: true).copyWith(
         ),
       ),
       textSelectionTheme: TextSelectionThemeData(
-        selectionHandleColor: DColor.primary,
-        cursorColor: DColor.primary,
+        selectionHandleColor: Kolor.primary,
+        cursorColor: Kolor.primary,
         selectionColor: kColor(context).tertiary,
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: DColor.primary,
-        linearTrackColor: DColor.card,
-        circularTrackColor: DColor.card,
-        refreshBackgroundColor: DColor.card,
+        color: Kolor.primary,
+        linearTrackColor: Kolor.card,
+        circularTrackColor: Kolor.card,
+        refreshBackgroundColor: Kolor.card,
       ),
     );

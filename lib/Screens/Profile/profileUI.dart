@@ -137,8 +137,8 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
               KCard(
                 padding:
                     const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-                borderColor: DColor.border,
-                color: DColor.scaffold,
+                borderColor: Kolor.border,
+                color: Kolor.scaffold,
                 width: double.maxFinite,
                 child: Column(
                   spacing: 20,
@@ -149,6 +149,14 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                       },
                       label: "Saved Addresses",
                       icon: Icons.map,
+                    ),
+                    div,
+                    buildSettingTile(
+                      onTap: () {
+                        context.push("/orders");
+                      },
+                      label: "Orders",
+                      icon: Icons.inventory,
                     ),
                     div,
                     buildSettingTile(

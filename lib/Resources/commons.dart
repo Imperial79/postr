@@ -14,7 +14,7 @@ SizedBox kHeight(double height) => SizedBox(height: height);
 SizedBox kWidth(double width) => SizedBox(width: width);
 
 Widget get div => const Divider(
-      color: DColor.border,
+      color: Kolor.border,
       thickness: .5,
     );
 
@@ -71,7 +71,7 @@ KErrorAlert(context, {required dynamic message}) {
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      backgroundColor: DColor.card,
+      backgroundColor: Kolor.card,
       title: Label("An Error Occurred!", color: StatusText.danger).title,
       icon: const Icon(
         Icons.dangerous,
@@ -82,3 +82,44 @@ KErrorAlert(context, {required dynamic message}) {
     ),
   );
 }
+
+Widget get kLoading => const Center(
+      child: SizedBox(width: 100, child: LinearProgressIndicator()),
+    );
+
+Widget get kEmpty => Center(
+      child: Column(
+        children: [
+          const Icon(
+            Icons.inbox,
+            color: Kolor.fadeText,
+          ),
+          Label(
+            "Sorry!",
+            color: Kolor.fadeText,
+          ).title,
+          Label(
+            "No data found.",
+            color: Kolor.fadeText,
+          ).subtitle,
+        ],
+      ),
+    );
+Widget get kNodata => Center(
+      child: Column(
+        children: [
+          const Icon(
+            Icons.not_interested_sharp,
+            color: Kolor.fadeText,
+          ),
+          Label(
+            "Sorry!",
+            color: Kolor.fadeText,
+          ).title,
+          Label(
+            "No data found.",
+            color: Kolor.fadeText,
+          ).subtitle,
+        ],
+      ),
+    );

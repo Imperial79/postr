@@ -10,6 +10,7 @@ import 'package:postr/Screens/Courier/Confirmation_UI.dart';
 import 'package:postr/Screens/Courier/Courier_UI.dart';
 import 'package:postr/Screens/Courier/Package_UI.dart';
 import 'package:postr/Screens/Courier/Schedule_UI.dart';
+import 'package:postr/Screens/Profile/Orders_UI.dart';
 import 'package:postr/Screens/RootUI.dart';
 import '../Repository/Auth/auth_repo.dart';
 import '../Screens/SplashUI.dart';
@@ -120,14 +121,21 @@ final goRouterProvider = Provider<GoRouter>(
           ],
         ),
         GoRoute(
-          path: '/track-order/:orderId',
-          builder: (context, state) {
-            final orderId = (state is Map<String, dynamic>)
-                ? state.pathParameters["orderId"]
-                : null;
-            return const SizedBox();
-          },
-        ),
+            path: '/orders',
+            builder: (context, state) {
+              return const Orders_UI();
+            },
+            routes: [
+              GoRoute(
+                path: 'track/:orderId',
+                builder: (context, state) {
+                  final orderId = (state is Map<String, dynamic>)
+                      ? state.pathParameters["orderId"]
+                      : null;
+                  return const SizedBox();
+                },
+              ),
+            ]),
       ],
     );
   },

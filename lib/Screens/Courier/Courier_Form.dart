@@ -75,7 +75,7 @@ class _CourierFormState extends ConsumerState<CourierForm> {
       width: 15,
       child: CircularProgressIndicator(
         strokeWidth: 2,
-        color: DColor.primary,
+        color: Kolor.primary,
       ),
     );
   }
