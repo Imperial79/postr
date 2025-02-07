@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:postr/Components/KScaffold.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/kCard.dart';
@@ -65,6 +66,7 @@ class _Orders_UIState extends ConsumerState<Orders_UI> {
 
   Widget buildHistoryTile(CourierModel data) {
     return KCard(
+      onTap: () => context.push("/orders/track/${data.id}"),
       child: Column(
         spacing: 20,
         crossAxisAlignment: CrossAxisAlignment.start,

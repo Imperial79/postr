@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:postr/Screens/Address/Addresses_UI.dart';
@@ -10,6 +9,7 @@ import 'package:postr/Screens/Courier/Confirmation_UI.dart';
 import 'package:postr/Screens/Courier/Courier_UI.dart';
 import 'package:postr/Screens/Courier/Package_UI.dart';
 import 'package:postr/Screens/Courier/Schedule_UI.dart';
+import 'package:postr/Screens/Profile/Order_Detail_UI.dart';
 import 'package:postr/Screens/Profile/Orders_UI.dart';
 import 'package:postr/Screens/RootUI.dart';
 import '../Repository/Auth/auth_repo.dart';
@@ -130,9 +130,11 @@ final goRouterProvider = Provider<GoRouter>(
                 path: 'track/:orderId',
                 builder: (context, state) {
                   final orderId = (state is Map<String, dynamic>)
-                      ? state.pathParameters["orderId"]
+                      ? int.parse(state.pathParameters["orderId"]!)
                       : null;
-                  return const SizedBox();
+                  return Order_Detail_UI(
+                    orderId: orderId ?? 0,
+                  );
                 },
               ),
             ]),

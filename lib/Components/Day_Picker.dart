@@ -85,22 +85,16 @@ class _DayPickerState extends State<DayPicker> {
                   child: !showPick
                       ? Column(
                           children: [
-                            Text(
+                            Label(
                               getMonth(_selectedDate),
-                              style: TextStyle(
-                                color: widget.activeColor ?? Colors.black,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
+                              color: widget.activeColor ?? Colors.black,
+                              fontSize: 10,
+                            ).regular,
+                            Label(
                               _selectedDate.split("-").last,
-                              style: TextStyle(
-                                color: widget.activeColor ?? Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                              color: widget.activeColor ?? Colors.black,
+                              fontSize: 20,
+                            ).regular,
                             Label(
                               getDay(_selectedDate),
                             ).regular,
@@ -171,14 +165,11 @@ class _DayPickerState extends State<DayPicker> {
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Column(
             children: [
-              Text(
+              Label(
                 filterDate.split("-").last,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+                fontSize: 20,
+                color: Colors.white,
+              ).regular,
               Text(
                 getDay(filterDate),
                 style: const TextStyle(

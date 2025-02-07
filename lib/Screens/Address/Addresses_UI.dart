@@ -157,8 +157,7 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Label("Add new address", fontSize: 25, fontWeight: 600)
-                          .title,
+                      Label("Add new address", fontSize: 25, weight: 600).title,
                       Label("Enter details below", fontSize: 17).subtitle,
                       height20,
                       KTextfield(
@@ -211,7 +210,7 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
                         validator: (val) => KValidation.required(val),
                       ).regular,
                       height20,
-                      Label("Address Type", fontWeight: 400).regular,
+                      Label("Address Type", weight: 400).regular,
                       height5,
                       Row(
                         spacing: 10,
@@ -290,13 +289,11 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Label(address?.name ?? "Name", fontWeight: 500).regular,
-                    Label("+91 ${address?.phone ?? "Phone"}", fontWeight: 300)
+                    Label(address?.name ?? "Name", weight: 500).regular,
+                    Label("+91 ${address?.phone ?? "Phone"}", weight: 300)
                         .regular,
-                    Label(address?.address ?? "Address", fontWeight: 300)
-                        .regular,
-                    Label(address?.pincode ?? "Pincode", fontWeight: 300)
-                        .regular,
+                    Label(address?.address ?? "Address", weight: 300).regular,
+                    Label(address?.pincode ?? "Pincode", weight: 300).regular,
                   ],
                 ),
               ),

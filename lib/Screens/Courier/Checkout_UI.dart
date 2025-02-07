@@ -24,6 +24,87 @@ class Checkout_UI extends ConsumerStatefulWidget {
 class _Checkout_UIState extends ConsumerState<Checkout_UI> {
   final isLoading = ValueNotifier(false);
 
+  // var cfPaymentGatewayService = CFPaymentGatewayService();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   cfPaymentGatewayService.setCallback(verifyPayment, onError);
+  // }
+
+  // generateOrder() async {
+  //   try {
+  //     isLoading.value = true;
+
+  //     final res = await ref.read(courierRepository).generateOrder(
+  //           orderId: widget.masterdata.id!,
+  //         );
+
+  //     await makePayment(res.data['order_id'], res.data['payment_session_id']);
+  //   } catch (e) {
+  //     KSnackbar(context, message: "$e", error: true);
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
+
+  // CFSession? createSession(String orderId, String sessionId) {
+  //   try {
+  //     var session = CFSessionBuilder()
+  //         .setEnvironment(CFEnvironment.SANDBOX)
+  //         .setOrderId(orderId)
+  //         .setPaymentSessionId(sessionId)
+  //         .build();
+  //     return session;
+  //   } on CFException catch (e) {
+  //     KSnackbar(context, message: e.message, error: true);
+  //     rethrow;
+  //   }
+  // }
+
+  // makePayment(String orderId, String sessionId) async {
+  //   try {
+  //     isLoading.value = true;
+
+  //     var session = createSession(orderId, sessionId);
+  //     var cfWebCheckout =
+  //         CFWebCheckoutPaymentBuilder().setSession(session!).build();
+  //     cfPaymentGatewayService.doPayment(cfWebCheckout);
+  //   } on CFException catch (e) {
+  //     KSnackbar(context, message: e.message, error: true);
+  //     rethrow;
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
+
+  // void verifyPayment(String paymentOrderId) async {
+  //   try {
+  //     isLoading.value = true;
+
+  //     final res = await ref.read(courierRepository).paymentConfirmation(
+  //           orderId: widget.masterdata.id!,
+  //           paymentOrderId: paymentOrderId,
+  //         );
+  //     confirmPickup();
+  //     KSnackbar(context, res: res);
+  //   } catch (e) {
+  //     KSnackbar(context, message: "$e", error: true);
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
+
+  // void onError(CFErrorResponse errorResponse, String orderId) {
+  //   isLoading.value = false;
+
+  //   KSnackbar(
+  //     context,
+  //     message: "Payment ${errorResponse.getStatus()}",
+  //     error: true,
+  //   );
+  // }
+
   confirmPickup() async {
     try {
       isLoading.value = true;
@@ -40,6 +121,7 @@ class _Checkout_UIState extends ConsumerState<Checkout_UI> {
       }
     } catch (e) {
       KErrorAlert(context, message: e);
+      rethrow;
     } finally {
       isLoading.value = false;
     }
@@ -130,11 +212,11 @@ class _Checkout_UIState extends ConsumerState<Checkout_UI> {
         spacing: 1,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Label(address?.name ?? "Name", fontWeight: 500).title,
-          Label("+91 ${address?.phone ?? "Phone"}", fontWeight: 300).regular,
+          Label(address?.name ?? "Name", weight: 500).title,
+          Label("+91 ${address?.phone ?? "Phone"}", weight: 300).regular,
           height5,
-          Label(address?.address ?? "Address", fontWeight: 300).subtitle,
-          Label(address?.pincode ?? "Pincode", fontWeight: 300).subtitle,
+          Label(address?.address ?? "Address", weight: 300).subtitle,
+          Label(address?.pincode ?? "Pincode", weight: 300).subtitle,
         ],
       ),
     );

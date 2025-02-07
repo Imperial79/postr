@@ -7,7 +7,7 @@ class Label {
   final String text;
   final Color? color;
   final double? fontSize;
-  final double? fontWeight;
+  final double? weight;
   final int? maxLines;
   final FontStyle? fontStyle;
   final double? height;
@@ -17,7 +17,7 @@ class Label {
     this.text, {
     this.color,
     this.fontSize,
-    this.fontWeight,
+    this.weight,
     this.maxLines,
     this.fontStyle,
     this.height,
@@ -29,7 +29,7 @@ class Label {
         style: TextStyle(
             fontSize: fontSize ?? 20,
             color: color,
-            fontVariations: [FontVariation.weight(fontWeight ?? 500)],
+            fontVariations: [FontVariation.weight(weight ?? 500)],
             fontStyle: fontStyle,
             height: height),
         textAlign: textAlign,
@@ -41,7 +41,7 @@ class Label {
         style: TextStyle(
           fontSize: fontSize ?? 14,
           color: color ?? Kolor.fadeText,
-          fontVariations: [FontVariation.weight(fontWeight ?? 400)],
+          fontVariations: [FontVariation.weight(weight ?? 400)],
           fontStyle: fontStyle,
           height: height,
         ),
@@ -56,7 +56,7 @@ class Label {
           style: TextStyle(
             letterSpacing: 3,
             wordSpacing: 5,
-            fontVariations: [FontVariation.weight(fontWeight ?? 600)],
+            fontVariations: [FontVariation.weight(weight ?? 600)],
             fontSize: 14,
             fontStyle: fontStyle,
             height: height,
@@ -69,14 +69,11 @@ class Label {
   Widget get regular => Text(
         text,
         style: TextStyle(
-          fontVariations: [FontVariation.weight(fontWeight ?? 600)],
-          color: color,
-          fontSize: fontSize,
-          fontStyle: fontStyle,
-          height: height,
-        ),
-        maxLines: maxLines,
-        overflow: (maxLines != null) ? TextOverflow.ellipsis : null,
+            fontVariations: [FontVariation.weight(weight ?? 600)],
+            color: color,
+            fontSize: fontSize,
+            fontStyle: fontStyle,
+            height: height),
         textAlign: textAlign,
       );
   Widget get withDivider => Row(
@@ -89,7 +86,7 @@ class Label {
               color: color,
               fontStyle: fontStyle,
               height: height,
-              fontVariations: [FontVariation.weight(fontWeight ?? 500)],
+              fontVariations: [FontVariation.weight(weight ?? 500)],
             ),
             textAlign: textAlign,
           ),

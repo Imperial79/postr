@@ -52,6 +52,8 @@ dependencies:
   firebase_messaging: ^15.2.0
   intl: ^0.20.1
   skeletonizer: ^1.4.3
+  flutter_dotenv: ^5.2.1
+  flutter_cashfree_pg_sdk: ^2.2.3+41
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +80,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - .env
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

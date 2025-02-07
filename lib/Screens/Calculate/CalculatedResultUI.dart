@@ -58,9 +58,7 @@ class _CalculatedResultUIState extends State<CalculatedResultUI> {
                 ),
                 kHeight(50),
                 Label("Total estimated amount",
-                        fontSize: 30,
-                        fontWeight: 200,
-                        textAlign: TextAlign.center)
+                        fontSize: 30, weight: 200, textAlign: TextAlign.center)
                     .title,
                 TweenAnimationBuilder<double>(
                   duration: const Duration(seconds: 1),
@@ -74,11 +72,11 @@ class _CalculatedResultUIState extends State<CalculatedResultUI> {
                         Label(
                           "₹ ${value.toStringAsFixed(2)}",
                           fontSize: 30,
-                          fontWeight: 700,
+                          weight: 700,
                           color: Kolor.primary,
                           textAlign: TextAlign.center,
                         ).title,
-                        Label("INR", fontSize: 20, fontWeight: 200).regular,
+                        Label("INR", fontSize: 20, weight: 200).regular,
                       ],
                     );
                   },

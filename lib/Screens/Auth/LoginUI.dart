@@ -74,7 +74,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                               "Postr",
                               fontSize: 40,
                               fontStyle: FontStyle.italic,
-                              fontWeight: 800,
+                              weight: 800,
                             ).title,
                           ],
                         ),
@@ -99,7 +99,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                       Expanded(
                         child: Label(
                           "Your data is secured",
-                          fontWeight: 400,
+                          weight: 400,
                           color: kColor(context).primaryContainer,
                         ).regular,
                       )

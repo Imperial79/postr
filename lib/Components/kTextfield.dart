@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:postr/Components/kCard.dart';
 import 'package:postr/Resources/colors.dart';
+import 'package:postr/Resources/theme.dart';
 import '../Resources/commons.dart';
 import 'Label.dart';
 import 'kButton.dart';
@@ -38,7 +39,7 @@ class KTextfield {
   final bool autoFocus;
   final void Function()? onTap;
   final bool? readOnly;
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final String? hintText;
   final TextInputType? keyboardType;
   final String? prefixText;
@@ -69,7 +70,7 @@ class KTextfield {
     this.autoFocus = false,
     this.onTap,
     this.readOnly,
-    this.controller,
+    required this.controller,
     this.hintText,
     this.keyboardType,
     this.prefixText,
@@ -96,23 +97,25 @@ class KTextfield {
     this.autofillHints,
   });
 
-  static const TextStyle kFieldTextstyle = TextStyle(
-    fontWeight: FontWeight.w500,
+  static const TextStyle kTextstyle = TextStyle(
+    fontVariations: [FontVariation.weight(500)],
     fontSize: kFontSize,
     letterSpacing: .5,
     height: kTextHeight,
+    fontFamily: kFont,
   );
 
-  static const TextStyle kHintTextstyle = TextStyle(
-    fontWeight: FontWeight.w400,
+  static const TextStyle kHintStyle = TextStyle(
+    fontVariations: [FontVariation.weight(400)],
     fontSize: kFontSize,
     height: kTextHeight,
     color: Kolor.fadeText,
+    fontFamily: kFont,
   );
 
   Widget get kLabel => Label(
         label!,
-        fontWeight: 400,
+        weight: 400,
         fontSize: 15,
       ).regular;
 
@@ -134,17 +137,14 @@ class KTextfield {
                   if (labelIcon != null) labelIcon!,
                   kLabel,
                   if (validator != null && showRequired)
-                    const Padding(
-                      padding: EdgeInsets.only(left: 3.0),
-                      child: Text(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 3.0),
+                      child: Label(
                         "(Required)",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: StatusText.danger,
-                          fontSize: 10,
-                          height: 1,
-                        ),
-                      ),
+                        color: StatusText.danger,
+                        fontSize: 10,
+                        height: 1,
+                      ).regular,
                     ),
                 ],
               ),
@@ -172,8 +172,8 @@ class KTextfield {
                   autofillHints: autofillHints,
                   controller: controller,
                   textCapitalization: textCapitalization,
-                  style: kFieldTextstyle.copyWith(
-                      fontSize: fontSize, color: textColor),
+                  style:
+                      kTextstyle.copyWith(fontSize: fontSize, color: textColor),
                   cursorColor: cursorColor,
                   readOnly: readOnly ?? false,
                   obscureText: obscureText ?? false,
@@ -209,7 +209,7 @@ class KTextfield {
                     enabledBorder: borderStyle(null),
                     errorStyle: const TextStyle(color: StatusText.danger),
                     hintText: hintText,
-                    hintStyle: kHintTextstyle.copyWith(
+                    hintStyle: kHintStyle.copyWith(
                         fontSize: fontSize, color: hintTextColor),
                   ),
                   onChanged: onChanged,
@@ -252,14 +252,12 @@ class KTextfield {
                     color: Kolor.primary,
                     borderRadius: kRadius(10),
                   ),
-                  child: Text(
+                  child: Label(
                     prefixText!,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 11,
-                        color: Colors.white),
+                    fontSize: fontSize,
+                    color: textColor,
                     textAlign: TextAlign.center,
-                  ),
+                  ).regular,
                 )
               else if (prefixText == null && prefix != null)
                 Container(
@@ -276,8 +274,8 @@ class KTextfield {
                 child: TextFormField(
                   controller: controller,
                   textCapitalization: textCapitalization,
-                  style: kFieldTextstyle.copyWith(
-                      fontSize: fontSize, color: textColor),
+                  style:
+                      kTextstyle.copyWith(fontSize: fontSize, color: textColor),
                   textAlign: TextAlign.center,
                   readOnly: readOnly ?? false,
                   obscureText: obscureText ?? false,
@@ -296,7 +294,7 @@ class KTextfield {
                     focusedBorder: borderStyle(Kolor.border),
                     enabledBorder: borderStyle(null),
                     hintText: hintText,
-                    hintStyle: kHintTextstyle.copyWith(
+                    hintStyle: kHintStyle.copyWith(
                         fontSize: fontSize, color: hintTextColor),
                   ),
                   onChanged: onChanged,
@@ -311,10 +309,8 @@ class KTextfield {
       );
 
   Widget dropdown({
-    required List<DropdownMenuEntry<dynamic>> dropdownMenuEntries,
-    void Function(dynamic)? onSelected,
-    Widget? leadingIcon,
-    String? errorText,
+    required List<DropdownMenuItem<String>>? items,
+    required void Function(String? val)? onChanged,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -331,49 +327,115 @@ class KTextfield {
                   ),
                 kLabel,
                 if (validator != null && showRequired)
-                  const Padding(
-                    padding: EdgeInsets.only(left: 3.0),
-                    child: Text(
+                  Padding(
+                    padding: const EdgeInsets.only(left: 3.0),
+                    child: Label(
                       "(Required)",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: StatusText.danger,
-                          fontSize: 10,
-                          height: 1),
-                    ),
+                      weight: 600,
+                      color: StatusText.danger,
+                      fontSize: 10,
+                    ).regular,
                   ),
               ],
             ),
           ),
-        DropdownMenu(
-          controller: controller,
-          hintText: hintText,
-          errorText: errorText,
-          textStyle:
-              kFieldTextstyle.copyWith(fontSize: fontSize, color: textColor),
-          onSelected: onSelected,
-          expandedInsets: EdgeInsets.zero,
-          menuStyle: const MenuStyle(
-              backgroundColor: WidgetStatePropertyAll(Kolor.card)),
-          inputDecorationTheme: InputDecorationTheme(
+        DropdownButtonFormField<String>(
+          value: controller.text,
+          hint: Text(
+            hintText ?? "Choose an Option",
+            style:
+                kHintStyle.copyWith(fontSize: fontSize, color: hintTextColor),
+          ),
+          onChanged: onChanged,
+          isDense: true,
+          menuMaxHeight: 300,
+          dropdownColor: Kolor.border,
+          elevation: 0,
+          style: kTextstyle.copyWith(
+              fontSize: fontSize, color: textColor ?? Colors.white),
+          icon: const Icon(Icons.keyboard_arrow_down_rounded),
+          decoration: InputDecoration(
             errorStyle: const TextStyle(color: StatusText.danger),
-            activeIndicatorBorder: const BorderSide(color: Kolor.border),
             border: borderStyle(null),
             errorBorder: borderStyle(StatusText.danger),
             focusedBorder: borderStyle(Kolor.border),
             enabledBorder: borderStyle(null),
             filled: true,
             fillColor: fieldColor,
-            hintStyle: kHintTextstyle.copyWith(
-                fontSize: fontSize, color: hintTextColor),
+            hintStyle:
+                kHintStyle.copyWith(fontSize: fontSize, color: hintTextColor),
           ),
-          selectedTrailingIcon: const Icon(Icons.keyboard_arrow_up_rounded),
-          trailingIcon: const Icon(Icons.keyboard_arrow_down_rounded),
-          leadingIcon: leadingIcon,
-          dropdownMenuEntries: dropdownMenuEntries,
-          menuHeight: 300,
+          validator: (value) => value!.isEmpty ? "Required!" : null,
+          items: items,
         ),
       ],
     );
   }
+
+  // Widget dropdown({
+  //   required List<DropdownMenuEntry<dynamic>> dropdownMenuEntries,
+  //   void Function(dynamic)? onSelected,
+  //   Widget? leadingIcon,
+  //   String? errorText,
+  // }) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       if (label != null)
+  //         Padding(
+  //           padding: const EdgeInsets.only(bottom: 7.0),
+  //           child: Row(
+  //             children: [
+  //               if (labelIcon != null)
+  //                 Padding(
+  //                   padding: const EdgeInsets.only(right: 7.0),
+  //                   child: labelIcon,
+  //                 ),
+  //               kLabel,
+  //               if (validator != null && showRequired)
+  //                 const Padding(
+  //                   padding: EdgeInsets.only(left: 3.0),
+  //                   child: Text(
+  //                     "(Required)",
+  //                     style: TextStyle(
+  //                         weight: FontWeight.w500,
+  //                         color: StatusText.danger,
+  //                         fontSize: 10,
+  //                         height: 1),
+  //                   ),
+  //                 ),
+  //             ],
+  //           ),
+  //         ),
+  //       DropdownMenu(
+  //         controller: controller,
+  //         hintText: hintText,
+  //         errorText: errorText,
+  //         textStyle:
+  //             kFieldTextstyle.copyWith(fontSize: fontSize, color: textColor),
+  //         onSelected: onSelected,
+  //         expandedInsets: EdgeInsets.zero,
+  //         menuStyle: const MenuStyle(
+  //             backgroundColor: WidgetStatePropertyAll(Kolor.card)),
+  //         inputDecorationTheme: InputDecorationTheme(
+  //           errorStyle: const TextStyle(color: StatusText.danger),
+  //           activeIndicatorBorder: const BorderSide(color: Kolor.border),
+  //           border: borderStyle(null),
+  //           errorBorder: borderStyle(StatusText.danger),
+  //           focusedBorder: borderStyle(Kolor.border),
+  //           enabledBorder: borderStyle(null),
+  //           filled: true,
+  //           fillColor: fieldColor,
+  //           hintStyle: kHintTextstyle.copyWith(
+  //               fontSize: fontSize, color: hintTextColor),
+  //         ),
+  //         selectedTrailingIcon: const Icon(Icons.keyboard_arrow_up_rounded),
+  //         trailingIcon: const Icon(Icons.keyboard_arrow_down_rounded),
+  //         leadingIcon: leadingIcon,
+  //         dropdownMenuEntries: dropdownMenuEntries,
+  //         menuHeight: 300,
+  //       ),
+  //     ],
+  //   );
+  // }
 }

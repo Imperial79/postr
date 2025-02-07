@@ -61,13 +61,13 @@ class _Confirmation_UIState extends State<Confirmation_UI> {
                 Label(
                   "Order No.",
                   fontSize: 20,
-                  fontWeight: 500,
+                  weight: 500,
                   textAlign: TextAlign.center,
                 ).regular,
                 Label(
                   "#${widget.masterdata.txnId}",
                   fontSize: 30,
-                  fontWeight: 700,
+                  weight: 700,
                   color: Kolor.primary,
                   textAlign: TextAlign.center,
                 ).title,

@@ -12,9 +12,9 @@ Widget KHeading({
     child: Center(
       child: Column(
         children: [
-          Label(title, fontSize: 25, fontWeight: 800).title,
+          Label(title, fontSize: 25, weight: 650).title,
           Label(subtitle,
-                  fontSize: 20, fontWeight: 200, textAlign: TextAlign.center)
+                  fontSize: 20, weight: 350, textAlign: TextAlign.center)
               .title,
           if (isLoading) ...[height10, kLoading]
         ],

@@ -125,7 +125,7 @@ class _CourierFormState extends ConsumerState<CourierForm> {
                   Expanded(
                     child: Label(
                       cityDetails,
-                      fontWeight: 400,
+                      weight: 400,
                     ).regular,
                   ),
                 ],

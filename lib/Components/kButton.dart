@@ -128,7 +128,7 @@ class KButton extends StatelessWidget {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Label(label, fontWeight: 500).regular,
+            Label(label, weight: 500).regular,
             if (icon != null) ...[
               const Spacer(),
               icon!,
@@ -176,14 +176,7 @@ class KButton extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          Text(
-            "Loading...",
-            style: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-            ),
-          ),
+          Label("Loading...").regular,
         ],
       );
 }

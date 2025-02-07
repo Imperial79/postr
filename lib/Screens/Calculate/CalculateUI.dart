@@ -162,7 +162,7 @@ class _CalculateUIState extends ConsumerState<CalculateUI> {
                               child: Label(
                                 fromPinCity,
                                 // color: colwhite,
-                                fontWeight: 400,
+                                weight: 400,
                               ).regular,
                             ),
                           ],
@@ -204,7 +204,7 @@ class _CalculateUIState extends ConsumerState<CalculateUI> {
                               child: Label(
                                 toPinCity,
                                 // color: colwhite,
-                                fontWeight: 400,
+                                weight: 400,
                               ).regular,
                             ),
                           ],

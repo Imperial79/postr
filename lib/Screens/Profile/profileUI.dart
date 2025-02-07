@@ -62,13 +62,13 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                       Label(
                         user.name,
                         fontSize: 25,
-                        fontWeight: 500,
+                        weight: 500,
                       ).regular,
                       if (user.phone!.isNotEmpty)
                         Label(
                           "+91 ${user.phone}",
                           fontSize: 17,
-                          fontWeight: 400,
+                          weight: 400,
                         ).subtitle
                       else
                         KCard(
@@ -104,7 +104,7 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                             child: Label(
                               "New Track",
                               fontSize: 17,
-                              fontWeight: 500,
+                              weight: 500,
                             ).regular,
                           ),
                         ],
@@ -125,7 +125,7 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
                             child: Label(
                               "Contact Us",
                               fontSize: 17,
-                              fontWeight: 500,
+                              weight: 500,
                             ).regular,
                           ),
                         ],
@@ -192,7 +192,7 @@ class _ProfileUIState extends ConsumerState<ProfileUI> {
         spacing: 20,
         children: [
           Icon(icon),
-          Label(label, fontSize: 17, fontWeight: 400).regular,
+          Label(label, fontSize: 17, weight: 400).regular,
           const Spacer(),
           const Icon(
             Icons.arrow_forward_ios,

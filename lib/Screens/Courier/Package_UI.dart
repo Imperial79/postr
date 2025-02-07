@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:postr/Components/Label.dart';
 import 'package:postr/Components/kCard.dart';
@@ -24,7 +23,7 @@ class Package_UI extends StatefulWidget {
 
 class _Package_UIState extends State<Package_UI> {
   final formKey = GlobalKey<FormState>();
-  final weight = TextEditingController(text: "10");
+  final weightInKg = TextEditingController(text: "10");
   final length = TextEditingController(text: "11");
   final width = TextEditingController(text: "20");
   final height = TextEditingController(text: "12");
@@ -79,8 +78,8 @@ class _Package_UIState extends State<Package_UI> {
             onPressed: () {
               final data = widget.masterdata.copyWith(
                 weightInKg: selectedUnit == "KG"
-                    ? parseToDouble(weight.text)
-                    : parseToDouble(weight.text) / 1000,
+                    ? parseToDouble(weightInKg.text)
+                    : parseToDouble(weightInKg.text) / 1000,
                 length: parseToDouble(length.text),
                 width: parseToDouble(width.text),
                 height: parseToDouble(height.text),
@@ -125,8 +124,9 @@ class _Package_UIState extends State<Package_UI> {
   List<Widget> documentView() {
     return [
       KTextfield(
-        controller: weight,
+        controller: weightInKg,
         suffix: DropdownButton<String>(
+          dropdownColor: Kolor.border,
           underline: const SizedBox.shrink(),
           value: selectedUnit,
           items: <String>["KG", "GM"].map((String value) {
@@ -138,6 +138,11 @@ class _Package_UIState extends State<Package_UI> {
           onChanged: (String? newValue) {
             setState(() {
               selectedUnit = newValue!;
+              final ogWeight = parseToDouble(weightInKg.text);
+              double newWeight =
+                  ogWeight > 1 ? ogWeight / 1000 : ogWeight * 1000;
+
+              weightInKg.text = "$newWeight";
             });
           },
         ),
@@ -152,7 +157,7 @@ class _Package_UIState extends State<Package_UI> {
   List<Widget> nonDocumentView() {
     return [
       KTextfield(
-        controller: weight,
+        controller: weightInKg,
         suffix: DropdownButton<String>(
           underline: const SizedBox.shrink(),
           value: selectedUnit,
@@ -234,20 +239,16 @@ class _Package_UIState extends State<Package_UI> {
         label: "Content Type",
         hintText: "Select Content Type",
       ).dropdown(
-        errorText: packageContent.text.isEmpty ? "Required!" : null,
-        dropdownMenuEntries: List.generate(
-          kPackageContentMap.length,
-          (index) => DropdownMenuEntry(
-            leadingIcon: SvgPicture.asset(
-              kPackageContentMap[kPackageContentMap.keys.toList()[index]]!,
-              height: 12,
-            ),
-            label: kPackageContentMap.keys.toList()[index],
-            value: kPackageContentMap.keys.toList()[index],
-          ),
-        ),
-        onSelected: (_) {
-          setState(() {});
+        items: kPackageContent.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        onChanged: (val) {
+          setState(() {
+            packageContent.text = val!;
+          });
         },
       ),
       Row(
@@ -257,7 +258,7 @@ class _Package_UIState extends State<Package_UI> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Label("Is Fragile?").title,
+                Label("Is Fragile?", weight: 610).title,
                 Label("Check if the product is fragile and needs better handling by our team.")
                     .subtitle,
               ],
@@ -265,6 +266,9 @@ class _Package_UIState extends State<Package_UI> {
           ),
           Switch.adaptive(
             value: isFragile,
+            inactiveTrackColor: Kolor.fadeText,
+            inactiveThumbColor: Kolor.text,
+            activeTrackColor: Kolor.primary,
             onChanged: (value) {
               setState(() {
                 isFragile = value;
@@ -297,12 +301,9 @@ class _Package_UIState extends State<Package_UI> {
           children: [
             Icon(icon),
             width10,
-            Text(
+            Label(
               label,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            ).regular,
           ],
         ),
       ),

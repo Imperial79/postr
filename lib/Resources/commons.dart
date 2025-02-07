@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:postr/Models/Response_Model.dart';
+import 'package:postr/Resources/theme.dart';
 
 import '../Components/Label.dart';
 import 'colors.dart';
@@ -50,17 +54,29 @@ Future<T?> navPopUntilPush<T extends Object?>(
   return navPush(context, screen);
 }
 
-KSnackbar(context, {required String message, bool error = false}) {
+KSnackbar(
+  context, {
+  dynamic message,
+  bool error = false,
+  SnackBarAction? action,
+  ResponseModel? res,
+}) {
+  final error0 = res != null ? res.error : error;
+  final message0 = res != null ? res.message : message;
+  log(message0);
+  ScaffoldMessenger.of(context).removeCurrentSnackBar();
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      backgroundColor: error
-          ? kColor(context).errorContainer
-          : kColor(context).primaryContainer,
-      content: Label(message,
-              color: error
-                  ? kColor(context).onErrorContainer
-                  : kColor(context).onPrimaryContainer)
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: kRadius(10)),
+      backgroundColor:
+          error0 ? kScheme.errorContainer : kScheme.primaryContainer,
+      content: Label("$message0",
+              color: error0
+                  ? kScheme.onErrorContainer
+                  : kScheme.onPrimaryContainer)
           .regular,
+      action: action,
       behavior: SnackBarBehavior.floating,
       dismissDirection: DismissDirection.horizontal,
     ),

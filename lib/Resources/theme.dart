@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:postr/Resources/colors.dart';
+import 'package:postr/Resources/commons.dart';
 
 const String kFont = "Kumbh";
 
@@ -47,5 +48,19 @@ ThemeData darkTheme(context) => ThemeData.dark(useMaterial3: true).copyWith(
         linearTrackColor: Kolor.card,
         circularTrackColor: Kolor.card,
         refreshBackgroundColor: Kolor.card,
+      ),
+      menuTheme: MenuThemeData(
+        style: MenuStyle(
+          backgroundColor: const WidgetStatePropertyAll(Kolor.border),
+          shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: kRadius(10))),
+        ),
+      ),
+      dropdownMenuTheme: DropdownMenuThemeData(
+        menuStyle: MenuStyle(
+          backgroundColor: const WidgetStatePropertyAll(Kolor.border),
+          shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: kRadius(10))),
+        ),
       ),
     );

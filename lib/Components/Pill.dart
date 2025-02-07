@@ -9,12 +9,14 @@ class Pill {
   String label;
   Color backgroundColor;
   Color textColor;
+  double fontSize;
 
   Pill({
     this.child,
     this.label = "text",
     this.backgroundColor = Kolor.primary,
     this.textColor = Colors.white,
+    this.fontSize = 14.0, // Default font size
   });
 
   Widget get regular => KCard(
@@ -29,6 +31,7 @@ class Pill {
           label,
           style: TextStyle(
               color: textColor,
+              fontSize: fontSize,
               fontVariations: const [FontVariation.weight(500)]),
         ),
       );

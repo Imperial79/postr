@@ -6,6 +6,7 @@ class Kolor {
   static const Color card = Color(0XFF1d1d1d);
   static const Color border = Color(0xFF474747);
   static const Color fadeText = Color(0xFF9C9C9C);
+  static const Color text = Colors.white;
 }
 
 class StatusText {
