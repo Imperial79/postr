@@ -44,7 +44,7 @@ class _CalculatedResultUIState extends State<CalculatedResultUI> {
                       style: TextStyle(
                         fontSize: 50,
                         fontStyle: FontStyle.italic,
-                        color: Colors.white,
+                        color: Kolor.text,
                         fontVariations: [FontVariation.weight(500)],
                       ),
                     ),

@@ -130,7 +130,7 @@ class _CalculateUIState extends ConsumerState<CalculateUI> {
                         controller: fromPin,
                         prefix: const Icon(
                           Icons.map,
-                          color: Colors.white,
+                          color: Kolor.text,
                           size: 23,
                         ),
                         suffix: fetchingFor == "Pickup"
@@ -172,7 +172,7 @@ class _CalculateUIState extends ConsumerState<CalculateUI> {
                         controller: toPin,
                         prefix: const Icon(
                           Icons.map,
-                          color: Colors.white,
+                          color: Kolor.text,
                           size: 23,
                         ),
                         suffix: fetchingFor == "Drop"
@@ -218,7 +218,7 @@ class _CalculateUIState extends ConsumerState<CalculateUI> {
                               controller: weight,
                               prefix: const Icon(
                                 Icons.scale,
-                                color: Colors.white,
+                                color: Kolor.text,
                                 size: 23,
                               ),
                               suffix: DropdownButton<String>(

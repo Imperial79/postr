@@ -1,7 +1,22 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../Helper/api_config.dart';
 import '../Models/Courier_Model.dart';
 import '../Models/Response_Model.dart';
+
+final orderDetailFuture = FutureProvider.autoDispose.family<CourierModel?, int>(
+  (ref, ordreId) async {
+    final res = await apiCallBack(path: "/courier/order-details", body: {
+      "orderId": ordreId,
+    });
+    log("$res");
+    if (!res.error) {
+      return CourierModel.fromMap(res.data);
+    }
+    return null;
+  },
+);
 
 final courierRepository = Provider(
   (ref) => CourierRepo(),

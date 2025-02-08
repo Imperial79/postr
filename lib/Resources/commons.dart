@@ -105,15 +105,14 @@ Widget get kLoading => const Center(
 
 Widget get kEmpty => Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Icon(
             Icons.inbox,
             color: Kolor.fadeText,
+            size: 60,
           ),
-          Label(
-            "Sorry!",
-            color: Kolor.fadeText,
-          ).title,
+          Label("Sorry!", color: Kolor.fadeText, fontSize: 30).title,
           Label(
             "No data found.",
             color: Kolor.fadeText,
@@ -121,21 +120,29 @@ Widget get kEmpty => Center(
         ],
       ),
     );
-Widget get kNodata => Center(
+Widget kNodata({
+  void Function()? onPressed,
+  bool showRetry = false,
+}) =>
+    Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Icon(
             Icons.not_interested_sharp,
             color: Kolor.fadeText,
+            size: 60,
           ),
+          Label("Sorry!", color: Kolor.fadeText, fontSize: 30).title,
           Label(
-            "Sorry!",
-            color: Kolor.fadeText,
-          ).title,
-          Label(
-            "No data found.",
+            "Something went wrong.",
             color: Kolor.fadeText,
           ).subtitle,
+          if (showRetry)
+            TextButton(
+              onPressed: onPressed,
+              child: Label("Retry").regular,
+            )
         ],
       ),
     );

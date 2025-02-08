@@ -79,7 +79,7 @@ class _Checkout_UIState extends ConsumerState<Schedule_UI> {
                 days: 10,
                 activeColor: kColor(context).tertiary,
                 inactiveCardColor: Kolor.card,
-                foregroundColor: Colors.black,
+                foregroundColor: Kolor.scaffold,
                 onSelected: (date) {
                   setState(() {
                     selectedDate = "$date";

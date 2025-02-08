@@ -83,7 +83,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                           "Fastest and most trusted package delivery",
                           fontSize: 20,
                           fontStyle: FontStyle.italic,
-                          color: Colors.white,
+                          color: Kolor.text,
                         ).subtitle,
                       ],
                     ),
@@ -109,7 +109,7 @@ class _LoginUIState extends ConsumerState<LoginUI> {
                     onPressed: _signInWithGoogle,
                     label: "Google",
                     backgroundColor: Kolor.card,
-                    foregroundColor: Colors.white,
+                    foregroundColor: Kolor.text,
                     icon: Image.asset(
                       "$kImagePath/google-logo.png",
                       height: 20,

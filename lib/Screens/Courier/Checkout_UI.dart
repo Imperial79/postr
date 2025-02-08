@@ -198,7 +198,7 @@ class _Checkout_UIState extends ConsumerState<Checkout_UI> {
             fontSize: 17,
             weight: 700,
             backgroundColor: Kolor.primary,
-            foregroundColor: Colors.black,
+            foregroundColor: Kolor.scaffold,
           ),
         ),
       ),

@@ -184,7 +184,7 @@ class KTextfield {
                   inputFormatters: inputFormatters,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: fieldColor ?? Colors.white,
+                    fillColor: fieldColor ?? Kolor.text,
                     counterText: '',
                     prefixIconConstraints:
                         const BoxConstraints(minHeight: 0, minWidth: 0),
@@ -352,7 +352,7 @@ class KTextfield {
           dropdownColor: Kolor.border,
           elevation: 0,
           style: kTextstyle.copyWith(
-              fontSize: fontSize, color: textColor ?? Colors.white),
+              fontSize: fontSize, color: textColor ?? Kolor.text),
           icon: const Icon(Icons.keyboard_arrow_down_rounded),
           decoration: InputDecoration(
             errorStyle: const TextStyle(color: StatusText.danger),

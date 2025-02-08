@@ -45,7 +45,7 @@ class _Confirmation_UIState extends State<Confirmation_UI> {
                       style: TextStyle(
                         fontSize: 50,
                         fontStyle: FontStyle.italic,
-                        color: Colors.white,
+                        color: Kolor.text,
                         fontVariations: [FontVariation.weight(500)],
                       ),
                     ),

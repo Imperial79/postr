@@ -87,12 +87,12 @@ class _DayPickerState extends State<DayPicker> {
                           children: [
                             Label(
                               getMonth(_selectedDate),
-                              color: widget.activeColor ?? Colors.black,
+                              color: widget.activeColor ?? Kolor.scaffold,
                               fontSize: 10,
                             ).regular,
                             Label(
                               _selectedDate.split("-").last,
-                              color: widget.activeColor ?? Colors.black,
+                              color: widget.activeColor ?? Kolor.scaffold,
                               fontSize: 20,
                             ).regular,
                             Label(
@@ -111,7 +111,7 @@ class _DayPickerState extends State<DayPicker> {
                             Text(
                               "Pick",
                               style: TextStyle(
-                                color: widget.foregroundColor ?? Colors.black,
+                                color: widget.foregroundColor ?? Kolor.scaffold,
                               ),
                             ),
                           ],
@@ -159,7 +159,7 @@ class _DayPickerState extends State<DayPicker> {
           decoration: BoxDecoration(
             color: isActive
                 ? widget.activeColor ?? Kolor.primary
-                : widget.inactiveCardColor ?? Colors.white,
+                : widget.inactiveCardColor ?? Kolor.text,
             borderRadius: kRadius(100),
           ),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -168,12 +168,12 @@ class _DayPickerState extends State<DayPicker> {
               Label(
                 filterDate.split("-").last,
                 fontSize: 20,
-                color: Colors.white,
+                color: Kolor.text,
               ).regular,
               Text(
                 getDay(filterDate),
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Kolor.text,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),

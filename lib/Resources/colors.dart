@@ -20,7 +20,7 @@ class StatusText {
 }
 
 Color kOpacity(Color? color, double opacity) =>
-    (color ?? Colors.white).withAlpha((opacity * 255).round());
+    (color ?? Kolor.text).withAlpha((opacity * 255).round());
 
 ColorScheme kColor(BuildContext context) => Theme.of(context).colorScheme;
 

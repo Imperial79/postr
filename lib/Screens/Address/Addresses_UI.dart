@@ -244,8 +244,8 @@ class _AddressesUIState extends ConsumerState<Addresses_UI> {
   Widget buildTypeSelector(StateSetter setState, String label) {
     final bool selected = type == label;
     return ChoiceChip(
-      label: Label(label, color: !selected ? Kolor.fadeText : Colors.white)
-          .regular,
+      label:
+          Label(label, color: !selected ? Kolor.fadeText : Kolor.text).regular,
       selectedColor: kColor(context).secondary,
       selected: selected,
       showCheckmark: false,

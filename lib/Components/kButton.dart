@@ -12,6 +12,7 @@ class KButton extends StatelessWidget {
   final Color? borderColor;
   final double fontSize;
   final Widget? icon;
+  final double? radius;
   final EdgeInsetsGeometry? padding;
   final ButtonStyle? customStyle;
   final bool isLoading;
@@ -22,10 +23,11 @@ class KButton extends StatelessWidget {
   const KButton({
     super.key,
     this.weight = 600,
+    this.radius = 15,
     required this.onPressed,
     this.label = "",
     this.backgroundColor,
-    this.foregroundColor = Colors.white,
+    this.foregroundColor = Kolor.text,
     this.fontSize = 15,
     this.icon,
     this.padding,
@@ -52,7 +54,7 @@ class KButton extends StatelessWidget {
       iconColor: foregroundColor,
       padding: padding ?? const EdgeInsets.all(15),
       shape: RoundedRectangleBorder(
-        borderRadius: kRadius(15),
+        borderRadius: kRadius(radius!),
       ),
       visualDensity: visualDensity,
       elevation: 0,

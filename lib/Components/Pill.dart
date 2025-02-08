@@ -15,7 +15,7 @@ class Pill {
     this.child,
     this.label = "text",
     this.backgroundColor = Kolor.primary,
-    this.textColor = Colors.white,
+    this.textColor = Kolor.text,
     this.fontSize = 14.0, // Default font size
   });
 

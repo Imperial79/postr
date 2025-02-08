@@ -149,7 +149,7 @@ class _KCarouselState extends State<KCarousel> {
   }) {
     return KCard(
       radius: 100,
-      color: Colors.black,
+      color: Kolor.scaffold,
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 7),
       margin: const EdgeInsets.only(bottom: 10.0),
       child: Row(
@@ -166,7 +166,7 @@ class _KCarouselState extends State<KCarousel> {
               width: 4,
               margin: const EdgeInsets.symmetric(horizontal: 3),
               decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: Colors.white),
+                  shape: BoxShape.circle, color: Kolor.text),
             ),
           ),
         ),

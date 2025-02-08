@@ -49,7 +49,7 @@ class _KSearchbarState extends State<KSearchbar> {
             child: !widget.isSearching
                 ? const Icon(
                     Icons.search,
-                    color: Colors.white,
+                    color: Kolor.text,
                   )
                 : SizedBox(
                     width: 20,

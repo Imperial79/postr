@@ -64,7 +64,7 @@ class KScaffold extends StatelessWidget {
           ? Container(
               height: double.maxFinite,
               width: double.maxFinite,
-              color: Colors.black.withAlpha((.8 * 255).round()),
+              color: Kolor.scaffold.withAlpha((.8 * 255).round()),
               child: Center(
                 child: KCard(
                   padding: const EdgeInsets.all(30),
@@ -112,7 +112,7 @@ AppBar KAppBar(
             },
             style: IconButton.styleFrom(
               backgroundColor: Colors.grey.shade800,
-              foregroundColor: Colors.white,
+              foregroundColor: Kolor.text,
             ),
             icon: const Icon(Icons.arrow_back))
         : null,
@@ -129,7 +129,7 @@ AppBar KAppBar(
               fontStyle: FontStyle.italic,
               fontSize: 27,
               weight: 600,
-              color: Colors.white,
+              color: Kolor.text,
             ).title,
           ],
         ),

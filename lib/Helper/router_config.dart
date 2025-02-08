@@ -121,23 +121,22 @@ final goRouterProvider = Provider<GoRouter>(
           ],
         ),
         GoRoute(
-            path: '/orders',
-            builder: (context, state) {
-              return const Orders_UI();
-            },
-            routes: [
-              GoRoute(
-                path: 'track/:orderId',
-                builder: (context, state) {
-                  final orderId = (state is Map<String, dynamic>)
-                      ? int.parse("${state.pathParameters["orderId"]}")
-                      : null;
-                  return Order_Detail_UI(
-                    orderId: orderId ?? 0,
-                  );
-                },
-              ),
-            ]),
+          path: '/orders',
+          builder: (context, state) {
+            return const Orders_UI();
+          },
+          routes: [
+            GoRoute(
+              path: 'track/:orderId',
+              builder: (context, state) {
+                final orderId = state.pathParameters["orderId"];
+                return Order_Detail_UI(
+                  orderId: int.parse("$orderId"),
+                );
+              },
+            ),
+          ],
+        ),
       ],
     );
   },
