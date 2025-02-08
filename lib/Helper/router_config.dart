@@ -130,7 +130,7 @@ final goRouterProvider = Provider<GoRouter>(
                 path: 'track/:orderId',
                 builder: (context, state) {
                   final orderId = (state is Map<String, dynamic>)
-                      ? int.parse(state.pathParameters["orderId"]!)
+                      ? int.parse("${state.pathParameters["orderId"]}")
                       : null;
                   return Order_Detail_UI(
                     orderId: orderId ?? 0,

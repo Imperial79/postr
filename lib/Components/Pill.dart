@@ -8,7 +8,7 @@ class Pill {
   Widget? child;
   String label;
   Color backgroundColor;
-  Color textColor;
+  Color? textColor;
   double fontSize;
 
   Pill({

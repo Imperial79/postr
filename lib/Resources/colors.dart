@@ -19,8 +19,8 @@ class StatusText {
   static const Color dark = Color(0xFF343a40);
 }
 
-Color kOpacity(Color color, double opacity) =>
-    color.withAlpha((opacity * 255).round());
+Color kOpacity(Color? color, double opacity) =>
+    (color ?? Colors.white).withAlpha((opacity * 255).round());
 
 ColorScheme kColor(BuildContext context) => Theme.of(context).colorScheme;
 

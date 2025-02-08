@@ -33,10 +33,11 @@ String kConvertToGram(dynamic weightInKg) {
   return "${(weight * 1000)} Gm";
 }
 
-String kDateFormat(String date, {bool showTime = false, String? format}) {
+String kDateFormat(String? date, {bool showTime = false, String? format}) {
   String formatter = "dd MMM, yyyy";
   if (showTime) {
     formatter += " - hh:mm a";
   }
-  return DateFormat(format ?? formatter).format(DateTime.parse(date));
+  return DateFormat(format ?? formatter)
+      .format(date != null ? DateTime.parse(date) : DateTime.now());
 }
